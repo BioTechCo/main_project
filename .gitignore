@@ -1,0 +1,10 @@
+/data
+/databackup
+/train
+/champ_result
+*.7z
+*.gz
+*.pptx
+*.zip
+src/playground.ipynb
+.vs

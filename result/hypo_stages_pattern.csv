@@ -1,0 +1,9 @@
+pattern,stage_I,stage_II,stage_III,count,percentage
+"('hypo', 'hypo', 'hypo')",hypo,hypo,hypo,41906,57%
+"('hypo', 'hypo', 'hyper')",hypo,hypo,hyper,7237,9%
+"('hypo', 'hyper', 'hypo')",hypo,hyper,hypo,4162,5%
+"('hypo', 'hyper', 'hyper')",hypo,hyper,hyper,2923,3%
+"('hyper', 'hypo', 'hypo')",hyper,hypo,hypo,6571,8%
+"('hyper', 'hypo', 'hyper')",hyper,hypo,hyper,3729,5%
+"('hyper', 'hyper', 'hypo')",hyper,hyper,hypo,2874,3%
+"('hyper', 'hyper', 'hyper')",hyper,hyper,hyper,3979,5%
