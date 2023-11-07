@@ -8,3 +8,4 @@
 *.zip
 src/playground.ipynb
 .vs
+/venv
