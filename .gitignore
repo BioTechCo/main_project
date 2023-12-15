@@ -1,5 +1,6 @@
 /data
 /databackup
+/data_TNBC
 /train
 /champ_result
 *.7z
