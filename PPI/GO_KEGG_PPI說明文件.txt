@@ -1,0 +1,13 @@
+node1： 第一個蛋白質的名稱。
+node2： 第二個蛋白質的名稱。
+node1_string_id： 第一個蛋白質在STRING數據庫中的ID。
+node2_string_id： 第二個蛋白質在STRING數據庫中的ID。
+neighborhood_on_chromosome： 表示這兩個蛋白質是否在染色體上的鄰近區域，0表示否。
+gene_fusion： 表示這兩個蛋白質是否參與基因融合，0表示否。
+phylogenetic_cooccurrence： 表示這兩個蛋白質在不同物種的進化過程中是否共存，0表示否。
+homology： 表示這兩個蛋白質是否有同源性，即它們的基因是由相同的祖先基因演變而來，0表示否。
+coexpression： 表示這兩個蛋白質是否在表達上有相似的模式。
+experimentally_determined_interaction： 表示這兩個蛋白質是否已經被實驗確定存在相互作用，這是一個實驗數據。
+database_annotated： 表示這兩個蛋白質是否已經被其他數據庫註釋。
+automated_textmining： 表示通過文本挖掘方法得出的這兩個蛋白質相互作用的信心分數。
+combined_score： 表示所有不同來源的得分綜合，是一個綜合的相互作用信心分數。
