@@ -8,6 +8,6 @@ write.csv(myNorm,file="all_beta_normalized_stage_450k_1213.csv",quote=F,row.name
 
 myDMP <- champ.DMP(beta=myNorm, pheno=myLoad$pd$Sample_Group)#, arraytype = "EPIC")
 
-write.csv(myDMP[[1]], file="result/DMP_result_stage_III.csv", quote=F)
+write.csv(myDMP[[1]], file="DMP_result_1213.csv", quote=F)
 
 # nolint end
