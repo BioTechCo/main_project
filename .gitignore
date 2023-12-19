@@ -7,6 +7,6 @@
 *.gz
 *.pptx
 *.zip
-src/playground.ipynb
+/playground
 .vs
 /venv
