@@ -5,10 +5,10 @@ library(clusterProfiler)
 library(org.Hs.eg.db)
 
 
-data <- read.csv("result_test_cut_point_cross_vali_dmptest.csv")
+data <- read.csv("../result/result_basic_dbeta_0.35.csv")
 
 gene_symbols <- data[,3]
-
+print(gene_symbols)
 entrez_ids <- mapIds(org.Hs.eg.db, keys=gene_symbols, keytype="SYMBOL", column="ENTREZID")
 sorted_gene_list <- sort(entrez_ids, decreasing = TRUE)
 
