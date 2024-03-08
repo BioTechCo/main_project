@@ -10,3 +10,4 @@
 /playground
 .vs
 /venv
+**/__pycache__/
