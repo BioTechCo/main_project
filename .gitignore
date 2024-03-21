@@ -11,3 +11,7 @@
 .vs
 /venv
 **/__pycache__/
+/LU
+/STAD
+/CHAMP_Normalization
+/CHAMP_QCimages
