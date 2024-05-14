@@ -27,14 +27,11 @@ for i in range(0,4):
     merged_df[i].to_csv("../data/liquid_milk_group"+str(i+1)+".csv",index=False)
     
     # 資料
-    
 # 情況 1：dbeta_tissue > 0 & dbeta_liquid > 0
-
-# 情況 2：dbeta_tissue > 0 & dbeta_liquid < 0
-
+# 情況 2：dbeta_tissue < 0 & dbeta_liquid > 0
 # 情況 3：dbeta_tissue < 0 & dbeta_liquid < 0
+# 情況 4：dbeta_tissue > 0 & dbeta_liquid < 0
 
-# 情況 4：dbeta_tissue < 0 & dbeta_liquid > 0
 title = ["left up","left down","right down","right up"]
 
 for i in range(0,4):

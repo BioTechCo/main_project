@@ -49,13 +49,13 @@ print(merged_df.corr(method='spearman',numeric_only=True))
 
 plt.subplot(2, 2, 3)
 sns.histplot(merged_df['dbeta_tissue_normalized'], kde=True, color='blue')
-plt.title('dbeta_tissue Histogram')
+# plt.title('dbeta_tissue Histogram')
 plt.xlabel('dbeta_tissue')
 plt.ylabel('Frequency')
 
 plt.subplot(2, 2, 4)
 sns.histplot(merged_df['dbeta_liquid_normalized'], kde=True, color='green')
-plt.title('dbeta_liquid Histogram')
+# plt.title('dbeta_liquid Histogram')
 plt.xlabel('dbeta_liquid')
 plt.ylabel('Frequency')
 
@@ -71,8 +71,8 @@ dbeta_liquid = merged_df['dbeta_liquid']
 plt.scatter(dbeta_tissue, dbeta_liquid, color='blue')
 
 # 加標籤
-for i in range(len(genes)):
-    plt.text(dbeta_tissue[i], dbeta_liquid[i], genes[i], fontsize=9)
+# for i in range(len(genes)):
+#     plt.text(dbeta_tissue[i], dbeta_liquid[i], genes[i], fontsize=9)
 
 plt.title('Gene Differential Methylation')
 plt.xlabel('dbeta_tissue')
@@ -93,31 +93,32 @@ dbeta_liquid = merged_df['dbeta_liquid_normalized']
 plt.scatter(dbeta_tissue, dbeta_liquid, color='blue')
 
 # 加標籤
-for i in range(len(genes)):
-    plt.text(dbeta_tissue[i], dbeta_liquid[i], genes[i], fontsize=9)
+# for i in range(len(genes)):
+#     plt.text(dbeta_tissue[i], dbeta_liquid[i], genes[i], fontsize=9)
 
 plt.title('Gene Differential Methylation')
 plt.xlabel('dbeta_tissue')
 plt.ylabel('dbeta_liquid')
+
+plt.xlim()
+
 plt.grid(True)
 
 
-plt.axhline(y=0.68, color='red', linestyle='--', linewidth=1)
-plt.text(0.5, 0.7, 'y = 0.68', color='red', fontsize=10, rotation=0)
-
-
+# plt.axhline(y=0.68, color='red', linestyle='--', linewidth=1)
+# plt.text(0.5, 0.7, 'y = 0.68', color='red', fontsize=10, rotation=0)
 
 # 情況 1：dbeta_tissue > 0 & dbeta_liquid > 0
 merged_df[(merged_df['dbeta_tissue'] > 0) & (merged_df['dbeta_liquid'] > 0)].to_csv("../data/liquid_group_1.csv",index=False)
 
-# 情況 2：dbeta_tissue > 0 & dbeta_liquid < 0
-merged_df[(merged_df['dbeta_tissue'] > 0) & (merged_df['dbeta_liquid'] < 0)] .to_csv("../data/liquid_group_2.csv",index=False)
+# 情況 2：dbeta_tissue < 0 & dbeta_liquid > 0
+merged_df[(merged_df['dbeta_tissue'] < 0) & (merged_df['dbeta_liquid'] > 0)].to_csv("../data/liquid_group_2.csv",index=False)
 
 # 情況 3：dbeta_tissue < 0 & dbeta_liquid < 0
 merged_df[(merged_df['dbeta_tissue'] < 0) & (merged_df['dbeta_liquid'] < 0)].to_csv("../data/liquid_group_3.csv",index=False)
 
-# 情況 4：dbeta_tissue < 0 & dbeta_liquid > 0
-merged_df[(merged_df['dbeta_tissue'] < 0) & (merged_df['dbeta_liquid'] > 0)].to_csv("../data/liquid_group_4.csv",index=False)
+# 情況 4：dbeta_tissue > 0 & dbeta_liquid < 0
+merged_df[(merged_df['dbeta_tissue'] > 0) & (merged_df['dbeta_liquid'] < 0)] .to_csv("../data/liquid_group_4.csv",index=False)
 
 
 plt.show()
