@@ -1,6 +1,5 @@
 #!/usr/bin/env Rscript
 
-# this line is to mute 🐛 from vscode
 args <- commandArgs(trailingOnly = TRUE)
 # test if there is at least one argument: if not, return an error
 if (length(args) == 0) {
@@ -12,22 +11,22 @@ if (length(args) == 0) {
 
 # result/gene_list.txt
 # INPUT_FILE = args[1]
-INPUT_FILE = "result/gene_list.txt"
+INPUT_FILE = "result/train_and_GSE89093_interseted.csv"
 # CLUSTER_NUM = args[2]
 CLUSTER_NUM = 5
 # OUTPUT_PDF = args[3]
 OUTPUT_PDF = "dendrogram.pdf"
 # OUTPUT_CSV = args[4]
-OUTPUT_CSV = "similarity_matrix.csv"
+OUTPUT_CSV = "distance_matrix.csv"
 
 
 library(GOSemSim)
 library(org.Hs.eg.db)
 library(dendextend)
-data <- read.csv(INPUT_FILE)
+data <- read.csv(INPUT_FILE, header = TRUE, stringsAsFactors = FALSE)
 entrez_ids <- mapIds(
   org.Hs.eg.db,
-  keys = data$gene,
+  keys = data$UCSC_RefGene_Name,
   keytype = "SYMBOL",
   column = "ENTREZID"
 )
@@ -41,16 +40,16 @@ d_all <- lapply(c("BP", "CC", "MF"), function(ont) {
 sim_matrices <- lapply(d_all, function(d) {
   mgeneSim(entrez_ids, semData = d, drop = "", measure = "Wang", verbose = TRUE)
 })
-sim_matrix_bp <- sim_matrices[[1]] # nolint
+sim_matrix_bp <- sim_matrices[[1]]
 sim_matrix_cc <- sim_matrices[[2]]
 sim_matrix_mf <- sim_matrices[[3]]
 
 # gather all unique genes
 all_genes <- unique(
   c(
-    row.names(sim_matrix_BP),
-    row.names(sim_matrix_CC),
-    row.names(sim_matrix_MF)
+    row.names(sim_matrix_bp),
+    row.names(sim_matrix_cc),
+    row.names(sim_matrix_mf)
   )
 )
 # create a combined matrix
@@ -63,9 +62,9 @@ fill_matrix <- function(main_matrix, sub_matrix) {
   main_matrix[rows, cols] <- sub_matrix
   return(main_matrix)
 }
-combined_matrix <- fill_matrix(combined_matrix, sim_matrix_BP)
-combined_matrix <- fill_matrix(combined_matrix, sim_matrix_CC)
-combined_matrix <- fill_matrix(combined_matrix, sim_matrix_MF)
+combined_matrix <- fill_matrix(combined_matrix, sim_matrix_bp)
+combined_matrix <- fill_matrix(combined_matrix, sim_matrix_cc)
+combined_matrix <- fill_matrix(combined_matrix, sim_matrix_mf)
 
 # transform Entrez IDs to gene symbols using mapIds
 gene_symbols <- mapIds(
@@ -79,7 +78,7 @@ rownames(combined_matrix) <- gene_symbols
 colnames(combined_matrix) <- gene_symbols
 
 # write the combined matrix to a CSV file
-write.csv(combined_matrix, file = OUTPUT_CSV, row.names = TRUE)
+write.csv(1 - combined_matrix, file = OUTPUT_CSV, row.names = TRUE)
 
 distance_matrix <- as.dist(1 - combined_matrix)
 
