@@ -77,8 +77,6 @@ gene_symbols <- mapIds(
 rownames(combined_matrix) <- gene_symbols
 colnames(combined_matrix) <- gene_symbols
 
-# write the combined matrix to a CSV file
-write.csv(1 - combined_matrix, file = OUTPUT_CSV, row.names = TRUE)
 
 distance_matrix <- as.dist(1 - combined_matrix)
 
@@ -90,6 +88,10 @@ cat("Number of Infinite values: ", sum(is.infinite(distance_matrix)), "\n")
 distance_matrix[is.na(distance_matrix) | is.nan(distance_matrix) |
     is.infinite(distance_matrix)
 ] <- 1
+
+# write the combined matrix to a CSV file
+write.csv(1 - combined_matrix, file = OUTPUT_CSV, row.names = TRUE)
+
 # hierarchical clustering using ward.D2 method
 hc <- hclust(distance_matrix, method = "ward.D2")
 
