@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "btc"
+version = "0.1.0"
+description = ""
+authors = ["vincent <hankggg2003xd@gmail.com>"]
+package-mode = false
+license = "LICENSE"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+scikit-learn = "^1.5.1"
+ipykernel = "^6.29.5"
+xgboost = "^2.1.0"
+matplotlib = "^3.9.1"
+imblearn = "^0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
