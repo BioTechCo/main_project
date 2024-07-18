@@ -7,3 +7,9 @@ configure poetry to create virtual environments in the project directory
 ```bash
 poetry config virtualenvs.in-project true
 ```
+
+install dependencies
+
+```bash
+poetry install
+```
