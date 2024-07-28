@@ -9,7 +9,7 @@
 *.zip
 /playground
 .vs
-/venv
+/.venv
 **/__pycache__/
 /LU
 /STAD
