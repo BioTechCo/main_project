@@ -2,7 +2,7 @@
 
 ### Description
 
-Describe the prograss added by this PR.
+Describe the progress added by this PR.
 
 ### Implementation
 
