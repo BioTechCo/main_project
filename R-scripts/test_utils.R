@@ -1,4 +1,5 @@
-source("R-scripts/utils.R")
+# when running tests locally, use `source("R-scripts/test_utils.R")`
+source("utils.R")
 
 
 library(testthat)
