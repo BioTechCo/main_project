@@ -31,7 +31,7 @@ d_all <- lapply(c("BP", "CC", "MF"), function(ont) {
 
 
 # calculate similarity matrices
-sim_matrices <- lapply(d_all, calculate_similarity, ids = entrez_ids)
+sim_matrices <- lapply(d_all, calculate_similarity, ids = entrez_ids_modified)
 sim_matrix_bp <- sim_matrices[[1]]
 sim_matrix_cc <- sim_matrices[[2]]
 sim_matrix_mf <- sim_matrices[[3]]
