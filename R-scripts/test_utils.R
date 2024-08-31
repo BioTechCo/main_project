@@ -1,4 +1,4 @@
-# when running tests locally, use `source("R-scripts/test_utils.R")`
+# when running tests locally, use `source("R-scripts/utils.R")`
 source("utils.R")
 
 
