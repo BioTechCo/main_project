@@ -1,4 +1,4 @@
-# to run the tests, run `testthat::test_dir("R-scripts")``
+# to run the tests, run `testthat::test_dir("R-scripts")`
 source("utils.R")
 
 
@@ -48,9 +48,9 @@ test_that("fill_matrix fills the main matrix correctly", {
 
 # Test calculate_similarity
 test_that("fill_matrix fills the main matrix correctly", {
-    main_matrix1 <- matrix(0, nrow = 4, ncol = 4)
-    main_matrix2 <- matrix(0, nrow = 4, ncol = 4)
-    main_matrix3 <- matrix(0, nrow = 4, ncol = 4)
+    main_matrix1 <- matrix(NA, nrow = 4, ncol = 4)
+    main_matrix2 <- matrix(NA, nrow = 4, ncol = 4)
+    main_matrix3 <- matrix(NA, nrow = 4, ncol = 4)
     genes <- c("gene1", "gene2", "gene3", "gene4")
     gene1 <- c("gene1", "gene2")
     gene2 <- c("gene1", "gene3")
