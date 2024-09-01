@@ -69,10 +69,7 @@ test_that("fill_matrix fills the main matrix correctly", {
     dimnames(sub_matrix3) <- list(gene3, gene3)
     main_matrix3 <- fill_matrix(main_matrix3, sub_matrix3)
     stacked_array <- abind(main_matrix1, main_matrix2, main_matrix3, along = 3)
-    stacked_array
     average_matrix <- average_non_zero(stacked_array)
-    average_matrix
-
     result_matrix <- matrix(c(
         2, 2, 2, 3, 2, 2, 0, 3, 2, 0, 2, 0, 3, 3, 0, 3
     ), nrow = 4, ncol = 4)
