@@ -1,4 +1,4 @@
-# when running tests locally, use `source("R-scripts/utils.R")`
+# to run the tests, run `testthat::test_dir("R-scripts")``
 source("utils.R")
 
 
@@ -9,7 +9,6 @@ library(testthat)
 test_that("fetch_official_gene_names retrieves official names correctly", {
     gene_symbols <- c("TP53", "BRCA1", "INVALIDGENE")
     official_names <- fetch_official_gene_names(gene_symbols)
-
     expect_length(official_names, length(gene_symbols))
     expect_false(is.na(official_names[1])) # TP53 should have an official name
     expect_false(is.na(official_names[2])) # BRCA1 should have an official name
@@ -21,7 +20,6 @@ test_that("fetch_official_gene_names retrieves official names correctly", {
 test_that("gene_mapper maps gene symbols to Entrez IDs correctly", {
     gene_symbols <- c("TP53", "BRCA1")
     entrez_ids <- gene_mapper(gene_symbols, "SYMBOL", "ENTREZID")
-
     expect_length(entrez_ids, length(gene_symbols))
     expect_true(all(!is.na(entrez_ids)))
     expect_equal(names(entrez_ids), gene_symbols)
@@ -36,7 +34,6 @@ test_that("fill_matrix fills the main matrix correctly", {
     sub_matrix <- matrix(1, nrow = 2, ncol = 2)
     rownames(sub_matrix) <- c("gene1", "gene2")
     colnames(sub_matrix) <- c("gene1", "gene2")
-
     filled_matrix <- fill_matrix(main_matrix, sub_matrix)
     for (i in 1:3) {
         for (j in 1:3) {
@@ -49,6 +46,42 @@ test_that("fill_matrix fills the main matrix correctly", {
     }
 })
 
+# Test calculate_similarity
+test_that("fill_matrix fills the main matrix correctly", {
+    main_matrix1 <- matrix(0, nrow = 4, ncol = 4)
+    main_matrix2 <- matrix(0, nrow = 4, ncol = 4)
+    main_matrix3 <- matrix(0, nrow = 4, ncol = 4)
+    genes <- c("gene1", "gene2", "gene3", "gene4")
+    gene1 <- c("gene1", "gene2")
+    gene2 <- c("gene1", "gene3")
+    gene3 <- c("gene1", "gene2", "gene4")
+
+    dimnames(main_matrix1) <- list(genes, genes)
+    sub_matrix1 <- matrix(1, nrow = 2, ncol = 2)
+    dimnames(sub_matrix1) <- list(gene1, gene1)
+    main_matrix1 <- fill_matrix(main_matrix1, sub_matrix1)
+    dimnames(main_matrix2) <- list(genes, genes)
+    sub_matrix2 <- matrix(2, nrow = 2, ncol = 2)
+    dimnames(sub_matrix2) <- list(gene2, gene2)
+    main_matrix2 <- fill_matrix(main_matrix2, sub_matrix2)
+    dimnames(main_matrix3) <- list(genes, genes)
+    sub_matrix3 <- matrix(3, nrow = 3, ncol = 3)
+    dimnames(sub_matrix3) <- list(gene3, gene3)
+    main_matrix3 <- fill_matrix(main_matrix3, sub_matrix3)
+    stacked_array <- abind(main_matrix1, main_matrix2, main_matrix3, along = 3)
+    stacked_array
+    average_matrix <- average_non_zero(stacked_array)
+    average_matrix
+
+    result_matrix <- matrix(c(
+        2, 2, 2, 3, 2, 2, 0, 3, 2, 0, 2, 0, 3, 3, 0, 3
+    ), nrow = 4, ncol = 4)
+    for (i in 1:4) {
+        for (j in 1:4) {
+            expect_equal(average_matrix[i, j], result_matrix[i, j])
+        }
+    }
+})
 
 # Test modify_gene_list
 test_that("modify_gene_list modifies gene list correctly", {
