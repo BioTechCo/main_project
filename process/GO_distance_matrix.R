@@ -1,5 +1,7 @@
 input_file <- "breast/result/GSE89093_nc/train100/dbeta_hyper_TSS_0.02.csv"
-output_csv <- "breast/result/GSE89093_nc/train100/distance_matrix.csv"
+output_bp_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_bp.csv"
+output_cc_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_cc.csv"
+output_mf_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_mf.csv"
 
 
 source("R-scripts/utils.R")
@@ -36,54 +38,62 @@ sim_matrix_bp <- sim_matrices[[1]]
 sim_matrix_cc <- sim_matrices[[2]]
 sim_matrix_mf <- sim_matrices[[3]]
 
-
-# gather all unique genes
-all_genes <- unique(
-    c(
-        row.names(sim_matrix_bp),
-        row.names(sim_matrix_cc),
-        row.names(sim_matrix_mf)
-    )
-)
-
-
-# create a combined matrix
-combined_matrix <- matrix(NA, length(all_genes), length(all_genes))
-dimnames(combined_matrix) <- list(all_genes, all_genes)
-
-
-# fill the combined matrix with the similarity matrices
-combined_matrix <- fill_matrix(combined_matrix, sim_matrix_bp)
-combined_matrix <- fill_matrix(combined_matrix, sim_matrix_cc)
-combined_matrix <- fill_matrix(combined_matrix, sim_matrix_mf)
-
-
 # transform Entrez IDs to gene symbols using mapIds
-gene_symbols <- gene_mapper(row.names(combined_matrix), "ENTREZID", "SYMBOL")
+gene_symbols_bp <- gene_mapper(colnames(sim_matrix_bp), "ENTREZID", "SYMBOL")
+gene_symbols_cc <- gene_mapper(colnames(sim_matrix_cc), "ENTREZID", "SYMBOL")
+gene_symbols_mf <- gene_mapper(colnames(sim_matrix_mf), "ENTREZID", "SYMBOL")
 
 
 # replace official gene names with missing Entrez IDs if any
-gene_symbols_with_name <- restore_gene_symbols(gene_symbols, official_names)
-
-
-# update row and column names of combined_matrix
-dimnames(combined_matrix) <- list(
-    gene_symbols_with_name,
-    gene_symbols_with_name
+gene_symbols_bp_restored <- restore_gene_symbols(
+    gene_symbols_bp, official_names
+)
+gene_symbols_cc_restored <- restore_gene_symbols(
+    gene_symbols_cc, official_names
+)
+gene_symbols_mf_restored <- restore_gene_symbols(
+    gene_symbols_mf, official_names
 )
 
 
-# calculate the distance matrix
-distance_matrix <- 1 - combined_matrix
+# update row and column names of similarity matrices
+dimnames(sim_matrix_bp) <- list(
+    gene_symbols_bp_restored,
+    gene_symbols_bp_restored
+)
+dimnames(sim_matrix_cc) <- list(
+    gene_symbols_cc_restored,
+    gene_symbols_cc_restored
+)
+dimnames(sim_matrix_mf) <- list(
+    gene_symbols_mf_restored,
+    gene_symbols_mf_restored
+)
+
+
+# calculate the distance matrices
+distance_matrix_bp <- 1 - sim_matrix_bp
+distance_matrix_cc <- 1 - sim_matrix_cc
+distance_matrix_mf <- 1 - sim_matrix_mf
 
 
 # print the number of missing values before and after calculating similarity
 nan_count(entrez_ids_modified, "Modified Entrez IDs")
-nan_count(gene_symbols, "Gene symbols")
+nan_count(gene_symbols_bp, "Gene symbols (BP)")
+nan_count(gene_symbols_cc, "Gene symbols (CC)")
+nan_count(gene_symbols_mf, "Gene symbols (MF)")
 swapped_entrez_ids <- setNames(names(entrez_ids_modified), entrez_ids_modified)
-diff <- setdiff(swapped_entrez_ids, gene_symbols)
-print(diff)
+
+# difference between swapped Entrez IDs and restored gene symbols
+diff_bp <- setdiff(swapped_entrez_ids, gene_symbols_bp)
+diff_cc <- setdiff(swapped_entrez_ids, gene_symbols_cc)
+diff_mf <- setdiff(swapped_entrez_ids, gene_symbols_mf)
+print(diff_bp)
+print(diff_cc)
+print(diff_mf)
 
 
 # print columns of entrez_ids
-write.csv(distance_matrix, file = output_csv, row.names = TRUE)
+write.csv(distance_matrix_bp, file = output_bp_csv, row.names = TRUE)
+write.csv(distance_matrix_cc, file = output_cc_csv, row.names = TRUE)
+write.csv(distance_matrix_mf, file = output_mf_csv, row.names = TRUE)
