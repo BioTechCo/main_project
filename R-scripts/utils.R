@@ -87,10 +87,8 @@ restore_gene_symbols <- function(gene_symbols, official_names) {
 }
 
 average_non_zero <- function(array) {
-    print(array)
     apply(array, c(1, 2), function(x) {
         non_zero_elements <- x[x != 0]
-        print(non_zero_elements)
         if (length(non_zero_elements) == 0) {
             return(0)
         } else {
