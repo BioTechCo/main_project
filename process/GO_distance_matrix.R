@@ -1,8 +1,12 @@
-input_file <- "breast/result/GSE89093_nc/train100/dbeta_hyper_TSS_0.02.csv"
-output_bp_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_bp.csv"
-output_cc_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_cc.csv"
-output_mf_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_mf.csv"
-output_terms_count_csv <- "breast/result/GSE89093_nc/train100/terms_count.csv"
+# Define the base directory
+base_dir <- "breast/result/GSE89093_nc/train100"
+
+# Construct the file paths using the base directory
+input_file <- file.path(base_dir, "dbeta_hyper_TSS_0.02.csv")
+output_bp_csv <- file.path(base_dir, "distance_matrix_bp.csv")
+output_cc_csv <- file.path(base_dir, "distance_matrix_cc.csv")
+output_mf_csv <- file.path(base_dir, "distance_matrix_mf.csv")
+output_terms_count_csv <- file.path(base_dir, "terms_count.csv")
 
 source("R-scripts/utils.R")
 
