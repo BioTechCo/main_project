@@ -2,7 +2,7 @@ input_file <- "breast/result/GSE89093_nc/train100/dbeta_hyper_TSS_0.02.csv"
 output_bp_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_bp.csv"
 output_cc_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_cc.csv"
 output_mf_csv <- "breast/result/GSE89093_nc/train100/distance_matrix_mf.csv"
-
+output_terms_count_csv <- "breast/result/GSE89093_nc/train100/terms_count.csv"
 
 source("R-scripts/utils.R")
 
@@ -28,9 +28,18 @@ nan_count(entrez_ids_modified, "Modified Entrez IDs")
 
 # load GO data for BP, CC, and MF
 d_all <- lapply(c("BP", "CC", "MF"), function(ont) {
-    godata(annoDb = "org.Hs.eg.db", ont = ont, computeIC = FALSE)
+    godata(annoDb = "org.Hs.eg.db", ont = ont, computeIC = TRUE)
 })
 
+# a list of count of GO terms for each ontology
+count <- lapply(d_all, function(godata_obj) {
+    go_terms <- names(godata_obj@IC) # Extract GO terms from the IC slot
+    return(length(go_terms)) # Return the number of GO terms
+})
+count_vector <- unlist(count)
+names(count_vector) <- c("BP", "CC", "MF")
+count_df <- data.frame(count = count_vector)
+write.csv(count, file = output_terms_count_csv, row.names = TRUE)
 
 # calculate similarity matrices
 sim_matrices <- lapply(d_all, calculate_similarity, ids = entrez_ids_modified)
