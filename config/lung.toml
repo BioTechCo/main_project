@@ -1,0 +1,37 @@
+[init.hyper]
+beta_file_number = 2
+test_ratio = 0.2
+splitting_seed = 42
+normal_number_0 = 37
+normal_number_1 = 37
+cancer_type = "lung"
+data_source = "GDC_lung_tissue"
+is_columns_duplicated = 2
+
+[preprocess.filtering]
+threshold = 0.05
+
+[preprocess.merge_and_split]
+feature_size_0 = 120677
+feature_size_1 = 360242
+feature_size_intersection = 115119
+Before_dropna_dfn_shape = [ 115119, 74,]
+Before_dropna_dfc_shape = [ 115119, 844,]
+After_dropna_dfn_shape = [ 115119, 74,]
+After_dropna_dfc_shape = [ 115119, 677,]
+training_set_samples = 600
+testing_set_samples = 151
+train_class_distribution = [ 57, 543,]
+testing_class_distribution = [ 17, 134,]
+
+[preprocess.dbeta]
+dmp_before_dropna_shape_feature = 289650
+dmp_after_dropna_shape_feature = 219382
+delta_beta_avg = 115119
+NaN_dbeta_feature = [ "cg03614649", "cg05624064",]
+delta_beta_avg_remove_NaN = 115117
+delta_beta_avg_remove_NaN_with_gene_name = 115117
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 500
