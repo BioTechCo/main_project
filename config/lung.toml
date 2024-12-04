@@ -28,7 +28,7 @@ testing_class_distribution = [ 17, 134,]
 dmp_before_dropna_shape_feature = 289650
 dmp_after_dropna_shape_feature = 219382
 delta_beta_avg = 115119
-NaN_dbeta_feature = [ "cg03614649", "cg05624064",]
+NaN_dbeta_feature = [ "cg02637320", "cg22691119",]
 delta_beta_avg_remove_NaN = 115117
 delta_beta_avg_remove_NaN_with_gene_name = 115117
 
