@@ -21,6 +21,10 @@ kneed = "^0.8.5"
 toml = "^0.10.2"
 plotly = "^5.24.1"
 nbformat = "^5.10.4"
+google-auth = "^2.36.0"
+google-auth-oauthlib = "^1.2.1"
+google-auth-httplib2 = "^0.2.0"
+google-api-python-client = "^2.154.0"
 
 [build-system]
 requires = ["poetry-core"]
