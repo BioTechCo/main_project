@@ -18,3 +18,5 @@
 **/champ_result/
 **/data/
 all_beta_normalized*
+*.pickle
+notebooks/credentials.json
