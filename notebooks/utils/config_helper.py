@@ -1,7 +1,11 @@
 import toml
 
+CONFIG_PATH = ""
+
 
 def load_config(config_path):
+    global CONFIG_PATH
+    CONFIG_PATH = config_path
     return toml.load(config_path)
 
 
