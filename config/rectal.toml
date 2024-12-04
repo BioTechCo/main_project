@@ -1,0 +1,16 @@
+[init.hyper]
+beta_file_number = 1
+test_ratio = 0.2
+splitting_seed = 42
+normal_number_0 = 43
+data_source = "GDC_rectal_tissue"
+is_columns_duplicated = 2
+
+[preprocess.merge_and_split]
+feature_size_0 = 367932
+Before_dropna_df_shape = [ 367932, 406,]
+After_dropna_df_shape = [ 367932, 406,]
+training_set_samples = 324
+testing_set_samples = 82
+train_class_distribution = [ 32, 292,]
+testing_class_distribution = [ 11, 71,]
