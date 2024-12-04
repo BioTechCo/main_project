@@ -1,0 +1,22 @@
+[init.hyper]
+beta_file_number = 2
+test_ratio = 0.2
+splitting_seed = 42
+normal_number_0 = 2
+normal_number_1 = 84
+data_source = "GDC_stomach_GSE99553"
+is_columns_duplicated = 2
+is_columns_duplicated_1 = 1
+
+[preprocess.merge_and_split]
+feature_size_0 = 375937
+feature_size_1 = 411036
+feature_size_intersection = 375382
+Before_dropna_dfn_shape = [ 375382, 86,]
+Before_dropna_dfc_shape = [ 375382, 395,]
+After_dropna_dfn_shape = [ 375382, 86,]
+After_dropna_dfc_shape = [ 375382, 395,]
+training_set_samples = 384
+testing_set_samples = 97
+train_class_distribution = [ 63, 321,]
+testing_class_distribution = [ 23, 74,]
