@@ -12,5 +12,24 @@ Before_dropna_df_shape = [ 367932, 406,]
 After_dropna_df_shape = [ 367932, 406,]
 training_set_samples = 324
 testing_set_samples = 82
-train_class_distribution = [ 32, 292,]
-testing_class_distribution = [ 11, 71,]
+train_class_distribution = [ 33, 291,]
+testing_class_distribution = [ 10, 72,]
+
+[preprocess.oversampling]
+training_set_samples = 582
+train_class_distribution = [ 291, 291,]
+
+[preprocess.filtering]
+threshold = 0.08
+
+[preprocess.dbeta]
+delta_beta_avg = 367931
+NaN_dbeta_feature = []
+delta_beta_avg_remove_NaN = 367931
+dmp_before_dropna_shape_feature = 260289
+dmp_after_dropna_shape_feature = 195985
+delta_beta_avg_remove_NaN_with_gene_name = 367931
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 500
