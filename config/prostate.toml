@@ -7,4 +7,25 @@ data_source = "GDC_prostate_tissue"
 is_columns_duplicated = 2
 
 [preprocess.merge_and_split]
-feature_size_0 = 373336
+feature_size_0 = 373340
+Before_dropna_df_shape = [ 373340, 552,]
+After_dropna_df_shape = [ 373340, 552,]
+training_set_samples = 441
+testing_set_samples = 111
+train_class_distribution = [ 40, 401,]
+testing_class_distribution = [ 10, 101,]
+
+[preprocess.dbeta]
+delta_beta_avg = 373340
+NaN_dbeta_feature = []
+delta_beta_avg_remove_NaN = 373340
+dmp_before_dropna_shape_feature = 286098
+dmp_after_dropna_shape_feature = 218741
+delta_beta_avg_remove_NaN_with_gene_name = 373340
+
+[preprocess.filtering]
+threshold = 0.06
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 600
