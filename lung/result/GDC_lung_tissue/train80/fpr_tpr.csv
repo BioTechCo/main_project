@@ -1,49 +1,49 @@
 selection_model,train_model,features,fpr,tpr,AUC
-XGBoost,XGBoost,25,[0. 1.],[0. 1.],0.5
-XGBoost,Random Forest,25,[0. 1.],[0. 1.],0.5
-XGBoost,Decision Tree,25,[0.         0.01754386 1.        ],[0.         0.97421731 1.        ],0.9783367257923814
-XGBoost,SVM,25,[0. 0. 1.],[0. 1. 1.],1.0
-XGBoost,XGBoost,30,[0. 1.],[0. 1.],0.5
-XGBoost,Random Forest,30,[0. 1.],[0. 1.],0.5
-XGBoost,Decision Tree,30,[0.         0.03508772 1.        ],[0.         0.97237569 1.        ],0.9686439856547445
-XGBoost,SVM,30,[0. 0. 1.],[0. 1. 1.],1.0
-XGBoost,XGBoost,35,[0. 1.],[0. 1.],0.5
-XGBoost,Random Forest,35,[0. 1.],[0. 1.],0.5
-XGBoost,Decision Tree,35,[0.         0.03508772 1.        ],[0.         0.97237569 1.        ],0.9686439856547445
-XGBoost,SVM,35,[0. 0. 1.],[0. 1. 1.],1.0
-Random Forest,XGBoost,25,[0. 1.],[0. 1.],0.5
-Random Forest,Random Forest,25,[0. 1.],[0. 1.],0.5
-Random Forest,Decision Tree,25,[0. 0. 1.],[0.         0.97605893 1.        ],0.9880294659300184
-Random Forest,SVM,25,[0. 0. 1.],[0. 1. 1.],1.0
-Random Forest,XGBoost,30,[0. 1.],[0. 1.],0.5
-Random Forest,Random Forest,30,[0. 1.],[0. 1.],0.5
-Random Forest,Decision Tree,30,[0.         0.03508772 1.        ],[0.         0.97237569 1.        ],0.9686439856547445
-Random Forest,SVM,30,[0. 0. 1.],[0. 1. 1.],1.0
-Random Forest,XGBoost,35,[0. 1.],[0. 1.],0.5
-Random Forest,Random Forest,35,[0. 1.],[0. 1.],0.5
-Random Forest,Decision Tree,35,[0.         0.03508772 1.        ],[0.         0.97237569 1.        ],0.9686439856547445
-Random Forest,SVM,35,[0. 0. 1.],[0. 1. 1.],1.0
-Decision Tree,XGBoost,25,[0. 1.],[0. 1.],0.5
-Decision Tree,Random Forest,25,[0. 1.],[0. 1.],0.5
-Decision Tree,Decision Tree,25,[0. 0. 1.],[0.         0.97605893 1.        ],0.9880294659300184
-Decision Tree,SVM,25,[0. 0. 1.],[0. 1. 1.],1.0
-Decision Tree,XGBoost,30,[0. 1.],[0. 1.],0.5
-Decision Tree,Random Forest,30,[0. 1.],[0. 1.],0.5
-Decision Tree,Decision Tree,30,[0. 0. 1.],[0.         0.97605893 1.        ],0.9880294659300184
-Decision Tree,SVM,30,[0. 0. 1.],[0. 1. 1.],1.0
-Decision Tree,XGBoost,35,[0. 1.],[0. 1.],0.5
-Decision Tree,Random Forest,35,[0. 1.],[0. 1.],0.5
-Decision Tree,Decision Tree,35,[0.         0.03508772 1.        ],[0.         0.96685083 1.        ],0.965881554715518
-Decision Tree,SVM,35,[0. 0. 1.],[0. 1. 1.],1.0
-SVM,XGBoost,25,[0. 1.],[0. 1.],0.5
-SVM,Random Forest,25,[0. 1.],[0. 1.],0.5
-SVM,Decision Tree,25,[0. 0. 1.],[0.         0.97605893 1.        ],0.9880294659300184
-SVM,SVM,25,[0. 0. 1.],[0. 1. 1.],1.0
-SVM,XGBoost,30,[0. 1.],[0. 1.],0.5
-SVM,Random Forest,30,[0. 1.],[0. 1.],0.5
-SVM,Decision Tree,30,[0. 0. 1.],[0.         0.97053407 1.        ],0.9852670349907919
-SVM,SVM,30,[0. 0. 1.],[0. 1. 1.],1.0
-SVM,XGBoost,35,[0. 1.],[0. 1.],0.5
-SVM,Random Forest,35,[0. 1.],[0. 1.],0.5
-SVM,Decision Tree,35,[0. 0. 1.],[0.         0.97605893 1.        ],0.9880294659300184
-SVM,SVM,35,[0. 0. 1.],[0. 1. 1.],1.0
+XGBoost,XGBoost,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+XGBoost,Random Forest,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+XGBoost,Decision Tree,25,"[0.0, 0.017543859649122806, 1.0]","[0.0, 0.9742173112338858, 1.0]",0.9783367257923814
+XGBoost,SVM,25,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+XGBoost,XGBoost,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+XGBoost,Random Forest,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+XGBoost,Decision Tree,30,"[0.0, 0.03508771929824561, 1.0]","[0.0, 0.9723756906077348, 1.0]",0.9686439856547445
+XGBoost,SVM,30,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+XGBoost,XGBoost,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+XGBoost,Random Forest,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+XGBoost,Decision Tree,35,"[0.0, 0.03508771929824561, 1.0]","[0.0, 0.9723756906077348, 1.0]",0.9686439856547445
+XGBoost,SVM,35,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+Random Forest,XGBoost,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Random Forest,Random Forest,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Random Forest,Decision Tree,25,"[0.0, 0.0, 1.0]","[0.0, 0.9760589318600368, 1.0]",0.9880294659300184
+Random Forest,SVM,25,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+Random Forest,XGBoost,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Random Forest,Random Forest,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Random Forest,Decision Tree,30,"[0.0, 0.03508771929824561, 1.0]","[0.0, 0.9723756906077348, 1.0]",0.9686439856547445
+Random Forest,SVM,30,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+Random Forest,XGBoost,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Random Forest,Random Forest,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Random Forest,Decision Tree,35,"[0.0, 0.03508771929824561, 1.0]","[0.0, 0.9723756906077348, 1.0]",0.9686439856547445
+Random Forest,SVM,35,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+Decision Tree,XGBoost,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Decision Tree,Random Forest,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Decision Tree,Decision Tree,25,"[0.0, 0.0, 1.0]","[0.0, 0.9760589318600368, 1.0]",0.9880294659300184
+Decision Tree,SVM,25,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+Decision Tree,XGBoost,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Decision Tree,Random Forest,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Decision Tree,Decision Tree,30,"[0.0, 0.0, 1.0]","[0.0, 0.9760589318600368, 1.0]",0.9880294659300184
+Decision Tree,SVM,30,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+Decision Tree,XGBoost,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Decision Tree,Random Forest,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+Decision Tree,Decision Tree,35,"[0.0, 0.03508771929824561, 1.0]","[0.0, 0.9668508287292817, 1.0]",0.965881554715518
+Decision Tree,SVM,35,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+SVM,XGBoost,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+SVM,Random Forest,25,"[0.0, 1.0]","[0.0, 1.0]",0.5
+SVM,Decision Tree,25,"[0.0, 0.0, 1.0]","[0.0, 0.9760589318600368, 1.0]",0.9880294659300184
+SVM,SVM,25,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+SVM,XGBoost,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+SVM,Random Forest,30,"[0.0, 1.0]","[0.0, 1.0]",0.5
+SVM,Decision Tree,30,"[0.0, 0.0, 1.0]","[0.0, 0.9705340699815838, 1.0]",0.9852670349907919
+SVM,SVM,30,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
+SVM,XGBoost,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+SVM,Random Forest,35,"[0.0, 1.0]","[0.0, 1.0]",0.5
+SVM,Decision Tree,35,"[0.0, 0.0, 1.0]","[0.0, 0.9760589318600368, 1.0]",0.9880294659300184
+SVM,SVM,35,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",1.0
