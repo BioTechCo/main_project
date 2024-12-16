@@ -15,13 +15,17 @@ feature_size_0 = 120677
 feature_size_1 = 360242
 feature_size_intersection = 115119
 Before_dropna_dfn_shape = [ 115119, 74,]
-Before_dropna_dfc_shape = [ 115119, 844,]
+Before_dropna_dfc_shape = [ 115119, 677,]
 After_dropna_dfn_shape = [ 115119, 74,]
 After_dropna_dfc_shape = [ 115119, 677,]
-training_set_samples = 600
-testing_set_samples = 151
-train_class_distribution = [ 57, 543,]
-testing_class_distribution = [ 17, 134,]
+training_set_samples = 1083
+testing_set_samples = 271
+training_class_distribution = [ 542, 541,]
+testing_class_distribution = [ 135, 136,]
+Before_SMOTE_X_shape = [ 751, 115119,]
+Before_SMOTE_y_shape = 751
+After_SMOTE_X_shape = [ 1354, 115119,]
+After_SMOTE_y_shape = 1354
 
 [preprocess.dbeta]
 dmp_before_dropna_shape_feature = 289650

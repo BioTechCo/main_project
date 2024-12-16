@@ -10,10 +10,14 @@ is_columns_duplicated = 2
 feature_size_0 = 367932
 Before_dropna_df_shape = [ 367932, 406,]
 After_dropna_df_shape = [ 367932, 406,]
-training_set_samples = 324
-testing_set_samples = 82
-train_class_distribution = [ 33, 291,]
-testing_class_distribution = [ 10, 72,]
+training_set_samples = 580
+testing_set_samples = 146
+training_class_distribution = [ 296, 284,]
+testing_class_distribution = [ 67, 79,]
+Before_SMOTE_X_shape = [ 406, 367932,]
+Before_SMOTE_y_shape = 406
+After_SMOTE_X_shape = [ 726, 367932,]
+After_SMOTE_y_shape = 726
 
 [preprocess.oversampling]
 training_set_samples = 582
