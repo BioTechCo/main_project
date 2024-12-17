@@ -1,0 +1,10 @@
+[init.hyper]
+beta_file_number = 1
+test_ratio = 0.2
+splitting_seed = 42
+normal_number_0 = 50
+data_source = "GDC_prostate_tissue"
+is_columns_duplicated = 2
+
+[preprocess.merge_and_split]
+feature_size_0 = 373336
