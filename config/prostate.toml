@@ -10,10 +10,15 @@ is_columns_duplicated = 2
 feature_size_0 = 373340
 Before_dropna_df_shape = [ 373340, 552,]
 After_dropna_df_shape = [ 373340, 552,]
-training_set_samples = 441
+training_set_samples = 802
 testing_set_samples = 111
 train_class_distribution = [ 40, 401,]
 testing_class_distribution = [ 10, 101,]
+Before_SMOTE_X_train_shape = [ 441, 373340,]
+Before_SMOTE_y_train_shape = 441
+After_SMOTE_X_train_shape = [ 802, 373340,]
+After_SMOTE_y_train_shape = 802
+training_class_distribution = [ 401, 401,]
 
 [preprocess.dbeta]
 delta_beta_avg = 373340
@@ -24,7 +29,7 @@ dmp_after_dropna_shape_feature = 218741
 delta_beta_avg_remove_NaN_with_gene_name = 373340
 
 [preprocess.filtering]
-threshold = 0.06
+threshold = 0.35
 
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
