@@ -38,3 +38,11 @@ delta_beta_avg_remove_NaN_with_gene_name = 115119
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
 avg_dbeta_upper_bound = 500
+
+[clustering.hyper]
+dbeta_file = "dbeta_TSS_0.31"
+gene_set_file = "selected_feature_names_set"
+bp_file = "distance_matrix_bp"
+cc_file = "distance_matrix_cc"
+mf_file = "distance_matrix_mf"
+terms_count_file = "terms_count"
