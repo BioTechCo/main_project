@@ -1,0 +1,2 @@
+Model,ID1,ID2,ID3,ID4,accuracy,sensitivity,specificity,precision,f1_score,mcc
+SVM,cg03623835,cg13995230,cg08101264,cg26097573,0.6,0.38,0.75,0.5,0.43,0.13
