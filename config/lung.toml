@@ -6,6 +6,8 @@ normal_number_0 = 37
 normal_number_1 = 37
 data_source = "GDC_lung_tissue"
 is_columns_duplicated = 2
+is_oversample = 0
+
 
 [preprocess.filtering]
 threshold = 0.31
@@ -18,9 +20,11 @@ Before_dropna_dfn_shape = [ 115119, 74,]
 Before_dropna_dfc_shape = [ 115119, 844,]
 After_dropna_dfn_shape = [ 115119, 74,]
 After_dropna_dfc_shape = [ 115119, 677,]
-training_set_samples = 1086
+training_set_samples_oversample = 1086
+training_set_samples = 600
 testing_set_samples = 151
-training_class_distribution = [ 543, 543,]
+training_class_distribution_oversample = [ 543, 543,]
+training_class_distribution = [ 57, 543,]
 testing_class_distribution = [ 17, 134,]
 Before_SMOTE_X_train_shape = [ 600, 115119,]
 Before_SMOTE_y_train_shape = 600
