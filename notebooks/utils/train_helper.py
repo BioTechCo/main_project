@@ -42,7 +42,11 @@ def record(
     tn, fp, _, _ = confusion_matrix(y, y_pred_on_X).ravel()
     accuracy = accuracy_score(y, y_pred_on_X)
     recall = recall_score(y, y_pred_on_X)
-    specificity = tn / (tn + fp)
+    if (tn + fp) == 0:
+        print("Warning: No true negative found. Setting specificity to 0.")
+        specificity = 0
+    else:
+        specificity = tn / (tn + fp)
     precision = precision_score(y, y_pred_on_X)
 
     fpr, tpr, _ = roc_curve(y, y_pred_on_X)
