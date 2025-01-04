@@ -64,7 +64,7 @@ def record(
                     "features": feature_count,
                     "accuracy": accuracy,
                     "recall": recall,
-                    "speficity": specificity,
+                    "specificity": specificity,
                     "precision": precision,
                     "f1_score": f1_score(y, y_pred_on_X),
                     "J-index": recall + specificity - 1,
