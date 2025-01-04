@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import silhouette_score
 from scipy.spatial.distance import squareform
 
+
 def check_distance_matrix(distance_matrix):
     is_square = distance_matrix.shape[0] == distance_matrix.shape[1]
     print("Matrix is square:", is_square)
@@ -17,7 +18,9 @@ def check_distance_matrix(distance_matrix):
     print("Number of NaN values in the matrix:", nan_count)
 
 
-def hierarchical_clustering(distance_matrix, range_min=2, range_max=31, cluster_number=None):
+def hierarchical_clustering(
+    distance_matrix, range_min=2, range_max=31, cluster_number=None, out_path=None
+):
     condensed_matrix = squareform(distance_matrix, force="tovector", checks=False)
     Z = linkage(condensed_matrix, method="ward")
     range_n_clusters = range(range_min, range_max + 1)
@@ -36,7 +39,7 @@ def hierarchical_clustering(distance_matrix, range_min=2, range_max=31, cluster_
         print("Best number of clusters:", best_n_clusters)
 
     # Create a figure with two subplots: one for the dendrogram and one for the silhouette scores
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
 
     # Plot dendrogram on the left
     dendrogram(Z, ax=ax1)
@@ -52,7 +55,8 @@ def hierarchical_clustering(distance_matrix, range_min=2, range_max=31, cluster_
     ax2.set_xticks(range(2, range_max))
 
     plt.tight_layout()
-    plt.show()
+    plt.savefig(out_path)
+    plt.close(fig)
 
     labels = fcluster(Z, best_n_clusters, criterion="maxclust")
     dis_col = distance_matrix
@@ -61,7 +65,9 @@ def hierarchical_clustering(distance_matrix, range_min=2, range_max=31, cluster_
     return gene_clusters
 
 
-def hierarchical_clustering_compare(distance_matrices, names, range_min=2, range_max=5):
+def hierarchical_clustering_compare(
+    distance_matrices, names, range_min=2, range_max=5, out_path=None
+):
     # Check if exactly three distance matrices and three names are provided
     if len(distance_matrices) != 3 or len(names) != 3:
         raise ValueError(
@@ -97,4 +103,5 @@ def hierarchical_clustering_compare(distance_matrices, names, range_min=2, range
     plt.xticks(range(range_min, range_max + 1))
     plt.legend()
     plt.tight_layout()
-    plt.show()
+    plt.savefig(out_path)
+    plt.close()
