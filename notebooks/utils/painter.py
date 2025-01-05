@@ -12,7 +12,7 @@ def plot_roc_curve(
     mode: Literal["train", "test"] = "train",
 ):
     fig = go.Figure()
-    for index, row in df.iterrows():
+    for _, row in df.iterrows():
         fig.add_trace(
             go.Scatter(
                 x=row[f"fpr_{mode}"],
@@ -52,31 +52,40 @@ def plot_roc_curve(
 # plot the accuracy difference using ploty
 
 
-def plot_performance_diff(
-    df: DataFrame, colors: dict, outPath: str, width: int = 800, height: int = 1600
+def create_performance_barchart(
+    df: DataFrame,
+    color_mapping: dict,
+    metric: str,
+    out_path: str,
+    title: str,
+    x_axis_label: str,
+    y_axis_label: str,
+    width: int = 800,
+    height: int = 1600,
+    orientation: Literal["v", "h"] = "v",
+    template: str = "plotly_white",
 ):
     fig = go.Figure()
-    for key, value in colors.items():
+    for key, value in color_mapping.items():
         fig.add_trace(
-            go.Scatter(
-                x=df[f"{key}_diff"],
-                y=df["selection_train_model_features"],
-                mode="lines+markers",
-                name=f"{key} Difference",
-                line=dict(color=value, width=2),
-                marker=dict(color=value, size=8),
+            go.Bar(
+                x=df[f"{key}"],
+                y=df[metric],
+                name=f"{key}",
+                marker=dict(color=value),
+                orientation=orientation,
             )
         )
 
     # Update layout
     fig.update_layout(
-        title="Performance Difference between Training and Testing Set",
-        xaxis_title="Performance Difference (Training - Testing)",
-        yaxis_title="Combination of Selection Model, Train Model and Features",
-        template="plotly_white",
+        title=title,
+        xaxis_title=x_axis_label,
+        yaxis_title=y_axis_label,
+        template=template,
         width=width,
         height=height,
     )
 
-    fig.write_html(outPath)
-    print(f"Performance difference saved to {outPath}")
+    fig.write_html(out_path)
+    print(f"Performance difference saved to {out_path}")

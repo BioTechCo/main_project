@@ -1,3 +1,4 @@
+from ast import List
 import pandas as pd
 import numpy as np
 from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
@@ -6,7 +7,7 @@ from sklearn.metrics import silhouette_score
 from scipy.spatial.distance import squareform
 
 
-def check_distance_matrix(distance_matrix):
+def check_distance_matrix(distance_matrix: pd.DataFrame) -> None:
     is_square = distance_matrix.shape[0] == distance_matrix.shape[1]
     print("Matrix is square:", is_square)
 
@@ -19,9 +20,10 @@ def check_distance_matrix(distance_matrix):
 
 
 def hierarchical_clustering(
-    distance_matrix, range_min=2, range_max=31, cluster_number=None, out_path=None
-):
-    condensed_matrix = squareform(distance_matrix, force="tovector", checks=False)
+    distance_matrix: pd.DataFrame, range_min: int = 2, range_max: int = 31, cluster_number: int = None, out_path: str = None
+) -> pd.DataFrame:
+    condensed_matrix = squareform(
+        distance_matrix, force="tovector", checks=False)
     Z = linkage(condensed_matrix, method="ward")
     range_n_clusters = range(range_min, range_max + 1)
     silhouette_avg = []
@@ -66,8 +68,8 @@ def hierarchical_clustering(
 
 
 def hierarchical_clustering_compare(
-    distance_matrices, names, range_min=2, range_max=5, out_path=None
-):
+    distance_matrices: List[pd.DataFrame], names: List[str], range_min: int = 2, range_max: int = 5, out_path: str = None
+) -> None:
     # Check if exactly three distance matrices and three names are provided
     if len(distance_matrices) != 3 or len(names) != 3:
         raise ValueError(
@@ -79,7 +81,8 @@ def hierarchical_clustering_compare(
 
     # Loop through each distance matrix and calculate silhouette scores
     for idx, (distance_matrix, name) in enumerate(zip(distance_matrices, names)):
-        condensed_matrix = squareform(distance_matrix, force="tovector", checks=False)
+        condensed_matrix = squareform(
+            distance_matrix, force="tovector", checks=False)
         Z = linkage(condensed_matrix, method="ward")
         range_n_clusters = range(range_min, range_max + 1)
         silhouette_avg = []
