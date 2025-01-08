@@ -1,0 +1,209 @@
+select_model,validation_model,num_features,accuracy,sensitivity,specificity,precision,f1,mcc
+XGBoost,SVM,20,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,25,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,30,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,35,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,40,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,45,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,50,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,55,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,60,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,65,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,70,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,75,1.0,1.0,1.0,1,1,1.0
+XGBoost,SVM,80,1.0,1.0,1.0,1,1,1.0
+XGBoost,Decision Tree,20,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,25,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,30,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,35,0.98,0.98,1.0,1,1,0.91
+XGBoost,Decision Tree,40,0.98,0.98,1.0,1,1,0.91
+XGBoost,Decision Tree,45,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,50,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,55,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,60,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,65,0.99,0.99,1.0,1,1,0.95
+XGBoost,Decision Tree,70,1.0,1.0,1.0,1,1,1.0
+XGBoost,Decision Tree,75,0.93,0.92,1.0,1,1,0.77
+XGBoost,Decision Tree,80,0.99,0.99,1.0,1,1,0.95
+XGBoost,Random Forest,20,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,25,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,30,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,35,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,40,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,45,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,50,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,55,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,60,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,65,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,70,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,75,1.0,1.0,1.0,1,1,1.0
+XGBoost,Random Forest,80,1.0,1.0,1.0,1,1,1.0
+XGBoost,XGBoost,20,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,25,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,30,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,35,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,40,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,45,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,50,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,55,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,60,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,65,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,70,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,75,0.99,0.99,1.0,1,1,0.95
+XGBoost,XGBoost,80,0.99,0.99,1.0,1,1,0.95
+Random Forest,SVM,20,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,25,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,30,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,35,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,40,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,45,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,50,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,55,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,60,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,65,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,70,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,75,1.0,1.0,1.0,1,1,1.0
+Random Forest,SVM,80,1.0,1.0,1.0,1,1,1.0
+Random Forest,Decision Tree,20,0.98,0.98,1.0,1,1,0.91
+Random Forest,Decision Tree,25,0.99,0.99,1.0,1,1,0.95
+Random Forest,Decision Tree,30,0.98,0.98,1.0,1,1,0.91
+Random Forest,Decision Tree,35,0.99,0.99,1.0,1,1,0.95
+Random Forest,Decision Tree,40,0.98,0.98,1.0,1,1,0.91
+Random Forest,Decision Tree,45,0.98,0.98,1.0,1,1,0.91
+Random Forest,Decision Tree,50,0.96,0.98,0.82,1,1,0.79
+Random Forest,Decision Tree,55,0.99,0.99,1.0,1,1,0.95
+Random Forest,Decision Tree,60,0.98,0.98,1.0,1,1,0.91
+Random Forest,Decision Tree,65,0.99,0.99,1.0,1,1,0.95
+Random Forest,Decision Tree,70,0.98,0.98,1.0,1,1,0.91
+Random Forest,Decision Tree,75,0.93,0.92,1.0,1,1,0.77
+Random Forest,Decision Tree,80,0.98,0.98,1.0,1,1,0.91
+Random Forest,Random Forest,20,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,25,1.0,1.0,1.0,1,1,1.0
+Random Forest,Random Forest,30,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,35,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,40,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,45,1.0,1.0,1.0,1,1,1.0
+Random Forest,Random Forest,50,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,55,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,60,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,65,1.0,1.0,1.0,1,1,1.0
+Random Forest,Random Forest,70,1.0,1.0,1.0,1,1,1.0
+Random Forest,Random Forest,75,0.99,0.99,1.0,1,1,0.95
+Random Forest,Random Forest,80,1.0,1.0,1.0,1,1,1.0
+Random Forest,XGBoost,20,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,25,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,30,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,35,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,40,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,45,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,50,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,55,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,60,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,65,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,70,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,75,0.99,0.99,1.0,1,1,0.95
+Random Forest,XGBoost,80,0.99,0.99,1.0,1,1,0.95
+Decision Tree,SVM,20,0.99,1.0,0.91,1,1,0.95
+Decision Tree,SVM,25,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,30,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,35,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,40,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,45,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,50,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,55,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,60,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,65,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,70,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,75,1.0,1.0,1.0,1,1,1.0
+Decision Tree,SVM,80,1.0,1.0,1.0,1,1,1.0
+Decision Tree,Decision Tree,20,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,25,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,30,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,35,0.88,0.88,0.91,1,1,0.62
+Decision Tree,Decision Tree,40,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,45,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,50,0.96,0.95,1.0,1,1,0.83
+Decision Tree,Decision Tree,55,0.96,0.95,1.0,1,1,0.83
+Decision Tree,Decision Tree,60,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,65,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,70,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Decision Tree,75,0.95,0.94,1.0,1,1,0.8
+Decision Tree,Decision Tree,80,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Random Forest,20,1.0,1.0,1.0,1,1,1.0
+Decision Tree,Random Forest,25,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Random Forest,30,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Random Forest,35,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Random Forest,40,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Random Forest,45,0.98,0.98,1.0,1,1,0.91
+Decision Tree,Random Forest,50,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Random Forest,55,0.98,0.98,1.0,1,1,0.91
+Decision Tree,Random Forest,60,0.98,0.98,1.0,1,1,0.91
+Decision Tree,Random Forest,65,1.0,1.0,1.0,1,1,1.0
+Decision Tree,Random Forest,70,0.99,0.99,1.0,1,1,0.95
+Decision Tree,Random Forest,75,1.0,1.0,1.0,1,1,1.0
+Decision Tree,Random Forest,80,1.0,1.0,1.0,1,1,1.0
+Decision Tree,XGBoost,20,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,25,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,30,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,35,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,40,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,45,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,50,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,55,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,60,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,65,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,70,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,75,0.99,0.99,1.0,1,1,0.95
+Decision Tree,XGBoost,80,0.99,0.99,1.0,1,1,0.95
+SVM,SVM,20,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,25,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,30,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,35,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,40,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,45,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,50,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,55,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,60,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,65,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,70,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,75,1.0,1.0,1.0,1,1,1.0
+SVM,SVM,80,1.0,1.0,1.0,1,1,1.0
+SVM,Decision Tree,20,1.0,1.0,1.0,1,1,1.0
+SVM,Decision Tree,25,0.95,0.95,0.91,1,1,0.78
+SVM,Decision Tree,30,1.0,1.0,1.0,1,1,1.0
+SVM,Decision Tree,35,0.95,0.95,0.91,1,1,0.78
+SVM,Decision Tree,40,0.98,0.98,1.0,1,1,0.91
+SVM,Decision Tree,45,0.95,0.95,0.91,1,1,0.78
+SVM,Decision Tree,50,0.96,0.96,0.91,1,1,0.81
+SVM,Decision Tree,55,0.98,0.98,1.0,1,1,0.91
+SVM,Decision Tree,60,0.96,0.95,1.0,1,1,0.83
+SVM,Decision Tree,65,0.98,0.98,1.0,1,1,0.91
+SVM,Decision Tree,70,0.98,0.98,1.0,1,1,0.91
+SVM,Decision Tree,75,1.0,1.0,1.0,1,1,1.0
+SVM,Decision Tree,80,0.99,0.99,1.0,1,1,0.95
+SVM,Random Forest,20,0.99,1.0,0.91,1,1,0.95
+SVM,Random Forest,25,0.99,1.0,0.91,1,1,0.95
+SVM,Random Forest,30,0.99,1.0,0.91,1,1,0.95
+SVM,Random Forest,35,0.99,1.0,0.91,1,1,0.95
+SVM,Random Forest,40,0.99,1.0,0.91,1,1,0.95
+SVM,Random Forest,45,1.0,1.0,1.0,1,1,1.0
+SVM,Random Forest,50,1.0,1.0,1.0,1,1,1.0
+SVM,Random Forest,55,1.0,1.0,1.0,1,1,1.0
+SVM,Random Forest,60,1.0,1.0,1.0,1,1,1.0
+SVM,Random Forest,65,1.0,1.0,1.0,1,1,1.0
+SVM,Random Forest,70,1.0,1.0,1.0,1,1,1.0
+SVM,Random Forest,75,1.0,1.0,1.0,1,1,1.0
+SVM,Random Forest,80,1.0,1.0,1.0,1,1,1.0
+SVM,XGBoost,20,1.0,1.0,1.0,1,1,1.0
+SVM,XGBoost,25,0.99,1.0,0.91,1,1,0.95
+SVM,XGBoost,30,0.99,1.0,0.91,1,1,0.95
+SVM,XGBoost,35,0.99,1.0,0.91,1,1,0.95
+SVM,XGBoost,40,1.0,1.0,1.0,1,1,1.0
+SVM,XGBoost,45,1.0,1.0,1.0,1,1,1.0
+SVM,XGBoost,50,1.0,1.0,1.0,1,1,1.0
+SVM,XGBoost,55,1.0,1.0,1.0,1,1,1.0
+SVM,XGBoost,60,0.99,0.99,1.0,1,1,0.95
+SVM,XGBoost,65,0.99,0.99,1.0,1,1,0.95
+SVM,XGBoost,70,0.99,0.99,1.0,1,1,0.95
+SVM,XGBoost,75,0.99,0.99,1.0,1,1,0.95
+SVM,XGBoost,80,0.99,0.99,1.0,1,1,0.95
