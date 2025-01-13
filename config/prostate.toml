@@ -5,6 +5,7 @@ splitting_seed = 42
 normal_number_0 = 50
 data_source = "GDC_prostate_tissue"
 is_columns_duplicated = 2
+is_oversample = 0
 
 [preprocess.merge_and_split]
 feature_size_0 = 373340
@@ -34,3 +35,14 @@ threshold = 0.35
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
 avg_dbeta_upper_bound = 600
+
+[clustering.hyper]
+dbeta_file = "dbeta_TSS_0.35"
+gene_set_file = "selected_feature_set"
+bp_file = "distance_matrix_bp"
+cc_file = "distance_matrix_cc"
+mf_file = "distance_matrix_mf"
+terms_count_file = "terms_count"
+
+[combination.hyper]
+dbeta_file = "dbeta_TSS_0.35_consensus"

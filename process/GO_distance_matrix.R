@@ -1,8 +1,8 @@
 # Define the base directory
-base_dir <- "breast/result/GSE243529/train80"
+base_dir <- "prostate/result/GDC_prostate_tissue/train80"
 
 # Construct the file paths using the base directory
-input_file <- file.path(base_dir, "dbeta_TSS_0.01.csv")
+input_file <- file.path(base_dir, "dbeta_TSS_0.35.csv")
 output_bp_csv <- file.path(base_dir, "distance_matrix_bp.csv")
 output_cc_csv <- file.path(base_dir, "distance_matrix_cc.csv")
 output_mf_csv <- file.path(base_dir, "distance_matrix_mf.csv")
