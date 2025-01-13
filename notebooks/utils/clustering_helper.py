@@ -68,7 +68,7 @@ def hierarchical_clustering(
 
 
 def hierarchical_clustering_compare(
-    distance_matrices: List[pd.DataFrame], names: List[str], range_min: int = 2, range_max: int = 5, out_path: str = None
+    distance_matrices: list[pd.DataFrame], names: list[str], range_min: int = 2, range_max: int = 5, out_path: str = None
 ) -> None:
     # Check if exactly three distance matrices and three names are provided
     if len(distance_matrices) != 3 or len(names) != 3:
