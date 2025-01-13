@@ -3,13 +3,13 @@ import toml
 CONFIG_PATH = ""
 
 
-def load_config(config_path):
+def load_config(config_path:str) -> dict:
     global CONFIG_PATH
     CONFIG_PATH = config_path
     return toml.load(config_path)
 
 
-def update_nested_toml(section_path, key, value):
+def update_nested_toml(section_path:str, key:str, value: str | int | float | bool) -> None:
     try:
         with open(CONFIG_PATH, "r") as f:
             config = toml.load(f)
