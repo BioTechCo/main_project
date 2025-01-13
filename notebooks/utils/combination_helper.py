@@ -27,12 +27,13 @@ from typing import Literal
 
 
 class CombinationHelper:
-    def __init__(self,
-                 train_df: pd.DataFrame,
-                 test_df: pd.DataFrame,
-                 dbeta: pd.DataFrame,
-                 gene_list: List[str],
-                 ) -> None:
+    def __init__(
+        self,
+        train_df: pd.DataFrame,
+        test_df: pd.DataFrame,
+        dbeta: pd.DataFrame,
+        gene_list: list[str],
+    ) -> None:
         self.train_df = train_df
         self.test_df = test_df
         self.dbeta = dbeta
@@ -181,7 +182,7 @@ class CombinationHelper:
             )
         )
 
-    def train(self, train_folder: str,test_folder: str, filename: str, discard_overfitting: bool = False):
+    def train(self, train_folder: str, test_folder: str, filename: str, discard_overfitting: bool = False):
         for model_name, grid_estimator in self.grid_estimators.items():
             for combination in self.combs:
                 prepared_X_train = self.prepare_data("train", combination)
@@ -191,8 +192,10 @@ class CombinationHelper:
                 best_params = grid_estimator.best_params_
 
                 best_score = grid_estimator.best_score_
-                y_pred_on_X_train = grid_estimator.best_estimator_.predict(prepared_X_train)
-                y_pred_on_X_test = grid_estimator.best_estimator_.predict(prepared_X_test)
+                y_pred_on_X_train = grid_estimator.best_estimator_.predict(
+                    prepared_X_train)
+                y_pred_on_X_test = grid_estimator.best_estimator_.predict(
+                    prepared_X_test)
 
                 if discard_overfitting:
                     train_acc = accuracy_score(self.y_train, y_pred_on_X_train)

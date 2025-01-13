@@ -9,16 +9,18 @@ def plot_roc_curve(
     outPath: str,
     width: int = 1200,
     height: int = 900,
-    mode: Literal["train", "test"] = "train",
+    x_column: str = "fpr",
+    y_column: str = "tpr",
+    trace_name: str = "model",
 ):
     fig = go.Figure()
     for _, row in df.iterrows():
         fig.add_trace(
             go.Scatter(
-                x=row[f"fpr_{mode}"],
-                y=row[f"tpr_{mode}"],
+                x=row[x_column],
+                y=row[y_column],
                 mode="lines",
-                name=f"{row['selection_model']} {row['train_model']} (AUC = {row[f'AUC_{mode}']:.3f})",
+                name=f"{row['selection_model']}_{row['train_model']}",
             )
         )
 
