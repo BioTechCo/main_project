@@ -91,3 +91,4 @@ def create_performance_barchart(
 
     fig.write_html(out_path)
     print(f"Performance difference saved to {out_path}")
+

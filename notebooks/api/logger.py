@@ -34,6 +34,10 @@ logging_config = dict(
         'train_helper': {
             'handlers': ['file_handler', 'console'],
             'level': logging.DEBUG,
-        }
+        },
+        'simple_model': {
+            'handlers': ['file_handler', 'console'],
+            'level': logging.DEBUG,
+        },
     }
 )
