@@ -21,7 +21,6 @@ from sklearn.metrics import (
     auc,
 
 )
-from typing import List
 from itertools import product
 from typing import Literal
 
