@@ -20,3 +20,4 @@
 all_beta_normalized*
 *.pickle
 notebooks/credentials.json
+/notebooks/logs
