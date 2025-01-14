@@ -31,6 +31,9 @@ Before_SMOTE_y_train_shape = 600
 After_SMOTE_X_train_shape = [ 1086, 115119,]
 After_SMOTE_y_train_shape = 1086
 
+[machine_learning.hyper]
+TSS_threshold = "dbeta_TSS_0.31_consensus"
+
 [preprocess.dbeta]
 dmp_before_dropna_shape_feature = 289650
 dmp_after_dropna_shape_feature = 219382
@@ -50,28 +53,6 @@ terms_count_file = "terms_count"
 [combination.hyper]
 dbeta_file = "dbeta_TSS_0.31_consensus"
 
-[machine_learning.Decision_Tree]
-max_features = 10
-min_samples_leaf = 70
-min_samples_split = 70
-
-[machine_learning.Random_Forest]
-max_features = 5
-min_samples_leaf = 80
-min_samples_split = 80
-n_estimators = 100
-
-[machine_learning.SVM]
-C = 50
-kernel = "rbf"
-
-[machine_learning.XGBoost]
-colsample_bytree = 0.6
-learning_rate = 0.1
-max_depth = 2
-min_child_weight = 40
-n_estimators = 50
-subsample = 0.7
 
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
