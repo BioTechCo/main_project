@@ -1,3 +1,4 @@
+
 import pandas as pd
 from sklearn.feature_selection import RFE, SequentialFeatureSelector
 import random
@@ -17,11 +18,13 @@ from sklearn.metrics import (
 import os
 
 from .pipe import pipe_dec
-
+from collections import defaultdict
 from logging.config import dictConfig
 from api.logger import logging_config
 import logging
-
+from .pipe import pipe_dec
+import json
+from typing import Literal
 dictConfig(logging_config)
 
 logger = logging.getLogger('train_helper')
@@ -34,30 +37,141 @@ def set_parameters(model: object, param_grid: dict) -> object:
     return grid_search
 
 
+class GeneRank:
+    def __init__(self, gene, rank):
+        self.gene: str = gene
+        self.rank: int = rank
+
+    def __str__(self) -> str:
+        return f"<Gene: {self.gene}, Rank: {self.rank}>"
+
+    def __repr__(self) -> str:
+        return f"<Gene: {self.gene}, Rank: {self.rank}>"
+
+    def getGene(self) -> str:
+        return self.gene
+
+    def getRank(self) -> int:
+        return self.rank
+
+
 def read_selected_features(file_name: str) -> dict:
-    gene_dict = {}
+    gene_dict = defaultdict(list)
     with open(file_name, "r") as f:
         for line in f:
             selected_feature_names = line.split(",")[1:]
             selected_feature_names[-1] = selected_feature_names[-1].strip()
-            gene_dict[line.split(",")[0]] = selected_feature_names
+            gene_dict[line.split(",")[0]].append(selected_feature_names)
     return gene_dict
 
 
+def read_selected_features_json(file_name: str) -> dict:
+    with open(file_name, "r") as f:
+        gene_dict: dict[str, dict[str, list[str]]] = json.load(f)
+    result_dict: dict[str, list[str]] = defaultdict(list)
+    for model, cluster_dict in gene_dict.items():
+        for _, genes in cluster_dict.items():
+            result_dict[model] += genes
+    return result_dict
+
+
 class TrainHelper():
-    def __init__(self, train_df: pd.DataFrame, test_df: pd.DataFrame, TSS_threshold: pd.DataFrame) -> None:
-        self.train_df = train_df
-        self.test_df = test_df
-        self.TSS_threshold = TSS_threshold
+    def __init__(self, dbeta_info: pd.DataFrame) -> None:
+        self.dbeta_info = dbeta_info
         self.selection_model = {}
         self.grid_estimators = {}
         self.Bagging_num = 5
 
+    def setup_dbeta(self, gene_list: list[str]) -> None:
+        """
+        Setup the dbeta_info dataframe with the gene_list if there is a gene list selected by previous dataset
+        
+        Parameters:
+            gene_list (list[str]): The list of genes to filter the dbeta_info dataframe.
+        """
+        self.dbeta_info = self.dbeta_info[self.dbeta_info["gene"].isin(gene_list)]
+
+    def set_train_test(self, train_df: pd.DataFrame) -> None:
+        self.train_df = train_df
+
+    def generate_selected_features_of_clusters(
+        self,
+        gene_dict: dict[str, list[list[str]]],
+        out_path: str,
+        mode: Literal["min", "max"] = "min",
+        out_format: Literal["json", "txt"] = "json",
+    ) -> None:
+        """
+        Generate the selected features of clusters based on the gene_dict.
+        The selected features are saved in the out_path file.
+
+        Parameters:
+            gene_dict (dict[str, list[list[str]]): The dictionary of gene lists for each model.
+            out_path (str): The path to save the selected features.
+            mode (Literal["min", "max"]): The mode to select the features. 
+            If "min", the selected features are the genes with the lowest rank in each cluster. 
+            If "max", the selected features are the genes with the highest rank in each cluster.
+            out_format (Literal["json", "txt"]): The output format of the selected features.
+            If "json", the selected features are saved in a json file for simple model training.
+            If "csv", the selected features are saved in a txt file for another selection process.
+        """
+        result_dict: dict[str, dict[str, list[str]]] = defaultdict(dict)
+        result_set: set[str] = set()
+
+        if mode == "min":
+            category_dict: dict[str,
+                                dict[str, list[GeneRank]]] = defaultdict(dict)
+            for model, gene_lists in gene_dict.items():
+                record = []
+                data = defaultdict(list)
+                for i, gene_list in enumerate(gene_lists):
+                    for gene in gene_list:
+                        if gene not in record:
+                            record.append(gene)
+                            cluster = self.dbeta_info[self.dbeta_info["gene"]
+                                                         == gene]["cluster"].values[0]
+                            data[str(cluster)].append(GeneRank(gene, i))
+                if len(data) == 0:
+                    continue
+                category_dict[model] = data
+            for model, cluster_dict in category_dict.items():
+                for cluster, genes in cluster_dict.items():
+                    lowest_rank = min([gene.getRank() for gene in genes])
+                    if out_format == "json":
+                        result_dict[model][cluster] = [
+                            gene.getGene() for gene in genes if gene.getRank() == lowest_rank]
+                    elif out_format == "txt":
+                        result_set.update(
+                            [gene.getGene() for gene in genes if gene.getRank() == lowest_rank])
+        elif mode == "max":
+            for model, gene_lists in gene_dict.items():
+                data = defaultdict(list)
+                for gene in gene_lists[-1]:
+                    cluster = self.dbeta_info[self.dbeta_info["gene"]
+                                                 == gene]["cluster"].values[0]
+                    if out_format == "json":
+                        data[str(cluster)].append(gene)
+                    elif out_format == "txt":
+                        result_set.add(gene)
+                if len(data) == 0:
+                    continue
+                result_dict[model] = data
+        else:
+            raise ValueError("mode should be either 'min' or 'max'")
+        if out_format == "json":
+            with open(out_path, "w") as f:
+                json.dump(result_dict, f)
+        elif out_format == "txt":
+            with open(out_path, "w") as f:
+                f.write("gene\n")
+                for gene in result_set:
+                    f.write(f"{gene}\n")
+
     def set_train_test(self) -> None:
         train_df_tt = self.train_df[self.train_df["Unnamed: 0"].isin(
-            self.TSS_threshold["ID"]) | (self.train_df["Unnamed: 0"] == "label")]
+            self.dbeta_info["ID"]) | (self.train_df["Unnamed: 0"] == "label")]
         test_df_tt = self.test_df[self.test_df["Unnamed: 0"].isin(
-            self.TSS_threshold["ID"]) | (self.test_df["Unnamed: 0"] == "label")]
+            self.dbeta_info["ID"]) | (self.test_df["Unnamed: 0"] == "label")]
         self.X_train = train_df_tt.iloc[:-1, 1:].T.values.tolist()
         self.X_test = test_df_tt.iloc[:-1, 1:].T.values.tolist()
         self.y_train = self.train_df.iloc[-1, 1:].astype(int)
@@ -79,11 +193,30 @@ class TrainHelper():
     def set_grid_estimators(self, grid_estimators: dict) -> None:
         self.grid_estimators = grid_estimators
 
-    def select_feature_sfs(self, TrainOutPath: str, tol: float = 0.001, n_features_to_select="auto") -> None:
+    def select_feature_sfs(
+            self,
+            TrainOutPath: str,
+            tol: float = 0.001,
+            step: int = 1,
+            n_features_to_select="auto"
+    ) -> None:
+        """
+        Select features using Sequential Feature Selector (SFS) with the selection models.
+        The selected features are saved in the TrainOutPath/sfs/selected_feature_names_sfs.txt file.
+
+        Parameters:
+            TrainOutPath (str): The path to save the selected features.
+            tol (float): The tolerance for the stopping criteriq. 
+            step (int): The step size for the number of features to select.
+            n_features_to_select (int): The number of features to select. If "auto", the number of features to select is the number of unique clusters.
+        """
         for selection_model_name, selection_model in self.selection_models.items():
             logger.debug(f"Training {selection_model_name} with SFS")
-            target = len(set(self.TSS_threshold['cluster']))
-            counter = target
+            num_unique_clusters = len(set(self.TSS_threshold['cluster']))
+            if n_features_to_select == "auto":
+                step_ = n_features_to_select
+            else:
+                step_ = num_unique_clusters
             while 1:
                 sfs = SequentialFeatureSelector(
                     estimator=selection_model,
@@ -91,49 +224,53 @@ class TrainHelper():
                     scoring=make_scorer(f1_score),
                     tol=tol,
                     n_jobs=-1,
-                    n_features_to_select=counter,
+                    n_features_to_select=step_,
                 )
                 sfs.fit_transform(self.X_train, self.y_train)
                 sfs.transform(self.X_test)
                 self._save_selected_features(
                     sfs, selection_model_name
                 ) >> self._append_to_file(f"{TrainOutPath}/sfs/selected_feature_names_sfs.txt", is_first_header=False)
-                if self.selected_clusters == target:
+                if step_ == "auto":
                     logger.info(
                         f"Training finished with {self.selected_clusters} clusters selected")
                     break
-                counter += target
-                logger.debug(
+                if self.selected_clusters == num_unique_clusters:
+                    logger.info(
+                        f"Training finished with {self.selected_clusters} clusters selected")
+                    break
+                step_ += step
+                logger.info(
                     f"Training {selection_model_name} with {self.selected_clusters} clusters selected")
 
-    def train_rfe(self, TrainOutPath: str, TestOutPath: str, feature_range: tuple) -> None:
-        for selection_model_name, selection_model in self.selection_models.items():
-            for feature_count in range(*feature_range):
-                rfe = RFE(estimator=selection_model,
-                          n_features_to_select=feature_count)
+    # def train_rfe(self, TrainOutPath: str, TestOutPath: str, feature_range: tuple) -> None:
+    #     for selection_model_name, selection_model in self.selection_models.items():
+    #         for feature_count in range(*feature_range):
+    #             rfe = RFE(estimator=selection_model,
+    #                       n_features_to_select=feature_count)
 
-                X_train_rfe = rfe.fit_transform(self.X_train, self.y_train)
-                X_test_rfe = rfe.transform(self.X_test)
+    #             X_train_rfe = rfe.fit_transform(self.X_train, self.y_train)
+    #             X_test_rfe = rfe.transform(self.X_test)
 
-                X_test_rfe__ = []
-                for X_test__item in self.X_test__:
-                    X_test_rfe__.append(rfe.transform(X_test__item))
+    #             X_test_rfe__ = []
+    #             for X_test__item in self.X_test__:
+    #                 X_test_rfe__.append(rfe.transform(X_test__item))
 
-                self._save_selected_features(
-                    rfe, selection_model_name
-                ) >> self._append_to_file(f"{TrainOutPath}/selected_feature_names.txt", is_first_header=False)
+    #             self._save_selected_features(
+    #                 rfe, selection_model_name
+    #             ) >> self._append_to_file(f"{TrainOutPath}/selected_feature_names.txt", is_first_header=False)
 
-                for estimator_name, grid_estimator in self.grid_estimators.items():
-                    grid_estimator.fit(X_train_rfe, self.y_train)
-                    self._fit_predict_append(grid_estimator.best_estimator_, X_train_rfe, self.y_train, selection_model_name,
-                                             estimator_name, feature_count, "rfe", "roc_curve", TrainOutPath)
+    #             for estimator_name, grid_estimator in self.grid_estimators.items():
+    #                 grid_estimator.fit(X_train_rfe, self.y_train)
+    #                 self._fit_predict_append(grid_estimator.best_estimator_, X_train_rfe, self.y_train, selection_model_name,
+    #                                          estimator_name, feature_count, "rfe", "roc_curve", TrainOutPath)
 
-                    self._fit_predict_append(grid_estimator.best_estimator_, X_test_rfe, self.y_test, selection_model_name,
-                                             estimator_name, feature_count, "rfe", "roc_curve", TestOutPath)
+    #                 self._fit_predict_append(grid_estimator.best_estimator_, X_test_rfe, self.y_test, selection_model_name,
+    #                                          estimator_name, feature_count, "rfe", "roc_curve", TestOutPath)
 
-                    for i, (X_test_rfe__i, y_test__i) in enumerate(zip(X_test_rfe__, self.y_test__)):
-                        self._fit_predict_append(grid_estimator.best_estimator_, X_test_rfe__i, y_test__i, selection_model_name,
-                                                 estimator_name, feature_count, f"rfe_{i}", f"roc_curve_{i}", TestOutPath)
+    #                 for i, (X_test_rfe__i, y_test__i) in enumerate(zip(X_test_rfe__, self.y_test__)):
+    #                     self._fit_predict_append(grid_estimator.best_estimator_, X_test_rfe__i, y_test__i, selection_model_name,
+    #                                              estimator_name, feature_count, f"rfe_{i}", f"roc_curve_{i}", TestOutPath)
 
     @pipe_dec
     def _append_to_file(self, data: pd.DataFrame, file_name: str, is_first_header: bool = True) -> None:
@@ -230,11 +367,11 @@ class TrainHelper():
         selector,
         selection_model_name: str,
     ) -> None:
-        index = self.TSS_threshold.columns.get_loc("gene")
-        cluster_index = self.TSS_threshold.columns.get_loc("cluster")
-        selected_features = self.TSS_threshold.iloc[selector.support_, index]
+        index = self.dbeta_info.columns.get_loc("gene")
+        cluster_index = self.dbeta_info.columns.get_loc("cluster")
+        selected_features = self.dbeta_info.iloc[selector.support_, index]
         self.selected_clusters = len(
-            set(self.TSS_threshold.iloc[selector.support_, cluster_index]))
+            set(self.dbeta_info.iloc[selector.support_, cluster_index]))
 
         selected_feature_df = pd.DataFrame({
             "selection_model_name": [selection_model_name],

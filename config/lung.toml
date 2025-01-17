@@ -7,7 +7,8 @@ normal_number_1 = 37
 data_source = "GDC_lung_tissue"
 is_columns_duplicated = 2
 is_oversample = 0
-
+training_set_path = "all_beta_normalized_0"
+test_set_path = "all_beta_normalized_1"
 
 [preprocess.filtering]
 threshold = 0.31
