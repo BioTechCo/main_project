@@ -78,7 +78,8 @@ class SimpleModel():
     ):
         try:
             for combination in self.combs:
-                logger.info(f"Training for combination: {combination} with estimator: {estimator_name}")
+                logger.info(
+                    f"Training for combination: {combination} with estimator: {estimator_name}")
                 X_train = self._prepare_data(self.pre_X_train, combination)
                 estimator.fit(X_train, self.y_train)
                 if is_grid_search:
@@ -111,11 +112,8 @@ class SimpleModel():
                 # Bagging
                 metric_avg = {}
                 for i in range(self.bagging_iterations):
-                    # logger.debug(f"Bagging iteration: {i}")
-                    # logger.debug(f"\ndbeta_info:\n{self.dbeta_info}")
-                    # logger.debug(f"\npre_X_test__:\n{self.pre_X_test__[i]}")
-                    # logger.debug(f"\conbination:\n{combination}")
-                    X_test__ = self._prepare_data(self.pre_X_test__[i], combination)
+                    X_test__ = self._prepare_data(
+                        self.pre_X_test__[i], combination)
                     y_pred_on_X = self._estimator.predict(X_test__)
                     y_proba_on_X = self._estimator.predict_proba(X_test__)[
                         :, 1]
@@ -134,7 +132,7 @@ class SimpleModel():
                     #         }
                     #     ]
                     # ) >> self._append_to_file(f"{out_path}/{estimator_name}_roc_curve_avg_{i}.csv")
-                    
+
                     for key, value in result['metrics'].items():
                         if key not in metric_avg:
                             metric_avg[key] = value
@@ -170,7 +168,7 @@ class SimpleModel():
         ]
 
     def _prepare_data(
-            self, 
+            self,
             df: pd.DataFrame,
             genes: tuple = None
     ) -> list:
@@ -265,9 +263,9 @@ class SimpleModel():
         }
 
     def _balance_dataframe_with_labels(
-            self,
-            df: pd.DataFrame,
-            seed=42
+        self,
+        df: pd.DataFrame,
+        seed=42
     ) -> pd.DataFrame:
         """
         Balances the dataframe to ensure equal normal and tumor samples for each ID
@@ -308,7 +306,7 @@ class SimpleModel():
         balanced_data = data[balanced_columns]
         balanced_labels = labels[balanced_columns]
         balanced_df = pd.concat([balanced_data, balanced_labels.to_frame().T])
-        
+
         balanced_df = pd.concat([id, balanced_df], axis=1)
         return balanced_df
 
