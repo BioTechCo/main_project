@@ -94,7 +94,7 @@ class TrainHelper():
     def set_train_test(self, train_df: pd.DataFrame) -> None:
         self.train_df = train_df
 
-    def generate_selected_features_of_clusters(
+    def generate_selected_features(
         self,
         gene_dict: dict[str, list[list[str]]],
         out_path: str,
