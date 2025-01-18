@@ -79,8 +79,8 @@ class TrainHelper():
     def __init__(self, dbeta_info: pd.DataFrame) -> None:
         self.dbeta_info = dbeta_info
         self.selection_model = {}
-        self.grid_estimators = {}
-        self.Bagging_num = 5
+        self.grid_estimators = {} # only used by RFE
+        self.Bagging_num = 5 # only used by RFE
 
     def setup_dbeta(self, gene_list: list[str]) -> None:
         """
@@ -190,7 +190,7 @@ class TrainHelper():
     def set_selection_models(self, selection_models: dict) -> None:
         self.selection_models = selection_models
 
-    def set_grid_estimators(self, grid_estimators: dict) -> None:
+    def set_grid_estimators(self, grid_estimators: dict) -> None: # only used by RFE
         self.grid_estimators = grid_estimators
 
     def select_feature_sfs(
