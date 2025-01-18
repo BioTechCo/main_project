@@ -198,7 +198,7 @@ class TrainHelper():
             TrainOutPath: str,
             tol: float = 0.001,
             step: int = 1,
-            n_features_to_select="auto"
+            n_features_to_select: Literal["auto", "cluster"] = "auto"
     ) -> None:
         """
         Select features using Sequential Feature Selector (SFS) with the selection models.
@@ -215,8 +215,11 @@ class TrainHelper():
             num_unique_clusters = len(set(self.TSS_threshold['cluster']))
             if n_features_to_select == "auto":
                 step_ = n_features_to_select
-            else:
+            elif n_features_to_select == "cluster":
                 step_ = num_unique_clusters
+            else:
+                raise ValueError(
+                    "n_features_to_select should be either 'auto' or 'cluster'")
             while 1:
                 sfs = SequentialFeatureSelector(
                     estimator=selection_model,
