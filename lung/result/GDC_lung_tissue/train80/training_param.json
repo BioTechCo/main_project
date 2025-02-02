@@ -1,0 +1,77 @@
+{
+    "XGBoost": {
+        "learning_rate": [
+            0.001,
+            0.01,
+            0.1
+        ],
+        "n_estimators": [
+            10,
+            20,
+            30
+        ],
+        "max_depth": [
+            1,
+            2
+        ],
+        "subsample": [
+            0.6,
+            0.7,
+            0.8
+        ],
+        "colsample_bytree": [
+            0.2,
+            0.5,
+            0.8
+        ],
+        "min_child_weight": [
+            1,
+            5,
+            10
+        ]
+    },
+    "Random Forest": {
+        "n_estimators": [
+            10,
+            20,
+            30
+        ],
+        "min_samples_split": [
+            3,
+            4
+        ],
+        "min_samples_leaf": [
+            1,
+            2
+        ]
+    },
+    "SVM": {
+        "kernel": [
+            "rbf",
+            "poly",
+            "sigmoid"
+        ],
+        "C": [
+            50,
+            100,
+            200
+        ]
+    },
+    "Decision Tree": {
+        "min_samples_split": [
+            70,
+            80,
+            90
+        ],
+        "min_samples_leaf": [
+            70,
+            80,
+            90
+        ],
+        "max_features": [
+            5,
+            10,
+            20
+        ]
+    }
+}
