@@ -6,12 +6,14 @@ normal_number_0 = 50
 data_source = "GDC_prostate_tissue"
 is_columns_duplicated = 2
 is_oversample = 0
+training_set_path = "all_beta_normalized_0"
+test_set_path = "all_beta_normalized_1"
 
 [preprocess.merge_and_split]
 feature_size_0 = 373340
 Before_dropna_df_shape = [ 373340, 552,]
 After_dropna_df_shape = [ 373340, 552,]
-training_set_samples = 802
+training_set_samples = 441
 testing_set_samples = 111
 train_class_distribution = [ 40, 401,]
 testing_class_distribution = [ 10, 101,]
@@ -19,7 +21,12 @@ Before_SMOTE_X_train_shape = [ 441, 373340,]
 Before_SMOTE_y_train_shape = 441
 After_SMOTE_X_train_shape = [ 802, 373340,]
 After_SMOTE_y_train_shape = 802
-training_class_distribution = [ 401, 401,]
+training_class_distribution = [ 40, 401,]
+training_set_samples_oversample = 802
+training_class_distribution_oversample = [ 401, 401,]
+
+[machine_learning.hyper]
+TSS_threshold = "dbeta_TSS_0.35_consensus"
 
 [preprocess.dbeta]
 delta_beta_avg = 373340
@@ -32,10 +39,6 @@ delta_beta_avg_remove_NaN_with_gene_name = 373340
 [preprocess.filtering]
 threshold = 0.35
 
-[preprocess.filtering.hyper]
-avg_dbeta_lower_bound = 300
-avg_dbeta_upper_bound = 600
-
 [clustering.hyper]
 dbeta_file = "dbeta_TSS_0.35"
 gene_set_file = "selected_feature_set"
@@ -46,3 +49,7 @@ terms_count_file = "terms_count"
 
 [combination.hyper]
 dbeta_file = "dbeta_TSS_0.35_consensus"
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 600

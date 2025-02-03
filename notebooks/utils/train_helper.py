@@ -85,7 +85,7 @@ class TrainHelper():
     def setup_dbeta(self, gene_list: list[str]) -> None:
         """
         Setup the dbeta_info dataframe with the gene_list if there is a gene list selected by previous dataset
-        
+
         Parameters:
             gene_list (list[str]): The list of genes to filter the dbeta_info dataframe.
         """
@@ -108,8 +108,8 @@ class TrainHelper():
         Parameters:
             gene_dict (dict[str, list[list[str]]): The dictionary of gene lists for each model.
             out_path (str): The path to save the selected features.
-            mode (Literal["min", "max"]): The mode to select the features. 
-            If "min", the selected features are the genes with the lowest rank in each cluster. 
+            mode (Literal["min", "max"]): The mode to select the features.
+            If "min", the selected features are the genes with the lowest rank in each cluster.
             If "max", the selected features are the genes with the highest rank in each cluster.
             out_format (Literal["json", "txt"]): The output format of the selected features.
             If "json", the selected features are saved in a json file for simple model training.
@@ -167,7 +167,7 @@ class TrainHelper():
                 for gene in result_set:
                     f.write(f"{gene}\n")
 
-    def set_train_test(self) -> None:
+    def set_train_test2(self) -> None:
         train_df_tt = self.train_df[self.train_df["Unnamed: 0"].isin(
             self.dbeta_info["ID"]) | (self.train_df["Unnamed: 0"] == "label")]
         test_df_tt = self.test_df[self.test_df["Unnamed: 0"].isin(
@@ -206,13 +206,13 @@ class TrainHelper():
 
         Parameters:
             TrainOutPath (str): The path to save the selected features.
-            tol (float): The tolerance for the stopping criteriq. 
+            tol (float): The tolerance for the stopping criteriq.
             step (int): The step size for the number of features to select.
             n_features_to_select (int): The number of features to select. If "auto", the number of features to select is the number of unique clusters.
         """
         for selection_model_name, selection_model in self.selection_models.items():
             logger.debug(f"Training {selection_model_name} with SFS")
-            num_unique_clusters = len(set(self.TSS_threshold['cluster']))
+            num_unique_clusters = 3
             if n_features_to_select == "auto":
                 step_ = n_features_to_select
             elif n_features_to_select == "cluster":

@@ -3,6 +3,7 @@
 /data_TNBC
 /train
 /champ_result
+**/external_result
 *.7z
 *.gz
 *.pptx
