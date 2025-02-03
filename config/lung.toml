@@ -1,14 +1,15 @@
 [init.hyper]
 beta_file_number = 2
-test_ratio = 0.2
+split_ratio = 0.2
 splitting_seed = 42
 normal_number_0 = 37
 normal_number_1 = 37
 data_source = "GDC_lung_tissue"
 is_columns_duplicated = 2
 is_oversample = 0
-training_set_path = "all_beta_normalized_0"
-test_set_path = "all_beta_normalized_1"
+majority_df_path = "all_beta_normalized_80.csv"
+minority_df_path = "all_beta_normalized_20.csv"
+dmp_file = "DMP_result_0.csv"
 
 [preprocess.filtering]
 threshold = 0.31
@@ -32,9 +33,6 @@ Before_SMOTE_y_train_shape = 600
 After_SMOTE_X_train_shape = [ 1086, 115119,]
 After_SMOTE_y_train_shape = 1086
 
-[machine_learning.hyper]
-TSS_threshold = "dbeta_TSS_0.31_consensus"
-
 [preprocess.dbeta]
 dmp_before_dropna_shape_feature = 289650
 dmp_after_dropna_shape_feature = 219382
@@ -43,17 +41,19 @@ NaN_dbeta_feature = []
 delta_beta_avg_remove_NaN = 115119
 delta_beta_avg_remove_NaN_with_gene_name = 115119
 
+[machine_learning.hyper]
+dbeta_info_file = "dbeta_TSS_0.31_consensus.csv"
+
 [clustering.hyper]
 dbeta_file = "dbeta_TSS_0.31"
-gene_set_file = "selected_feature_names_set"
-bp_file = "distance_matrix_bp"
-cc_file = "distance_matrix_cc"
-mf_file = "distance_matrix_mf"
-terms_count_file = "terms_count"
+gene_set_file = "selected_feature_names_set.csv"
+bp_file = "distance_matrix_bp.csv"
+cc_file = "distance_matrix_cc.csv"
+mf_file = "distance_matrix_mf.csv"
+terms_count_file = "terms_count.csv"
 
 [combination.hyper]
-dbeta_file = "dbeta_TSS_0.31_consensus"
-
+dbeta_file = "dbeta_TSS_0.31_consensus.csv"
 
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
