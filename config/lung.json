@@ -1,0 +1,27 @@
+{
+    "GDC_lung_tissue": {
+        "normal": 74,
+        "tumor": 843,
+        "sample_count": 2,
+        "sample_type": "tissue",
+        "file": "../lung/champ_result/GDC_lung_tissue/all_beta_normalized_TCGA_LUAD_LUSC.csv",
+        "split_test": 0.2,
+        "random_state": 42
+    },
+    "GSE235414":{
+        "normal": 65,
+        "tumor": 65,
+        "sample_count": 2,
+        "sample_type": "tissue"
+    },
+    "GDC_lung_tissue_80":{
+        "normal": 59,
+        "tumor": 674,
+        "file": "../lung/result/GDC_lung_tissue/split80/all_beta_normalized.csv"
+    },
+    "GDC_lung_tissue_20":{
+        "normal": 15,
+        "tumor": 169,
+        "file": "../lung/result/GDC_lung_tissue/split20/all_beta_normalized.csv"
+    }
+}

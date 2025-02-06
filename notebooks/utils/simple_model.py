@@ -31,15 +31,13 @@ class SimpleModel():
         train_df: pd.DataFrame,
         test_df: pd.DataFrame,
         gene_list: list,
-        dbeta_info: pd.DataFrame,
-        method: Literal["sfs", "rfe"] = "rfe"
+        dbeta_info: pd.DataFrame
     ):
         self.train_df = train_df
         self.test_df = test_df
         self.gene_list = gene_list
         self.dbeta_info = dbeta_info
         self.bagging_iterations = 10
-        self.method = method
 
     def setup_dbeta(self):
         self.dbeta_info = self.dbeta_info[self.dbeta_info["gene"].isin(
@@ -95,8 +93,8 @@ class SimpleModel():
                     combination,
                     estimator_name,
                     self._estimator,
-                    f"{self.method}/{estimator_name}_metrics.csv",
-                    f"{self.method}/{estimator_name}_roc_curve.csv",
+                    f"{estimator_name}_metrics.csv",
+                    f"{estimator_name}_roc_curve.csv",
                     train_out_path
                 )
 
@@ -107,8 +105,8 @@ class SimpleModel():
                     combination,
                     estimator_name,
                     self._estimator,
-                    f"{self.method}/{estimator_name}_metrics.csv",
-                    f"{self.method}/{estimator_name}_roc_curve.csv",
+                    f"{estimator_name}_metrics.csv",
+                    f"{estimator_name}_roc_curve.csv",
                     test_out_path
                 )
 
@@ -151,7 +149,7 @@ class SimpleModel():
                             **metric_avg
                         }
                     ]
-                ) >> self._append_to_file(f"{test_out_path}/{self.method}/{estimator_name}_metrics_avg.csv")
+                ) >> self._append_to_file(f"{test_out_path}/{estimator_name}_metrics_avg.csv")
 
         except Exception as e:
             logger.error(f"Error in testing: {e}")

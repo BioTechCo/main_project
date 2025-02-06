@@ -39,5 +39,9 @@ logging_config = dict(
             'handlers': ['file_handler', 'console'],
             'level': logging.DEBUG,
         },
+        'process_norm': {
+            'handlers': ['file_handler', 'console'],
+            'level': logging.DEBUG,
+        },
     }
 )

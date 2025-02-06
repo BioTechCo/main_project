@@ -309,7 +309,7 @@ class TrainHelper:
                     f"Training {selection_model_name} with {self.selected_clusters} clusters selected"
                 )
 
-    def select_feture_rfe(
+    def select_feature_rfe(
         self,
         train_out_path: str,
         validate_out_path: str,
