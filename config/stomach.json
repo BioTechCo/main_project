@@ -1,0 +1,20 @@
+{
+    "GDC_stomach_tissue": {
+        "normal": 2,
+        "tumor": 395,
+        "sample_count": 2,
+        "sample_type": "tissue"
+    },
+    "GSE99553":{
+        "normal": 84,
+        "tumor": 0,
+        "sample_count": 1,
+        "sample_type": "tissue"
+    },
+    "GDC_stomach_tissue__GSE99553": {
+        "normal": 86,
+        "tumor": 395,
+        "sample_count": 1,
+        "sample_type": "tissue"
+    }
+}
