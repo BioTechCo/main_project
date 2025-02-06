@@ -1,15 +1,10 @@
 [init.hyper]
-split_ratio = 0.2
-data_source = "GDC_lung_tissue"
 train_df_file = "../lung/champ_result/GDC_lung_tissue_80/all_beta_normalized.csv"
-validate_df_file = "../lung/champ_result/GDC_lung_tissue_20/all_beta_normalized.csv"
-test_df_file = "../lung/champ_result/GSE235414/all_beta_normalized_GSE235414.csv"
-dmp_files1 = "../lung/champ_result/GDC_lung_tissue/DMP_result_TCGA_LUAD_LUSC.csv"
-dmp_files2 = "../lung/champ_result/GDC_lung_tissue/DMP_result_GSE235414.csv"
+dmp_files = "../lung/champ_result/GDC_lung_tissue/DMP_result_TCGA_LUAD_LUSC.csv"
 majority_out_path = "../lung/result/GDC_lung_tissue/split80"
-minority_out_path = "../lung/result/GDC_lung_tissue/split20"
 
 [feature_selection.hyper]
+validate_df_file = "../lung/champ_result/GDC_lung_tissue_20/all_beta_normalized.csv"
 train_out_path = "../lung/result/GDC_lung_tissue/split80/section_3/rfe"
 validate_out_path = "../lung/result/GDC_lung_tissue/split20/section_3/rfe"
 dbeta_info_file = "../lung/result/GDC_lung_tissue/split80/section_5/dbeta_TSS_0.29_consensus.csv"
