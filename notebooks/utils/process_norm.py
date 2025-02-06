@@ -47,16 +47,6 @@ def organize_dataset(
     return X
 
 
-def remove_features_with_any_nan(df: pd.DataFrame, how:str = "all") -> pd.DataFrame:
-    """
-    remove features with any NaN values
-    """
-    logger.info(f"before removing NaNs: {df.shape}")
-    df_drop = df.dropna(axis=1, how=how)
-    logger.info(f"after removing NaNs: {df.shape}")
-    return df_drop
-
-
 def split_dataset(
     df: pd.DataFrame, split_ratio: float, seed: int
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
