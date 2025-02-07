@@ -11,8 +11,30 @@ def plot_roc_curve(
     height: int = 900,
     x_column: str = "fpr",
     y_column: str = "tpr",
-    trace_name: str = "model",
+    trace_name: list[str] = ["selection_model", "train_model"],
 ):
+    """
+    Plot the ROC curve for the given data frame
+    
+    Parameters
+    ----------
+    df : DataFrame
+        The data frame containing the ROC curve data
+    title : str
+        The title of the plot
+    outPath : str
+        The path to save the plot
+    width : int
+        The width of the plot
+    height : int
+        The height of the plot
+    x_column : str
+        The name of the column containing the x values
+    y_column : str
+        The name of the column containing the y values
+    trace_name : list[str]
+        The list of column names to use as the trace names
+    """
     fig = go.Figure()
     for _, row in df.iterrows():
         fig.add_trace(
@@ -20,7 +42,7 @@ def plot_roc_curve(
                 x=row[x_column],
                 y=row[y_column],
                 mode="lines",
-                name=f"{row['selection_model']}_{row['train_model']}",
+                name="_".join([str(x) for x in row[trace_name]]),
             )
         )
 

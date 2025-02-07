@@ -1,12 +1,18 @@
 # Define the base directory
-base_dir <- "prostate/result/GDC_prostate_tissue/train80"
+library(glue)
+library(blogdown)
+cancer_type <- readline("Enter the cancer type: ")
+config <- read_toml(glue("config/{cancer_type}.toml"))
+base_out_dir <- config$base_out_dir
 
 # Construct the file paths using the base directory
-input_file <- file.path(base_dir, "dbeta_TSS_0.35.csv")
-output_bp_csv <- file.path(base_dir, "distance_matrix_bp.csv")
-output_cc_csv <- file.path(base_dir, "distance_matrix_cc.csv")
-output_mf_csv <- file.path(base_dir, "distance_matrix_mf.csv")
-output_terms_count_csv <- file.path(base_dir, "terms_count.csv")
+input_file <- file.path(config$input_file)
+output_bp_csv <- file.path(base_out_dir, "distance_matrix_bp.csv")
+output_cc_csv <- file.path(base_out_dir, "distance_matrix_cc.csv")
+output_mf_csv <- file.path(base_out_dir, "distance_matrix_mf.csv")
+output_terms_count_csv <- file.path(base_out_dir, "terms_count.csv")
+
+dir.create(base_out_dir, recursive = TRUE, showWarnings = FALSE)
 
 source("R-scripts/utils.R")
 

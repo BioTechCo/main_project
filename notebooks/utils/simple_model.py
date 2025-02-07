@@ -18,6 +18,7 @@ from itertools import product
 from logging.config import dictConfig
 from api.logger import logging_config
 import logging
+from typing import Literal
 
 dictConfig(logging_config)
 
@@ -92,8 +93,8 @@ class SimpleModel():
                     combination,
                     estimator_name,
                     self._estimator,
-                    f"{estimator_name}_metrics",
-                    f"{estimator_name}_roc_curve",
+                    f"{estimator_name}_metrics.csv",
+                    f"{estimator_name}_roc_curve.csv",
                     train_out_path
                 )
 
@@ -104,8 +105,8 @@ class SimpleModel():
                     combination,
                     estimator_name,
                     self._estimator,
-                    f"{estimator_name}_metrics",
-                    f"{estimator_name}_roc_curve",
+                    f"{estimator_name}_metrics.csv",
+                    f"{estimator_name}_roc_curve.csv",
                     test_out_path
                 )
 
@@ -210,7 +211,7 @@ class SimpleModel():
                     **result["metrics"]
                 }
             ]
-        ) >> self._append_to_file(f"{out_path}/{evaluation_metric_path}.csv")
+        ) >> self._append_to_file(f"{out_path}/{evaluation_metric_path}")
         pd.DataFrame(
             [
                 {
@@ -219,7 +220,7 @@ class SimpleModel():
                     **result["roc_curve"]
                 }
             ]
-        ) >> self._append_to_file(f"{out_path}/{roc_curve_path}.csv")
+        ) >> self._append_to_file(f"{out_path}/{roc_curve_path}")
 
     def _predict(
             self,
@@ -312,6 +313,9 @@ class SimpleModel():
 
     @pipe_dec
     def _append_to_file(self, data: pd.DataFrame, file_name: str, is_first_header: bool = True) -> None:
+        # check if folder exists
+        if not os.path.exists(os.path.dirname(file_name)):
+            os.makedirs(os.path.dirname(file_name))
         if not os.path.isfile(file_name):
             data.to_csv(file_name, index=False, header=is_first_header)
         else:
