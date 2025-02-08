@@ -1,0 +1,2 @@
+estimator_name,gene_0,accuracy,recall,specificity,precision,f1_score,AUC,MCC,fbeta2_score
+Voting,RAX,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0

@@ -1,0 +1,2 @@
+estimator_name,gene_0,accuracy,recall,specificity,precision,f1_score,AUC,MCC,fbeta2_score
+RandomForest,RAX,0.25,0.25,0.25,0.25,0.25,0.25,-0.5,0.25

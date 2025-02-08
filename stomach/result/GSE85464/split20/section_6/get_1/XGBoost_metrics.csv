@@ -1,0 +1,2 @@
+estimator_name,gene_0,accuracy,recall,specificity,precision,f1_score,AUC,MCC,fbeta2_score
+XGBoost,RAX,0.625,0.25,1.0,1.0,0.4,0.625,0.3779644730092272,0.29411764705882354
