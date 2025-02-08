@@ -1,39 +1,37 @@
 [init.hyper]
-beta_file_number = 1
-test_ratio = 0.2
-splitting_seed = 42
-normal_number_0 = 43
-data_source = "GDC_rectal_tissue"
-is_columns_duplicated = 2
-
-[preprocess.merge_and_split]
-feature_size_0 = 367932
-Before_dropna_df_shape = [ 367932, 406,]
-After_dropna_df_shape = [ 367932, 406,]
-training_set_samples = 580
-testing_set_samples = 146
-training_class_distribution = [ 296, 284,]
-testing_class_distribution = [ 67, 79,]
-Before_SMOTE_X_shape = [ 406, 367932,]
-Before_SMOTE_y_shape = 406
-After_SMOTE_X_shape = [ 726, 367932,]
-After_SMOTE_y_shape = 726
-
-[preprocess.oversampling]
-training_set_samples = 582
-train_class_distribution = [ 291, 291,]
+train_df_file = "../rectal/result/GDC_rectal_tissue_450k/split80/all_beta_normalized_train_oversample_smote.csv"
+dmp_files = "../rectal/champ_result/GDC_rectal_tissue_450K/DMP_result.csv"
+majority_out_path = "../rectal/result/GDC_rectal_tissue_450k/split80"
 
 [preprocess.filtering]
 threshold = 0.08
 
 [preprocess.dbeta]
-delta_beta_avg = 367931
-NaN_dbeta_feature = []
-delta_beta_avg_remove_NaN = 367931
-dmp_before_dropna_shape_feature = 260289
-dmp_after_dropna_shape_feature = 195985
-delta_beta_avg_remove_NaN_with_gene_name = 367931
+delta_beta_avg_feature_num = 364227
+NaN_dbeta_feature = [ "cg00813378", "cg09087503", "cg09296001", "cg12628196", "cg01876338", "cg14832904", "cg19664945", "cg20175702",]
+delta_beta_avg_feature_num_remove_NaN = 364219
+dmp_before_dropna_shape_feature = 262248
+dmp_after_dropna_shape_feature = 198417
+delta_beta_avg_feature_num_remove_NaN_join_dmp = 364219
 
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
 avg_dbeta_upper_bound = 500
+
+[GO_distance_matrix.hyper]
+input_file = "rectal/result/GDC_rectal_tissue_450k/split80/section_2/dbeta_TSS_0.08.csv"
+base_out_dir = "rectal/result/GDC_rectal_tissue_450k/split80/GO_distance_matrix"
+
+[clustering_visual.hyper]
+result_prefix = "dbeta_TSS_0.08"
+dbeta_file = "../rectal/result/GDC_rectal_tissue_450k/split80/section_2/dbeta_TSS_0.08.csv"
+bp_file = "../rectal/result/GDC_rectal_tissue_450k/split80/GO_distance_matrix/distance_matrix_bp.csv"
+cc_file = "../rectal/result/GDC_rectal_tissue_450k/split80/GO_distance_matrix/distance_matrix_cc.csv"
+mf_file = "../rectal/result/GDC_rectal_tissue_450k/split80/GO_distance_matrix/distance_matrix_mf.csv"
+terms_count_file = "../rectal/result/GDC_rectal_tissue_450k/split80/GO_distance_matrix/terms_count.csv"
+result_out_path = "../rectal/result/GDC_rectal_tissue_450k/split80/section_5"
+
+[feature_selection.hyper]
+train_out_path = "../rectal/result/GDC_rectal_tissue_450k/split80/section_3/rfe"
+validate_out_path = "../rectal/result/GDC_rectal_tissue_450k/split20/section_3/rfe"
+dbeta_info_file = "section_5/dbeta_TSS_0.08_consensus.csv"
