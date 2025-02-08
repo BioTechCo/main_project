@@ -1,0 +1,20 @@
+{
+  "TCGA_BRCA_20250119": {
+    "normal": 97,
+    "tumor": 793,
+    "sample_count": 2,
+    "sample_type": "tissue",
+    "file": "../breast/champ_result/TCGA_BRCA_20250119/all_beta_normalized_TCGA_BRCA.csv",
+    "split_test": 0.2,
+    "random_state": 42
+  },
+  "GSE66313": {
+    "normal": 15,
+    "tumor": 39,
+    "sample_count": 2,
+    "sample_type": "tissue",
+    "file": "../breast/champ_result/GSE66313/all_beta_normalized.csv",
+    "split_test": 0.2,
+    "random_state": 42
+  }
+}

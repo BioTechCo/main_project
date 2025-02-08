@@ -1,0 +1,5 @@
+selection_model,train_model,features,accuracy_validate,recall_validate,f1_score_validate,AUC_validate,MCC_validate,fbeta2_score_validate
+SVM,SVM,4,1.0,1.0,1.0,1.0,1.0,1.0
+DecisionTree,SVM,4,1.0,1.0,1.0,1.0,1.0,1.0
+RandomForest,SVM,4,1.0,1.0,1.0,1.0,1.0,1.0
+XGBoost,SVM,4,0.99438202247191,0.9937106918238994,0.996845425867508,1.0,0.971609570369037,0.9949622166246852
