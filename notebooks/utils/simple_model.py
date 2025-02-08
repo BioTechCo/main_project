@@ -1,4 +1,3 @@
-
 import os
 import pandas as pd
 import random
@@ -22,16 +21,16 @@ from typing import Literal
 
 dictConfig(logging_config)
 
-logger = logging.getLogger('simple_model')
+logger = logging.getLogger("simple_model")
 
 
-class SimpleModel():
+class SimpleModel:
     def __init__(
         self,
         train_df: pd.DataFrame,
         test_df: pd.DataFrame,
         gene_list: list,
-        dbeta_info: pd.DataFrame
+        dbeta_info: pd.DataFrame,
     ):
         self.train_df = train_df
         self.test_df = test_df
@@ -40,8 +39,7 @@ class SimpleModel():
         self.bagging_iterations = 10
 
     def setup_dbeta(self):
-        self.dbeta_info = self.dbeta_info[self.dbeta_info["gene"].isin(
-            self.gene_list)]
+        self.dbeta_info = self.dbeta_info[self.dbeta_info["gene"].isin(self.gene_list)]
 
     def setup_train_test(self):
         """
@@ -50,10 +48,14 @@ class SimpleModel():
         note that Xs are not yet transposed and converted to list
         this is done in the _prepare_data method where a gene list can be passed
         """
-        train_df_tt = self.train_df[self.train_df["Unnamed: 0"].isin(
-            self.dbeta_info["ID"]) | (self.train_df["Unnamed: 0"] == "label")]
-        test_df_tt = self.test_df[self.test_df["Unnamed: 0"].isin(
-            self.dbeta_info["ID"]) | (self.test_df["Unnamed: 0"] == "label")]
+        train_df_tt = self.train_df[
+            self.train_df["Unnamed: 0"].isin(self.dbeta_info["ID"])
+            | (self.train_df["Unnamed: 0"] == "label")
+        ]
+        test_df_tt = self.test_df[
+            self.test_df["Unnamed: 0"].isin(self.dbeta_info["ID"])
+            | (self.test_df["Unnamed: 0"] == "label")
+        ]
         self.pre_X_train = train_df_tt.iloc[:-1, :]
         self.pre_X_test = test_df_tt.iloc[:-1, :]
         self.y_train = self.train_df.iloc[-1, 1:].astype(int)
@@ -63,8 +65,7 @@ class SimpleModel():
         self.y_test__ = []
         for seed in range(self.bagging_iterations):
             self._test_df_tt = test_df_tt
-            split_df = self._balance_dataframe_with_labels(
-                test_df_tt, seed=seed)
+            split_df = self._balance_dataframe_with_labels(test_df_tt, seed=seed)
             self.split_df = split_df
             self.pre_X_test__.append(split_df.iloc[:-1, :])
             self.y_test__.append(split_df.iloc[-1, 1:].astype(int))
@@ -80,7 +81,8 @@ class SimpleModel():
         try:
             for combination in self.combs:
                 logger.info(
-                    f"Training for combination: {combination} with estimator: {estimator_name}")
+                    f"Training for combination: {combination} with estimator: {estimator_name}"
+                )
                 X_train = self._prepare_data(self.pre_X_train, combination)
                 estimator.fit(X_train, self.y_train)
                 if is_grid_search:
@@ -95,7 +97,7 @@ class SimpleModel():
                     self._estimator,
                     f"{estimator_name}_metrics.csv",
                     f"{estimator_name}_roc_curve.csv",
-                    train_out_path
+                    train_out_path,
                 )
 
                 X_test = self._prepare_data(self.pre_X_test, combination)
@@ -107,17 +109,15 @@ class SimpleModel():
                     self._estimator,
                     f"{estimator_name}_metrics.csv",
                     f"{estimator_name}_roc_curve.csv",
-                    test_out_path
+                    test_out_path,
                 )
 
                 # Bagging
                 metric_avg = {}
                 for i in range(self.bagging_iterations):
-                    X_test__ = self._prepare_data(
-                        self.pre_X_test__[i], combination)
+                    X_test__ = self._prepare_data(self.pre_X_test__[i], combination)
                     y_pred_on_X = self._estimator.predict(X_test__)
-                    y_proba_on_X = self._estimator.predict_proba(X_test__)[
-                        :, 1]
+                    y_proba_on_X = self._estimator.predict_proba(X_test__)[:, 1]
                     result = self._predict(
                         y=self.y_test__[i],
                         y_pred_on_X=y_pred_on_X,
@@ -134,7 +134,7 @@ class SimpleModel():
                     #     ]
                     # ) >> self._append_to_file(f"{out_path}/{estimator_name}_roc_curve_avg_{i}.csv")
 
-                    for key, value in result['metrics'].items():
+                    for key, value in result["metrics"].items():
                         if key not in metric_avg:
                             metric_avg[key] = value
                         else:
@@ -146,10 +146,12 @@ class SimpleModel():
                         {
                             "estimator_name": estimator_name,
                             **{f"gene_{i}": gene for i, gene in enumerate(combination)},
-                            **metric_avg
+                            **metric_avg,
                         }
                     ]
-                ) >> self._append_to_file(f"{test_out_path}/{estimator_name}_metrics_avg.csv")
+                ) >> self._append_to_file(
+                    f"{test_out_path}/{estimator_name}_metrics_avg.csv"
+                )
 
         except Exception as e:
             logger.error(f"Error in testing: {e}")
@@ -159,28 +161,31 @@ class SimpleModel():
         """
         Set up the combinations of genes based on the groups in the dbeta_info dataframe.
         """
-        groups = self.dbeta_info['cluster'].unique()
+        groups = self.dbeta_info["cluster"].unique()
         genes_by_group = {
-            group: self.dbeta_info[self.dbeta_info['cluster'] == group]['gene'].tolist() for group in groups}
+            group: self.dbeta_info[self.dbeta_info["cluster"] == group]["gene"].tolist()
+            for group in groups
+        }
 
         self.combs = [
-            combination for combination in product(*genes_by_group.values())
-            if len(set(combination)) == 4  # Ensure genes are distinct
+            combination
+            for combination in product(*genes_by_group.values())
+            if len(set(combination)) >= 1  # Ensure there is at least one gene
         ]
 
-    def _prepare_data(
-            self,
-            df: pd.DataFrame,
-            genes: tuple = None
-    ) -> list:
+    def _prepare_data(self, df: pd.DataFrame, genes: tuple = None) -> list:
         if genes is None:
             return df.iloc[:, 1:].T.values.tolist()
         else:
-            return df[df['Unnamed: 0'].isin(list(self._get_ID(genes)))].iloc[:, 1:].T.values.tolist()
+            return (
+                df[df["Unnamed: 0"].isin(list(self._get_ID(genes)))]
+                .iloc[:, 1:]
+                .T.values.tolist()
+            )
 
     def _get_ID(self, genes: tuple) -> tuple:
         # logger.debug(f"Getting ID for genes: {tuple(self.dbeta_info[self.dbeta_info['gene'].isin(genes)]['ID'])}")
-        return tuple(self.dbeta_info[self.dbeta_info['gene'].isin(genes)]['ID'])
+        return tuple(self.dbeta_info[self.dbeta_info["gene"].isin(genes)]["ID"])
 
     def _fit_predict_append(
         self,
@@ -191,7 +196,7 @@ class SimpleModel():
         estimator: object,
         evaluation_metric_path: str,
         roc_curve_path: str,
-        out_path: str
+        out_path: str,
     ):
         """
         A helper function to fit the estimator, predict on the data, and append the results to a file.
@@ -206,27 +211,27 @@ class SimpleModel():
         pd.DataFrame(
             [
                 {
-                    'estimator_name': estimator_name,
+                    "estimator_name": estimator_name,
                     **{f"gene_{i}": gene for i, gene in enumerate(combination)},
-                    **result["metrics"]
+                    **result["metrics"],
                 }
             ]
         ) >> self._append_to_file(f"{out_path}/{evaluation_metric_path}")
         pd.DataFrame(
             [
                 {
-                    'estimator_name': estimator_name,
+                    "estimator_name": estimator_name,
                     **{f"gene_{i}": gene for i, gene in enumerate(combination)},
-                    **result["roc_curve"]
+                    **result["roc_curve"],
                 }
             ]
         ) >> self._append_to_file(f"{out_path}/{roc_curve_path}")
 
     def _predict(
-            self,
-            y: pd.DataFrame,
-            y_pred_on_X: pd.DataFrame,
-            y_proba_on_X: pd.DataFrame,
+        self,
+        y: pd.DataFrame,
+        y_pred_on_X: pd.DataFrame,
+        y_proba_on_X: pd.DataFrame,
     ) -> dict:
         tn, fp, _, _ = confusion_matrix(y, y_pred_on_X).ravel()
         accuracy = accuracy_score(y, y_pred_on_X)
@@ -244,30 +249,24 @@ class SimpleModel():
         tpr = tpr.tolist()
 
         return {
-            "metrics":
-                {
-                    "accuracy": accuracy,
-                    "recall": recall,
-                    "specificity": specificity,
-                    "precision": precision,
-                    "f1_score": f1_score(y, y_pred_on_X),
-                    "AUC": roc_auc,
-                    "MCC": matthews_corrcoef(y, y_pred_on_X),
-                    "fbeta2_score": fbeta_score(y, y_pred_on_X, beta=2),
-                },
-            "roc_curve":
-                {
-                    "fpr": fpr,
-                    "tpr": tpr,
-                    "threshold": threshold,
-                }
+            "metrics": {
+                "accuracy": accuracy,
+                "recall": recall,
+                "specificity": specificity,
+                "precision": precision,
+                "f1_score": f1_score(y, y_pred_on_X),
+                "AUC": roc_auc,
+                "MCC": matthews_corrcoef(y, y_pred_on_X),
+                "fbeta2_score": fbeta_score(y, y_pred_on_X, beta=2),
+            },
+            "roc_curve": {
+                "fpr": fpr,
+                "tpr": tpr,
+                "threshold": threshold,
+            },
         }
 
-    def _balance_dataframe_with_labels(
-        self,
-        df: pd.DataFrame,
-        seed=42
-    ) -> pd.DataFrame:
+    def _balance_dataframe_with_labels(self, df: pd.DataFrame, seed=42) -> pd.DataFrame:
         """
         Balances the dataframe to ensure equal normal and tumor samples for each ID
         by randomly selecting columns based on the labels in the last row.
@@ -288,17 +287,14 @@ class SimpleModel():
         data = df.iloc[:-1, 1:]
         self._labels = labels
         self._data = data
-        normal_columns = [col for col in data.columns if int(
-            round(labels[col])) == 0]
+        normal_columns = [col for col in data.columns if int(round(labels[col])) == 0]
         self.normal_columns = normal_columns
-        tumor_columns = [col for col in data.columns if int(
-            round(labels[col])) == 1]
+        tumor_columns = [col for col in data.columns if int(round(labels[col])) == 1]
         self.tumor_columns = tumor_columns
         min_columns = min(len(normal_columns), len(tumor_columns))
         self._min_columns = min_columns
         if len(normal_columns) > len(tumor_columns):
-            selected_normal_columns = random.sample(
-                normal_columns, min_columns)
+            selected_normal_columns = random.sample(normal_columns, min_columns)
             balanced_columns = selected_normal_columns + tumor_columns
         else:
             selected_tumor_columns = random.sample(tumor_columns, min_columns)
@@ -312,7 +308,9 @@ class SimpleModel():
         return balanced_df
 
     @pipe_dec
-    def _append_to_file(self, data: pd.DataFrame, file_name: str, is_first_header: bool = True) -> None:
+    def _append_to_file(
+        self, data: pd.DataFrame, file_name: str, is_first_header: bool = True
+    ) -> None:
         # check if folder exists
         if not os.path.exists(os.path.dirname(file_name)):
             os.makedirs(os.path.dirname(file_name))
