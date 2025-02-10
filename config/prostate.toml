@@ -28,7 +28,7 @@ dbeta_file = "../prostate/result/GDC_prostate_tissue/split80/section_5/dbeta_TSS
 selected_feature_file = "../prostate/result/GDC_prostate_tissue/split20/section_3/rfe/selected_features.json"
 train_out_path = "../prostate/result/GDC_prostate_tissue/split80/section_6"
 validate_out_path = "../prostate/result/GDC_prostate_tissue/split20/section_6"
-df_file = "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized.csv"
+df_file = "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized_0_oversample_smote.csv"
 training_param_file = "../prostate/training_param.json"
 
 [preprocess.filtering]
@@ -45,3 +45,6 @@ delta_beta_avg_feature_num_remove_NaN_join_dmp = 373340
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
 avg_dbeta_upper_bound = 500
+
+[machine_learning.hyper]
+dbeta_info_file = "section_5/dbeta_TSS_0.36_consensus.csv"

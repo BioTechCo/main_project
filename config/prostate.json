@@ -4,17 +4,17 @@
     "tumor": 502,
     "sample_count": 2,
     "sample_type": "tissue",
-    "file": "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized.csv",
+    "file": "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized_0.csv",
     "split_test": 0.2,
     "random_state": 42
   },
   "GDC_prostate_tissue_80": {
-    "normal": 40,
+    "normal": 401,
     "tumor": 402,
     "file": "../prostate/result/GDC_prostate_tissue/split80/all_beta_normalized.csv"
   },
   "GDC_prostate_tissue_20": {
-    "normal": 10,
+    "normal": 101,
     "tumor": 100,
     "file": "../prostate/result/GDC_prostate_tissue/split20/all_beta_normalized.csv"
   }
