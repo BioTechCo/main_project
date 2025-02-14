@@ -1,22 +1,22 @@
 [init.hyper]
 train_df_file = "../breast/result/TCGA_BRCA_20250119/split80/all_beta_normalized_complement.csv"
-dmp_files = "../breast/champ_result/TCGA_BRCA_20250119/DMP_result_TCGA_BRCA.csv"
+dmp_files = "../breast/champ_result/TCGA_BRCA_20250119/merged_result.csv"
 majority_out_path = "../breast/result/TCGA_BRCA_20250119/split80"
 
 [feature_selection.hyper]
 validate_df_file = "../breast/result/TCGA_BRCA_20250119/split20/all_beta_normalized_ratio.csv"
 train_out_path = "../breast/result/TCGA_BRCA_20250119/split80/section_3/rfe"
 validate_out_path = "../breast/result/TCGA_BRCA_20250119/split20/section_3/rfe"
-dbeta_info_file = "../breast/result/TCGA_BRCA_20250119/split80/section_5/dbeta_TSS_0.33_consensus.csv"
+dbeta_info_file = "../breast/result/TCGA_BRCA_20250119/split80/section_5/dbeta_TSS_0.32_consensus.csv"
 training_param_file = "../breast/training_param.json"
 
 [GO_distance_matrix.hyper]
-input_file = "breast/result/TCGA_BRCA_20250119/split80/section_2/dbeta_TSS_0.33.csv"
+input_file = "breast/result/TCGA_BRCA_20250119/split80/section_2/dbeta_TSS_0.32.csv"
 base_out_dir = "breast/result/TCGA_BRCA_20250119/split80/GO_distance_matrix"
 
 [clustering_visual.hyper]
-result_prefix = "dbeta_TSS_0.33"
-dbeta_file = "../breast/result/TCGA_BRCA_20250119/split80/section_2/dbeta_TSS_0.33.csv"
+result_prefix = "dbeta_TSS_0.32"
+dbeta_file = "../breast/result/TCGA_BRCA_20250119/split80/section_2/dbeta_TSS_0.32.csv"
 bp_file = "../breast/result/TCGA_BRCA_20250119/split80/GO_distance_matrix/distance_matrix_bp.csv"
 cc_file = "../breast/result/TCGA_BRCA_20250119/split80/GO_distance_matrix/distance_matrix_cc.csv"
 mf_file = "../breast/result/TCGA_BRCA_20250119/split80/GO_distance_matrix/distance_matrix_mf.csv"
@@ -24,19 +24,20 @@ terms_count_file = "../breast/result/TCGA_BRCA_20250119/split80/GO_distance_matr
 result_out_path = "../breast/result/TCGA_BRCA_20250119/split80/section_5"
 
 [simple_model.hyper]
-dbeta_file = "../breast/result/TCGA_BRCA_20250119/split80/section_5/dbeta_TSS_0.33_consensus.csv"
+dbeta_file = "../breast/result/TCGA_BRCA_20250119/split80/section_5/dbeta_TSS_0.32_consensus.csv"
 selected_feature_file = "../breast/result/TCGA_BRCA_20250119/split20/section_3/rfe/selected_features.json"
 train_out_path = "../breast/result/GSE66313/split80/section_6"
 validate_out_path = "../breast/result/GSE66313/split20/section_6"
-df_file = "../breast/champ_result/GSE66313/all_beta_normalized.csv"
+df_file1 = "../breast/champ_result/TCGA_BRCA_20250119/all_beta_normalized_TCGA_BRCA.csv"
+df_file2 = "../breast/champ_result/GSE66313/all_beta_normalized.csv"
 training_param_file = "../breast/training_param.json"
 
 [preprocess.filtering]
-threshold = 0.33
+threshold = 0.32
 
 [preprocess.dbeta]
-dmp_before_dropna_shape_feature = 283630
-dmp_after_dropna_shape_feature = 218476
+dmp_before_dropna_shape_feature = 91323
+dmp_after_dropna_shape_feature = 65762
 NaN_dbeta_feature = []
 delta_beta_avg_feature_num = 341738
 delta_beta_avg_feature_num_remove_NaN = 341738
