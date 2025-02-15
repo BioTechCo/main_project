@@ -43,7 +43,7 @@ dbeta_info_file = "section_5/dbeta_TSS_0.11_consensus.csv"
 
 [simple_model.hyper]
 dbeta_file = "../rectal/result/GDC_rectal_tissue_450k/split80/section_5/dbeta_TSS_0.11_consensus.csv"
-selected_feature_file = "../rectal/result/GDC_rectal_tissue_450k/split80/sfs/selected_features.json"
-train_out_path = "../rectal/result/GSE199057/split80/section_6_sfs"
-validate_out_path = "../rectal/result/GSE199057/split20/section_6_sfs"
+selected_feature_file = "../rectal/result/GDC_rectal_tissue_450k/split20/section_3/rfe/selected_features.json"
+train_out_path = "../rectal/result/GDC_rectal_tissue_450k/split80/section_6_rfe"
+validate_out_path = "../rectal/result/GDC_rectal_tissue_450k/split20/section_6_rfe"
 training_param_file = "../rectal/training_param.json"
