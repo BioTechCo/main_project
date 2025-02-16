@@ -5,8 +5,8 @@ majority_out_path = "../breast/result/TCGA_BRCA_20250119/split80"
 
 [feature_selection.hyper]
 validate_df_file = "../breast/result/TCGA_BRCA_20250119/split20/all_beta_normalized_ratio.csv"
-train_out_path = "../breast/result/TCGA_BRCA_20250119/split80/section_3/rfe"
-validate_out_path = "../breast/result/TCGA_BRCA_20250119/split20/section_3/rfe"
+train_out_path = "../breast/result/TCGA_BRCA_20250119/split80/section_3/sfs"
+validate_out_path = "../breast/result/TCGA_BRCA_20250119/split20/section_3/sfs"
 dbeta_info_file = "../breast/result/TCGA_BRCA_20250119/split80/section_5/dbeta_TSS_0.32_consensus.csv"
 training_param_file = "../breast/training_param.json"
 
@@ -25,7 +25,7 @@ result_out_path = "../breast/result/TCGA_BRCA_20250119/split80/section_5"
 
 [simple_model.hyper]
 dbeta_file = "../breast/result/TCGA_BRCA_20250119/split80/section_5/dbeta_TSS_0.32_consensus.csv"
-selected_feature_file = "../breast/result/TCGA_BRCA_20250119/split20/section_3/rfe/selected_features.json"
+selected_feature_file = "../breast/result/TCGA_BRCA_20250119/split20/section_3/sfs/selected_features.json"
 train_out_path = "../breast/result/GSE66313/split80/section_6"
 validate_out_path = "../breast/result/GSE66313/split20/section_6"
 df_file1 = "../breast/champ_result/TCGA_BRCA_20250119/all_beta_normalized_TCGA_BRCA.csv"
