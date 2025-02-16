@@ -6,8 +6,8 @@ majority_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split80"
 
 [feature_selection.hyper]
 validate_df_file = "../stomach/result/GDC_stomach_and_GSE99553/test20/all_beta_normalized_test.csv"
-train_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_3/rfe"
-validate_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split20/section_3/rfe"
+train_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_3/sfs"
+validate_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split20/section_3/sfs"
 dbeta_info_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/dbeta_TSS_0.3_consensus.csv"
 training_param_file = "../stomach/training_param.json"
 
@@ -26,7 +26,7 @@ result_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5"
 
 [simple_model.hyper]
 dbeta_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/dbeta_TSS_0.3_consensus.csv"
-selected_feature_file = "../stomach/result/GDC_stomach_and_GSE99553/split20/section_3/rfe/selected_features.json"
+selected_feature_file = "../stomach/result/GDC_stomach_and_GSE99553/split20/section_3/sfs/selected_features.json"
 train_out_path = "../stomach/result/GSE85464/split80/section_6"
 validate_out_path = "../stomach/result/GSE85464/split20/section_6"
 df_file1 = "../stomach/champ_result/GDC_stomach_and_GSE99553/all_beta_normalized_copy.csv"
