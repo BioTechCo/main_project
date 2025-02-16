@@ -1,26 +1,49 @@
 [init.hyper]
-beta_file_number = 2
-test_ratio = 0.2
-splitting_seed = 42
-normal_number_0 = 2
-normal_number_1 = 84
-data_source = "GDC_stomach_GSE99553"
-is_columns_duplicated = 2
-is_columns_duplicated_1 = 1
+train_df_file = "../stomach/result/GDC_stomach_and_GSE99553/train80/all_beta_normalized_train.csv"
+validate_df_file = "../stomach/result/GDC_stomach_and_GSE99553/test20/all_beta_normalized_test.csv"
+dmp_files = "../stomach/champ_result/GDC_stomach_and_GSE99553/merged_result.csv"
+majority_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split80"
 
-[preprocess.merge_and_split]
-feature_size_0 = 375937
-feature_size_1 = 411036
-feature_size_intersection = 375382
-Before_dropna_dfn_shape = [ 375382, 86,]
-Before_dropna_dfc_shape = [ 375382, 395,]
-After_dropna_dfn_shape = [ 375382, 86,]
-After_dropna_dfc_shape = [ 375382, 395,]
-training_set_samples = 632
-testing_set_samples = 158
-training_class_distribution = [ 308, 324,]
-testing_class_distribution = [ 87, 71,]
-Before_SMOTE_X_shape = [ 481, 375382,]
-Before_SMOTE_y_shape = 481
-After_SMOTE_X_shape = [ 790, 375382,]
-After_SMOTE_y_shape = 790
+[feature_selection.hyper]
+validate_df_file = "../stomach/result/GDC_stomach_and_GSE99553/test20/all_beta_normalized_test.csv"
+train_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_3/rfe"
+validate_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split20/section_3/rfe"
+dbeta_info_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/dbeta_TSS_0.3_consensus.csv"
+training_param_file = "../stomach/training_param.json"
+
+[GO_distance_matrix.hyper]
+input_file = "stomach/result/GDC_stomach_and_GSE99553/split80/section_2/dbeta_TSS_0.3.csv"
+base_out_dir = "stomach/result/GDC_stomach_and_GSE99553/split80/GO_distance_matrix"
+
+[clustering_visual.hyper]
+result_prefix = "dbeta_TSS_0.3"
+dbeta_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_2/dbeta_TSS_0.3.csv"
+bp_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/GO_distance_matrix/distance_matrix_bp.csv"
+cc_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/GO_distance_matrix/distance_matrix_cc.csv"
+mf_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/GO_distance_matrix/distance_matrix_mf.csv"
+terms_count_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/GO_distance_matrix/terms_count.csv"
+result_out_path = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5"
+
+[simple_model.hyper]
+dbeta_file = "../stomach/result/GDC_stomach_and_GSE99553/split80/section_5/dbeta_TSS_0.3_consensus.csv"
+selected_feature_file = "../stomach/result/GDC_stomach_and_GSE99553/split20/section_3/rfe/selected_features.json"
+train_out_path = "../stomach/result/GSE85464/split80/section_6"
+validate_out_path = "../stomach/result/GSE85464/split20/section_6"
+df_file1 = "../stomach/champ_result/GDC_stomach_and_GSE99553/all_beta_normalized_copy.csv"
+df_file2 = "../stomach/champ_result/GSE85464/all_beta_normalized.csv"
+training_param_file = "../stomach/training_param.json"
+
+[preprocess.filtering]
+threshold = 0.3
+
+[preprocess.dbeta]
+dmp_before_dropna_shape_feature = 116556
+dmp_after_dropna_shape_feature = 81761
+NaN_dbeta_feature = []
+delta_beta_avg_feature_num = 375639
+delta_beta_avg_feature_num_remove_NaN = 375639
+delta_beta_avg_feature_num_remove_NaN_join_dmp = 375639
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 500
