@@ -1,10 +1,10 @@
 [init.hyper]
-train_df_file = "../lung/champ_result/GDC_lung_tissue_80/all_beta_normalized.csv"
-dmp_files = "../lung/champ_result/GDC_lung_tissue/DMP_result_TCGA_LUAD_LUSC.csv"
+train_df_file = "../lung/result/GDC_lung_tissue/split80/all_beta_normalized.csv"
+dmp_files = "../lung/champ_result/GDC_lung_tissue/merged_result.csv"
 majority_out_path = "../lung/result/GDC_lung_tissue/split80"
 
 [feature_selection.hyper]
-validate_df_file = "../lung/champ_result/GDC_lung_tissue_20/all_beta_normalized.csv"
+validate_df_file = "../lung/result/GDC_lung_tissue/split20/all_beta_normalized.csv"
 train_out_path = "../lung/result/GDC_lung_tissue/split80/section_3/rfe"
 validate_out_path = "../lung/result/GDC_lung_tissue/split20/section_3/rfe"
 dbeta_info_file = "../lung/result/GDC_lung_tissue/split80/section_5/dbeta_TSS_0.29_consensus.csv"
@@ -28,15 +28,16 @@ dbeta_file = "../lung/result/GDC_lung_tissue/split80/section_5/dbeta_TSS_0.29_co
 selected_feature_file = "../lung/result/GDC_lung_tissue/split20/section_3/rfe/selected_features.json"
 train_out_path = "../lung/result/GSE235414/split80/section_6"
 validate_out_path = "../lung/result/GSE235414/split20/section_6"
-df_file = "../lung/champ_result/GSE235414/all_beta_normalized_GSE235414.csv"
+df_file1 = "../lung/champ_result/GDC_lung_tissue/all_beta_normalized_TCGA_LUAD_LUSC.csv"
+df_file2 = "../lung/champ_result/GSE235414/all_beta_normalized_GSE235414.csv"
 training_param_file = "../lung/training_param.json"
 
 [preprocess.filtering]
 threshold = 0.29
 
 [preprocess.dbeta]
-dmp_before_dropna_shape_feature = 300130
-dmp_after_dropna_shape_feature = 230270
+dmp_before_dropna_shape_feature = 138396
+dmp_after_dropna_shape_feature = 100570
 NaN_dbeta_feature = []
 delta_beta_avg_feature_num = 353507
 delta_beta_avg_feature_num_remove_NaN = 353507
