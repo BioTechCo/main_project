@@ -5,8 +5,8 @@ majority_out_path = "../lung/result/GDC_lung_tissue/split80"
 
 [feature_selection.hyper]
 validate_df_file = "../lung/result/GDC_lung_tissue/split20/all_beta_normalized.csv"
-train_out_path = "../lung/result/GDC_lung_tissue/split80/section_3/rfe"
-validate_out_path = "../lung/result/GDC_lung_tissue/split20/section_3/rfe"
+train_out_path = "../lung/result/GDC_lung_tissue/split80/section_3/sfs"
+validate_out_path = "../lung/result/GDC_lung_tissue/split20/section_3/sfs"
 dbeta_info_file = "../lung/result/GDC_lung_tissue/split80/section_5/dbeta_TSS_0.29_consensus.csv"
 training_param_file = "../lung/training_param.json"
 
