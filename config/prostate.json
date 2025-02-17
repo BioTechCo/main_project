@@ -8,6 +8,15 @@
     "split_test": 0.2,
     "random_state": 42
   },
+  "GDC_prostate_tissue": {
+    "normal": 50,
+    "tumor": 502,
+    "sample_count": 2,
+    "sample_type": "tissue",
+    "file": "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized.csv",
+    "split_test": 0.2,
+    "random_state": 42
+  },
   "GSE269244_80": {
     "normal": 94,
     "tumor": 96,
