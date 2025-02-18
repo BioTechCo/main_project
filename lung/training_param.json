@@ -1,7 +1,7 @@
 {
   "XGBoost": {
-    "learning_rate": [0.01, 0.1, 0.3],
-    "n_estimators": [100, 50, 200],
+    "learning_rate": [0.001, 0.01, 0.1],
+    "n_estimators": [10, 50, 200],
     "max_depth": [1, 2, 3],
     "subsample": [0.7, 0.8, 1.0],
     "colsample_bytree": [0.5, 0.8, 1.0],

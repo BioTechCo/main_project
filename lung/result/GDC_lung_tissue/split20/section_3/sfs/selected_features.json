@@ -1,0 +1,26 @@
+{
+  "SVM": {
+    "2": ["C16orf78", "C17orf93"],
+    "1": ["FOXI2"],
+    "4": ["MRGPRD"],
+    "3": ["MIR196A2", "MIR495"]
+  },
+  "DecisionTree": {
+    "2": ["C17orf93"],
+    "4": ["CRTC1"],
+    "1": ["FOXI2"],
+    "3": ["MIR196B"]
+  },
+  "RandomForest": {
+    "2": ["C17orf93"],
+    "4": ["CCDC8", "OR8B8", "SSTR4"],
+    "1": ["ALX4", "TFAP2A"],
+    "3": ["MIR543"]
+  },
+  "XGBoost": {
+    "4": ["ADAMTS20", "DGKA"],
+    "2": ["AKR7L", "GHITM"],
+    "1": ["ALX1", "ALX4"],
+    "3": ["MIR10A", "MIR10B", "MIR124-2", "MIR124-3"]
+  }
+}

@@ -25,7 +25,7 @@ result_out_path = "../lung/result/GDC_lung_tissue/split80/section_5"
 
 [simple_model.hyper]
 dbeta_file = "../lung/result/GDC_lung_tissue/split80/section_5/dbeta_TSS_0.29_consensus.csv"
-selected_feature_file = "../lung/result/GDC_lung_tissue/split20/section_3/rfe/selected_features.json"
+selected_feature_file = "../lung/result/GDC_lung_tissue/split20/section_3/sfs/selected_features.json"
 train_out_path = "../lung/result/GSE235414/split80/section_6"
 validate_out_path = "../lung/result/GSE235414/split20/section_6"
 df_file1 = "../lung/champ_result/GDC_lung_tissue/all_beta_normalized_TCGA_LUAD_LUSC.csv"
