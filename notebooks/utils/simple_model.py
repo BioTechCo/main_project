@@ -43,7 +43,7 @@ class SimpleModel():
         self.dbeta_info = self.dbeta_info[self.dbeta_info["gene"].isin(
             self.gene_list)]
 
-    def setup_train_test(self):
+    def setup_train_test(self, ID: str = "ID"):
         """
         Prepare the training and testing dataframes by filtering out the genes
         that are not in the gene list.
@@ -51,9 +51,9 @@ class SimpleModel():
         this is done in the _prepare_data method where a gene list can be passed
         """
         train_df_tt = self.train_df[self.train_df["Unnamed: 0"].isin(
-            self.dbeta_info["ID"]) | (self.train_df["Unnamed: 0"] == "label")]
+            self.dbeta_info[ID]) | (self.train_df["Unnamed: 0"] == "label")]
         test_df_tt = self.test_df[self.test_df["Unnamed: 0"].isin(
-            self.dbeta_info["ID"]) | (self.test_df["Unnamed: 0"] == "label")]
+            self.dbeta_info[ID]) | (self.test_df["Unnamed: 0"] == "label")]
         self.pre_X_train = train_df_tt.iloc[:-1, :]
         self.pre_X_test = test_df_tt.iloc[:-1, :]
         self.y_train = self.train_df.iloc[-1, 1:].astype(int)
@@ -76,12 +76,13 @@ class SimpleModel():
         train_out_path: str = None,
         test_out_path: str = None,
         is_grid_search: bool = False,
+        ID: str = "ID"
     ):
         try:
             for combination in self.combs:
                 logger.info(
                     f"Training for combination: {combination} with estimator: {estimator_name}")
-                X_train = self._prepare_data(self.pre_X_train, combination)
+                X_train = self._prepare_data(self.pre_X_train, combination, ID)
                 estimator.fit(X_train, self.y_train)
                 if is_grid_search:
                     self._estimator = estimator.best_estimator_
@@ -98,7 +99,7 @@ class SimpleModel():
                     train_out_path
                 )
 
-                X_test = self._prepare_data(self.pre_X_test, combination)
+                X_test = self._prepare_data(self.pre_X_test, combination, ID)
                 self._fit_predict_append(
                     X_test,
                     self.y_test,
@@ -114,7 +115,7 @@ class SimpleModel():
                 metric_avg = {}
                 for i in range(self.bagging_iterations):
                     X_test__ = self._prepare_data(
-                        self.pre_X_test__[i], combination)
+                        self.pre_X_test__[i], combination, ID)
                     y_pred_on_X = self._estimator.predict(X_test__)
                     y_proba_on_X = self._estimator.predict_proba(X_test__)[
                         :, 1]
@@ -165,22 +166,23 @@ class SimpleModel():
 
         self.combs = [
             combination for combination in product(*genes_by_group.values())
-            if len(set(combination)) == 4  # Ensure genes are distinct
+            if len(set(combination)) == len(groups)
         ]
 
     def _prepare_data(
             self,
             df: pd.DataFrame,
-            genes: tuple = None
+            genes: tuple = None,
+            ID: str = "ID"
     ) -> list:
         if genes is None:
             return df.iloc[:, 1:].T.values.tolist()
         else:
-            return df[df['Unnamed: 0'].isin(list(self._get_ID(genes)))].iloc[:, 1:].T.values.tolist()
+            return df[df['Unnamed: 0'].isin(list(self._get_ID(genes, ID)))].iloc[:, 1:].T.values.tolist()
 
-    def _get_ID(self, genes: tuple) -> tuple:
+    def _get_ID(self, genes: tuple, ID: str) -> tuple:
         # logger.debug(f"Getting ID for genes: {tuple(self.dbeta_info[self.dbeta_info['gene'].isin(genes)]['ID'])}")
-        return tuple(self.dbeta_info[self.dbeta_info['gene'].isin(genes)]['ID'])
+        return tuple(self.dbeta_info[self.dbeta_info['gene'].isin(genes)][ID])
 
     def _fit_predict_append(
         self,
