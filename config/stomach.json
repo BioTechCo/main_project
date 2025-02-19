@@ -15,12 +15,64 @@
     "normal": 86,
     "tumor": 395,
     "sample_count": 2,
-    "sample_type": "tissue"
+    "split_test": 0.2,
+    "random_state": 42,
+    "sample_type": "tissue",
+    "file": "../stomach/champ_result/GDC_stomach_and_GSE99553/all_beta_normalized_copy.csv"
+  },
+  "GDC_stomach_and_GSE99553_80": {
+    "normal": 69,
+    "tumor": 315,
+    "sample_count": 1,
+    "split_test": 0.25,
+    "random_state": 42,
+    "sample_type": "tissue",
+    "file": "../stomach/champ_result/GDC_stomach_and_GSE99553_80/all_beta_normalized.csv"
+  },
+  "GDC_stomach_and_GSE99553_20_test": {
+    "normal": 17,
+    "tumor": 80,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../stomach/champ_result/GDC_stomach_and_GSE99553_20_test/all_beta_normalized.csv"
+  },
+  "GDC_stomach_and_GSE99553_60_train": {
+    "normal": 52,
+    "tumor": 236,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../stomach/champ_result/GDC_stomach_and_GSE99553_60_train/all_beta_normalized.csv"
+  },
+  "GDC_stomach_and_GSE99553_20_validate": {
+    "normal": 17,
+    "tumor": 79,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../stomach/champ_result/GDC_stomach_and_GSE99553_20_validate/all_beta_normalized.csv"
   },
   "GSE85464": {
     "normal": 19,
     "tumor": 19,
     "sample_count": 2,
-    "sample_type": "tissue"
+    "sample_type": "tissue",
+    "split_test": 0.2,
+    "random_state": 42,
+    "file": "../stomach/champ_result/GSE85464/all_beta_normalized.csv"
+  },
+  "GSE85464_80": {
+    "normal": 15,
+    "tumor": 15,
+    "sample_count": 1,
+    "split_test": 0.25,
+    "random_state": 42,
+    "sample_type": "tissue",
+    "file": "../stomach/champ_result/GSE85464_80/all_beta_normalized.csv"
+  },
+  "GSE85464_20_test": {
+    "normal": 4,
+    "tumor": 4,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../stomach/champ_result/GSE85464_20_test/all_beta_normalized.csv"
   }
 }
