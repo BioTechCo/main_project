@@ -8,6 +8,29 @@
     "split_test": 0.2,
     "random_state": 42
   },
+  "TCGA_BRCA_20250119_80": {
+    "normal": 78,
+    "tumor": 634,
+    "file": "../breast/champ_result/TCGA_BRCA_20250119_80/all_beta_normalized.csv",
+    "split_test": 0.25,
+    "random_state": 42,
+    "sample_count": 1
+  },
+  "GDC_lung_tissue_60_train": {
+    "normal": 58,
+    "tumor": 476,
+    "file": "../breast/champ_result/GDC_lung_tissue_60_train/all_beta_normalized.csv"
+  },
+  "TCGA_BRCA_20250119_20_validate": {
+    "normal": 20,
+    "tumor": 158,
+    "file": "../breast/champ_result/TCGA_BRCA_20250119_20_validate/all_beta_normalized.csv"
+  },
+  "TCGA_BRCA_20250119_20_test": {
+    "normal": 19,
+    "tumor": 159,
+    "file": "../breast/champ_result/TCGA_BRCA_20250119_20_test/all_beta_normalized.csv"
+  },
   "GSE66313": {
     "normal": 15,
     "tumor": 39,
@@ -16,5 +39,35 @@
     "file": "../breast/champ_result/GSE66313/all_beta_normalized.csv",
     "split_test": 0.2,
     "random_state": 42
+  },
+  "GSE66313_80": {
+    "normal": 12,
+    "tumor": 31,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../breast/champ_result/GSE66313_80/all_beta_normalized.csv",
+    "split_test": 0.25,
+    "random_state": 42
+  },
+  "GSE66313_20_test": {
+    "normal": 3,
+    "tumor": 8,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../breast/champ_result/GSE66313_20_test/all_beta_normalized.csv"
+  },
+  "GSE66313_60_train": {
+    "normal": 9,
+    "tumor": 23,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../breast/champ_result/GSE66313_60_train/all_beta_normalized.csv"
+  },
+  "GSE66313_20_validate": {
+    "normal": 3,
+    "tumor": 8,
+    "sample_count": 1,
+    "sample_type": "tissue",
+    "file": "../breast/champ_result/GSE66313_20_validate/all_beta_normalized.csv"
   }
 }
