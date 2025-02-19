@@ -1,0 +1,71 @@
+[init.hyper]
+df_file_1 = "../prostate/champ_result/GDC_prostate_tissue_60_train/all_beta_normalized.csv"
+df_file_2 = "../prostate/champ_result/GSE269244_60_train/all_beta_normalized.csv"
+dmp_file_1 = "../prostate/champ_result/GDC_prostate_tissue/DMP_result_0.csv.csv"
+dmp_file_2 = "../prostate/champ_result/GSE269244/DMP_result_TN.csv.csv"
+majority_out_path_1 = "../prostate/planA/GDC_prostate_tissue/split60train"
+majority_out_path_2 = "../prostate/planA/GSE269244/split60train"
+joined_out_path = "../prostate/planA/joined"
+
+[feature_selection.hyper]
+validate_df_file = "../prostate/champ_result/GDC_prostate_tissue_20_validate/all_beta_normalized.csv"
+train_out_path = "../prostate/planA/GDC_prostate_tissue/split60train/section_3/rfe"
+validate_out_path = "../prostate/planA/GDC_prostate_tissue/split20validate/section_3/rfe"
+dbeta_info_file = "../prostate/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../prostate/planA/GDC_prostate_tissue/split60train/section_3/rfe/training_param.json"
+
+[feature_selection_2.hyper]
+validate_df_file = "../prostate/champ_result/GSE269244_20_validate/all_beta_normalized.csv"
+train_out_path = "../prostate/planA/GSE269244/split60train/section_3/rfe"
+validate_out_path = "../prostate/planA/GSE269244/split20validate/section_3/rfe"
+dbeta_info_file = "../prostate/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../prostate/training_param.json"
+
+[GO_distance_matrix.hyper]
+input_file = "prostate/planA/joined/section_2/dbeta_TSS_threshold_joined.csv"
+base_out_dir = "prostate/planA/joined/GO_distance_matrix"
+
+[clustering_visual.hyper]
+result_prefix = "dbeta_TSS_threshold_joined"
+dbeta_file = "../prostate/planA/joined/section_2/dbeta_TSS_threshold_joined.csv"
+bp_file = "../prostate/planA/joined/GO_distance_matrix/distance_matrix_bp.csv"
+cc_file = "../prostate/planA/joined/GO_distance_matrix/distance_matrix_cc.csv"
+mf_file = "../prostate/planA/joined/GO_distance_matrix/distance_matrix_mf.csv"
+terms_count_file = "../prostate/planA/joined/GO_distance_matrix/terms_count.csv"
+result_out_path = "../prostate/planA/joined/section_5"
+
+[simple_model.hyper]
+dbeta_file = "../prostate/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+selected_feature_file = "../prostate/planA/GDC_prostate_tissue/split60train/section_3/rfe/selected_features.json"
+selected_feature_file_2 = "../prostate/planA/GSE269244/split60train/section_3/rfe/selected_features.json"
+
+train_out_path = "../prostate/planA/joined/split60train/section_6"
+validate_out_path = "../prostate/planA/joined/split20test/section_6"
+
+df_train_file = "../prostate/champ_result/GDC_prostate_tissue_60_train/all_beta_normalized.csv"
+df_test_file = "../prostate/champ_result/GDC_prostate_tissue_20_test/all_beta_normalized.csv"
+df_train_file_2 = "../prostate/champ_result/GSE269244_60_train/all_beta_normalized.csv"
+df_test_file_2 = "../prostate/champ_result/GSE269244_20_test/all_beta_normalized.csv"
+training_param_file = "../prostate/training_param.json"
+
+[preprocess.filtering]
+threshold_TCGA = 0.3
+threshold_GEO = 0.22
+
+[preprocess.dbeta]
+delta_beta_avg_feature_numTCGA = 353508
+NaN_dbeta_featureTCGA = [ "label",]
+delta_beta_avg_feature_num_remove_NaNTCGA = 353507
+dmp_before_dropna_shape_featureTCGA = 300130
+dmp_after_dropna_shape_featureTCGA = 230270
+delta_beta_avg_feature_num_remove_NaN_join_dmpTCGA = 353507
+delta_beta_avg_feature_numGEO = 581635
+NaN_dbeta_featureGEO = [ "label",]
+delta_beta_avg_feature_num_remove_NaNGEO = 581634
+dmp_before_dropna_shape_featureGEO = 321059
+dmp_after_dropna_shape_featureGEO = 221870
+delta_beta_avg_feature_num_remove_NaN_join_dmpGEO = 581634
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 500
