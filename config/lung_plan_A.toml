@@ -1,23 +1,29 @@
 [init.hyper]
-df_file_1 = "../lung/champ_result/GDC_lung_tissue_60_train/all_beta_normalized.csv"
-df_file_2 = "../lung/champ_result/GSE235414_60_train/all_beta_normalized.csv"
+df_file_1 = "../lung/champ_result/GDC_lung_tissue_80/all_beta_normalized.csv"
+df_file_2 = "../lung/champ_result/GSE235414_80/all_beta_normalized.csv"
 dmp_file_1 = "../lung/champ_result/GDC_lung_tissue/DMP_result_TCGA_LUAD_LUSC.csv"
 dmp_file_2 = "../lung/champ_result/GSE235414/DMP_result_GSE235414.csv"
-majority_out_path_1 = "../lung/planA/GDC_lung_tissue/split60train"
-majority_out_path_2 = "../lung/planA/GSE235414/split60train"
+majority_out_path_1 = "../lung/planA/GDC_lung_tissue/split80train"
+majority_out_path_2 = "../lung/planA/GSE235414/split80train"
 joined_out_path = "../lung/planA/joined"
 
-[feature_selection.hyper]
-validate_df_file = "../lung/champ_result/GDC_lung_tissue_20_validate/all_beta_normalized.csv"
-train_out_path = "../lung/planA/GDC_lung_tissue/split60train/section_3/rfe"
-validate_out_path = "../lung/planA/GDC_lung_tissue/split20validate/section_3/rfe"
+[feature_selection.rfe.hyper]
+train_out_path = "../lung/planA/GDC_lung_tissue/split80train/section_3/rfe"
 dbeta_info_file = "../lung/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
-training_param_file = "../lung/planA/GDC_lung_tissue/split60train/section_3/rfe/training_param.json"
+training_param_file = "../lung/training_param.json"
 
-[feature_selection_2.hyper]
-validate_df_file = "../lung/champ_result/GSE235414_20_validate/all_beta_normalized.csv"
-train_out_path = "../lung/planA/GSE235414/split60train/section_3/rfe"
-validate_out_path = "../lung/planA/GSE235414/split20validate/section_3/rfe"
+[feature_selection_2.rfe.hyper]
+train_out_path = "../lung/planA/GSE235414/split80train/section_3/rfe"
+dbeta_info_file = "../lung/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../lung/training_param.json"
+
+[feature_selection.sfs.hyper]
+train_out_path = "../lung/planA/GDC_lung_tissue/split80train/section_3/sfs"
+dbeta_info_file = "../lung/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../lung/training_param.json"
+
+[feature_selection_2.sfs.hyper]
+train_out_path = "../lung/planA/GSE235414/split80train/section_3/sfs"
 dbeta_info_file = "../lung/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
 training_param_file = "../lung/training_param.json"
 
@@ -36,31 +42,29 @@ result_out_path = "../lung/planA/joined/section_5"
 
 [simple_model.hyper]
 dbeta_file = "../lung/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
-selected_feature_file = "../lung/planA/GDC_lung_tissue/split60train/section_3/rfe/selected_features.json"
-selected_feature_file_2 = "../lung/planA/GSE235414/split60train/section_3/rfe/selected_features.json"
-
-train_out_path = "../lung/planA/joined/split60train/section_6"
+selected_feature_file = "../lung/planA/GDC_lung_tissue/split80train/section_3/rfe/selected_features.json"
+selected_feature_file_2 = "../lung/planA/GSE235414/split80train/section_3/rfe/selected_features.json"
+train_out_path = "../lung/planA/joined/split80train/section_6"
 validate_out_path = "../lung/planA/joined/split20test/section_6"
-
-df_train_file = "../lung/champ_result/GDC_lung_tissue_60_train/all_beta_normalized.csv"
+df_train_file = "../lung/champ_result/GDC_lung_tissue_80/all_beta_normalized.csv"
 df_test_file = "../lung/champ_result/GDC_lung_tissue_20_test/all_beta_normalized.csv"
-df_train_file_2 = "../lung/champ_result/GSE235414_60_train/all_beta_normalized.csv"
+df_train_file_2 = "../lung/champ_result/GSE235414_80/all_beta_normalized.csv"
 df_test_file_2 = "../lung/champ_result/GSE235414_20_test/all_beta_normalized.csv"
 training_param_file = "../lung/training_param.json"
 
 [preprocess.filtering]
-threshold_TCGA = 0.3
-threshold_GEO = 0.22
+threshold_TCGA = 0.29
+threshold_GEO = 0.21
 
 [preprocess.dbeta]
-delta_beta_avg_feature_numTCGA = 353508
-NaN_dbeta_featureTCGA = [ "label",]
+delta_beta_avg_feature_numTCGA = 353507
+NaN_dbeta_featureTCGA = []
 delta_beta_avg_feature_num_remove_NaNTCGA = 353507
 dmp_before_dropna_shape_featureTCGA = 300130
 dmp_after_dropna_shape_featureTCGA = 230270
 delta_beta_avg_feature_num_remove_NaN_join_dmpTCGA = 353507
-delta_beta_avg_feature_numGEO = 581635
-NaN_dbeta_featureGEO = [ "label",]
+delta_beta_avg_feature_numGEO = 581634
+NaN_dbeta_featureGEO = []
 delta_beta_avg_feature_num_remove_NaNGEO = 581634
 dmp_before_dropna_shape_featureGEO = 321059
 dmp_after_dropna_shape_featureGEO = 221870
