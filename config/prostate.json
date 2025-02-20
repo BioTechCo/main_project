@@ -4,31 +4,31 @@
     "tumor": 502,
     "sample_count": 2,
     "sample_type": "tissue",
-    "file": "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized_0.csv",
+    "file": "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized.csv",
     "split_test": 0.2,
     "random_state": 42
   },
   "GDC_prostate_tissue_80": {
-    "normal": 59,
-    "tumor": 674,
+    "normal": 40,
+    "tumor": 401,
     "file": "../prostate/champ_result/GDC_prostate_tissue_80/all_beta_normalized.csv",
     "split_test": 0.25,
     "random_state": 42,
     "sample_count": 1
   },
   "GDC_prostate_tissue_20_test": {
-    "normal": 15,
-    "tumor": 169,
+    "normal": 10,
+    "tumor": 101,
     "file": "../prostate/champ_result/GDC_prostate_tissue_20_test/all_beta_normalized.csv"
   },
   "GDC_prostate_tissue_60_train": {
-    "normal": 44,
-    "tumor": 505,
+    "normal": 30,
+    "tumor": 300,
     "file": "../prostate/champ_result/GDC_prostate_tissue_60_train/all_beta_normalized.csv"
   },
   "GDC_prostate_tissue_20_validate": {
-    "normal": 15,
-    "tumor": 169,
+    "normal": 10,
+    "tumor": 101,
     "file": "../prostate/champ_result/GDC_prostate_tissue_20_validate/all_beta_normalized.csv"
   },
   "GSE269244": {
@@ -41,26 +41,26 @@
     "random_state": 42
   },
   "GSE269244_80": {
-    "normal": 52,
-    "tumor": 52,
+    "normal": 94,
+    "tumor": 96,
     "sample_count": 1,
     "file": "../prostate/champ_result/GSE269244_80/all_beta_normalized.csv",
     "split_test": 0.25,
     "random_state": 42
   },
   "GSE269244_20_test": {
-    "normal": 13,
-    "tumor": 13,
+    "normal": 24,
+    "tumor": 24,
     "file": "../prostate/champ_result/GSE269244_20_test/all_beta_normalized.csv"
   },
   "GSE269244_60_train": {
-    "normal": 39,
-    "tumor": 39,
+    "normal": 70,
+    "tumor": 72,
     "file": "../prostate/champ_result/GSE269244_60_train/all_beta_normalized.csv"
   },
   "GSE269244_20_validate": {
-    "normal": 13,
-    "tumor": 13,
+    "normal": 24,
+    "tumor": 24,
     "file": "../prostate/champ_result/GSE269244_20_validate/all_beta_normalized.csv"
   }
 }

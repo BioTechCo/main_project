@@ -1,8 +1,8 @@
 [init.hyper]
 df_file_1 = "../prostate/champ_result/GDC_prostate_tissue_60_train/all_beta_normalized.csv"
 df_file_2 = "../prostate/champ_result/GSE269244_60_train/all_beta_normalized.csv"
-dmp_file_1 = "../prostate/champ_result/GDC_prostate_tissue/DMP_result_0.csv.csv"
-dmp_file_2 = "../prostate/champ_result/GSE269244/DMP_result_TN.csv.csv"
+dmp_file_1 = "../prostate/champ_result/GDC_prostate_tissue/DMP_result_TN.csv"
+dmp_file_2 = "../prostate/champ_result/GSE269244/DMP_result_TN.csv"
 majority_out_path_1 = "../prostate/planA/GDC_prostate_tissue/split60train"
 majority_out_path_2 = "../prostate/planA/GSE269244/split60train"
 joined_out_path = "../prostate/planA/joined"
@@ -38,10 +38,8 @@ result_out_path = "../prostate/planA/joined/section_5"
 dbeta_file = "../prostate/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
 selected_feature_file = "../prostate/planA/GDC_prostate_tissue/split60train/section_3/rfe/selected_features.json"
 selected_feature_file_2 = "../prostate/planA/GSE269244/split60train/section_3/rfe/selected_features.json"
-
 train_out_path = "../prostate/planA/joined/split60train/section_6"
 validate_out_path = "../prostate/planA/joined/split20test/section_6"
-
 df_train_file = "../prostate/champ_result/GDC_prostate_tissue_60_train/all_beta_normalized.csv"
 df_test_file = "../prostate/champ_result/GDC_prostate_tissue_20_test/all_beta_normalized.csv"
 df_train_file_2 = "../prostate/champ_result/GSE269244_60_train/all_beta_normalized.csv"
@@ -49,22 +47,22 @@ df_test_file_2 = "../prostate/champ_result/GSE269244_20_test/all_beta_normalized
 training_param_file = "../prostate/training_param.json"
 
 [preprocess.filtering]
-threshold_TCGA = 0.3
-threshold_GEO = 0.22
+threshold_TCGA = 0.36
+threshold_GEO = 0.21
 
 [preprocess.dbeta]
-delta_beta_avg_feature_numTCGA = 353508
+delta_beta_avg_feature_numTCGA = 373341
 NaN_dbeta_featureTCGA = [ "label",]
-delta_beta_avg_feature_num_remove_NaNTCGA = 353507
-dmp_before_dropna_shape_featureTCGA = 300130
-dmp_after_dropna_shape_featureTCGA = 230270
-delta_beta_avg_feature_num_remove_NaN_join_dmpTCGA = 353507
-delta_beta_avg_feature_numGEO = 581635
+delta_beta_avg_feature_num_remove_NaNTCGA = 373340
+dmp_before_dropna_shape_featureTCGA = 286098
+dmp_after_dropna_shape_featureTCGA = 218741
+delta_beta_avg_feature_num_remove_NaN_join_dmpTCGA = 373340
+delta_beta_avg_feature_numGEO = 695603
 NaN_dbeta_featureGEO = [ "label",]
-delta_beta_avg_feature_num_remove_NaNGEO = 581634
-dmp_before_dropna_shape_featureGEO = 321059
-dmp_after_dropna_shape_featureGEO = 221870
-delta_beta_avg_feature_num_remove_NaN_join_dmpGEO = 581634
+delta_beta_avg_feature_num_remove_NaNGEO = 695602
+dmp_before_dropna_shape_featureGEO = 188706
+dmp_after_dropna_shape_featureGEO = 136630
+delta_beta_avg_feature_num_remove_NaN_join_dmpGEO = 695602
 
 [preprocess.filtering.hyper]
 avg_dbeta_lower_bound = 300
