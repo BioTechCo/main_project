@@ -1,0 +1,69 @@
+[init.hyper]
+df_file_1 = "../stomach/champ_result/GDC_stomach_and_GSE99553_60_train/all_beta_normalized.csv"
+df_file_2 = "../stomach/champ_result/GSE85464_60_train/all_beta_normalized.csv"
+dmp_file_1 = "../stomach/champ_result/GDC_stomach_and_GSE99553/DMP_result.csv"
+dmp_file_2 = "../stomach/champ_result/GSE85464/DMP_result_TN.csv"
+majority_out_path_1 = "../stomach/planA/GDC_stomach_and_GSE99553/split60train"
+majority_out_path_2 = "../stomach/planA/GSE85464/split60train"
+joined_out_path = "../stomach/planA/joined"
+
+[feature_selection.hyper]
+validate_df_file = "../stomach/champ_result/GDC_stomach_and_GSE99553_20_validate/all_beta_normalized.csv"
+train_out_path = "../stomach/planA/GDC_stomach_and_GSE99553/split60train/section_3/rfe"
+validate_out_path = "../stomach/planA/GDC_stomach_and_GSE99553/split20validate/section_3/rfe"
+dbeta_info_file = "../stomach/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../stomach/planA/GDC_stomach_and_GSE99553/split60train/section_3/rfe/training_param.json"
+
+[feature_selection_2.hyper]
+validate_df_file = "../stomach/champ_result/GSE85464_20_validate/all_beta_normalized.csv"
+train_out_path = "../stomach/planA/GSE85464/split60train/section_3/rfe"
+validate_out_path = "../stomach/planA/GSE85464/split20validate/section_3/rfe"
+dbeta_info_file = "../stomach/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../stomach/training_param.json"
+
+[GO_distance_matrix.hyper]
+input_file = "stomach/planA/joined/section_2/dbeta_TSS_threshold_joined.csv"
+base_out_dir = "stomach/planA/joined/GO_distance_matrix"
+
+[clustering_visual.hyper]
+result_prefix = "dbeta_TSS_threshold_joined"
+dbeta_file = "../stomach/planA/joined/section_2/dbeta_TSS_threshold_joined.csv"
+bp_file = "../stomach/planA/joined/GO_distance_matrix/distance_matrix_bp.csv"
+cc_file = "../stomach/planA/joined/GO_distance_matrix/distance_matrix_cc.csv"
+mf_file = "../stomach/planA/joined/GO_distance_matrix/distance_matrix_mf.csv"
+terms_count_file = "../stomach/planA/joined/GO_distance_matrix/terms_count.csv"
+result_out_path = "../stomach/planA/joined/section_5"
+
+[simple_model.hyper]
+dbeta_file = "../stomach/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+selected_feature_file = "../stomach/planA/GDC_stomach_and_GSE99553/split60train/section_3/rfe/selected_features.json"
+selected_feature_file_2 = "../stomach/planA/GSE85464/split60train/section_3/rfe/selected_features.json"
+train_out_path = "../stomach/planA/joined/split60train/section_6"
+validate_out_path = "../stomach/planA/joined/split20test/section_6"
+df_train_file = "../stomach/champ_result/GDC_stomach_and_GSE99553_60_train/all_beta_normalized.csv"
+df_test_file = "../stomach/champ_result/GDC_stomach_and_GSE99553_20_test/all_beta_normalized.csv"
+df_train_file_2 = "../stomach/champ_result/GSE85464_60_train/all_beta_normalized.csv"
+df_test_file_2 = "../stomach/champ_result/GSE85464_20_test/all_beta_normalized.csv"
+training_param_file = "../stomach/training_param.json"
+
+[preprocess.filtering]
+threshold_TCGA = 0.31
+threshold_GEO = 0.22
+
+[preprocess.dbeta]
+delta_beta_avg_feature_numTCGA = 375640
+NaN_dbeta_featureTCGA = [ "label",]
+delta_beta_avg_feature_num_remove_NaNTCGA = 375639
+dmp_before_dropna_shape_featureTCGA = 267487
+dmp_after_dropna_shape_featureTCGA = 203693
+delta_beta_avg_feature_num_remove_NaN_join_dmpTCGA = 375639
+delta_beta_avg_feature_numGEO = 410000
+NaN_dbeta_featureGEO = [ "label",]
+delta_beta_avg_feature_num_remove_NaNGEO = 409999
+dmp_before_dropna_shape_featureGEO = 149988
+dmp_after_dropna_shape_featureGEO = 106302
+delta_beta_avg_feature_num_remove_NaN_join_dmpGEO = 409999
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 500
