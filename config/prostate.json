@@ -1,0 +1,40 @@
+{
+  "GDC_prostate_tissue": {
+    "normal": 50,
+    "tumor": 502,
+    "sample_count": 2,
+    "sample_type": "tissue",
+    "file": "../prostate/champ_result/GDC_prostate_tissue/all_beta_normalized.csv",
+    "split_test": 0.2,
+    "random_state": 42
+  },
+  "GDC_prostate_tissue_80": {
+    "normal": 40,
+    "tumor": 401,
+    "file": "../prostate/champ_result/GDC_prostate_tissue_80/all_beta_normalized.csv"
+  },
+  "GDC_prostate_tissue_20_test": {
+    "normal": 10,
+    "tumor": 101,
+    "file": "../prostate/champ_result/GDC_prostate_tissue_20_test/all_beta_normalized.csv"
+  },
+  "GSE269244": {
+    "normal": 118,
+    "tumor": 120,
+    "sample_count": 2,
+    "sample_type": "tissue",
+    "file": "../prostate/champ_result/GSE269244/all_beta_normalized.csv",
+    "split_test": 0.2,
+    "random_state": 42
+  },
+  "GSE269244_80": {
+    "normal": 94,
+    "tumor": 96,
+    "file": "../prostate/champ_result/GSE269244_80/all_beta_normalized.csv"
+  },
+  "GSE269244_20_test": {
+    "normal": 24,
+    "tumor": 24,
+    "file": "../prostate/champ_result/GSE269244_20_test/all_beta_normalized.csv"
+  }
+}
