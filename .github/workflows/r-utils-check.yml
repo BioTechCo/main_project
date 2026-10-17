@@ -17,6 +17,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      TEST_PACKAGES: testthat abind rentrez AnnotationDbi org.Hs.eg.db GOSemSim
 
     steps:
       - name: Checkout repository
@@ -33,11 +35,18 @@ jobs:
           r-version: renv
           # Install prebuilt Linux binaries from Posit Package Manager instead of compiling
           use-public-rspm: true
-      - name: Set up renv
-        uses: r-lib/actions/setup-renv@v2
+      - name: Set renv cache path
+        run: echo "RENV_PATHS_ROOT=$HOME/.cache/R/renv" >> "$GITHUB_ENV"
+      - name: Cache renv packages
+        uses: actions/cache@v4
         with:
-          # Bump to invalidate the renv cache manually
-          cache-version: 1
+          path: ~/.cache/R/renv
+          # Package list lives in this file, so its hash covers TEST_PACKAGES changes
+          key: renv-v1-${{ runner.os }}-${{ hashFiles('renv.lock', '.github/workflows/r-utils-check.yml') }}
+          restore-keys: renv-v1-${{ runner.os }}-
+      - name: Restore test dependencies
+        run: |
+          Rscript -e 'renv::restore(packages = strsplit(Sys.getenv("TEST_PACKAGES"), " ")[[1]], prompt = FALSE)'
       - name: Run tests
         working-directory: ${{ github.workspace }}
         run: |
