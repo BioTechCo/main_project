@@ -1,0 +1,75 @@
+[init.hyper]
+df_file_1 = "../rectal/result/GDC_rectal_tissue_450k/split80/all_beta_normalized_train_oversample_smote.csv"
+df_file_2 = "../rectal/result/GSE199057/split80/all_beta_normalized_train_oversample_smote.csv"
+dmp_file_1 = "../rectal/champ_result/GDC_rectal_tissue_450K/DMP_result.csv"
+dmp_file_2 = "../rectal/champ_result/GSE199057/DMP_result.csv"
+majority_out_path_1 = "../rectal/planA_smote/GDC_rectal_tissue_450k/split80"
+majority_out_path_2 = "../rectal/planA_smote/GSE199057/split80"
+joined_out_path = "../rectal/planA_smote/joined"
+
+[GO_distance_matrix.hyper]
+input_file = "rectal/planA_smote/joined/section_2/dbeta_TSS_threshold_joined.csv"
+base_out_dir = "rectal/planA_smote/joined/GO_distance_matrix"
+
+[clustering_visual.hyper]
+result_prefix = "dbeta_TSS_threshold_joined"
+dbeta_file = "../rectal/planA_smote/joined/section_2/dbeta_TSS_threshold_joined.csv"
+bp_file = "../rectal/planA_smote/joined/GO_distance_matrix/distance_matrix_bp.csv"
+cc_file = "../rectal/planA_smote/joined/GO_distance_matrix/distance_matrix_cc.csv"
+mf_file = "../rectal/planA_smote/joined/GO_distance_matrix/distance_matrix_mf.csv"
+terms_count_file = "../rectal/planA_smote/joined/GO_distance_matrix/terms_count.csv"
+result_out_path = "../rectal/planA_smote/joined/section_5"
+
+[simple_model.hyper]
+dbeta_file = "../rectal/planA_smote/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+selected_feature_file = "../rectal/planA_smote/GDC_rectal_tissue_450k/split80/section_3/rfe/selected_features.json"
+selected_feature_file_2 = "../rectal/planA_smote/GSE199057/split80/section_3/rfe/selected_features.json"
+train_out_path = "../rectal/planA_smote/joined/split80/section_6"
+validate_out_path = "../rectal/planA_smote/joined/split20/section_6"
+df_train_file = "../rectal/result/GDC_rectal_tissue_450k/split80/all_beta_normalized_train_oversample_smote.csv"
+df_test_file = "../rectal/result/GDC_rectal_tissue_450k/split20/all_beta_normalized_test.csv"
+df_train_file_2 = "../rectal/result/GSE199057/split80/all_beta_normalized_train_oversample_smote.csv"
+df_test_file_2 = "../rectal/result/GSE199057/split20/all_beta_normalized_test.csv"
+training_param_file = "../rectal/training_param.json"
+
+[preprocess.filtering]
+threshold_TCGA = 0.39
+threshold_GEO = 0.35
+
+[preprocess.dbeta]
+delta_beta_avg_feature_numTCGA = 364227
+NaN_dbeta_featureTCGA = []
+delta_beta_avg_feature_num_remove_NaNTCGA = 364227
+dmp_before_dropna_shape_featureTCGA = 262248
+dmp_after_dropna_shape_featureTCGA = 198417
+delta_beta_avg_feature_num_remove_NaN_join_dmpTCGA = 364227
+delta_beta_avg_feature_numGEO = 711702
+NaN_dbeta_featureGEO = []
+delta_beta_avg_feature_num_remove_NaNGEO = 711702
+dmp_before_dropna_shape_featureGEO = 638794
+dmp_after_dropna_shape_featureGEO = 299839
+delta_beta_avg_feature_num_remove_NaN_join_dmpGEO = 711702
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 500
+
+[feature_selection.rfe.hyper]
+train_out_path = "../rectal/planA_smote/GDC_rectal_tissue_450k/split80/section_3/rfe"
+dbeta_info_file = "../rectal/planA_smote/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../rectal/training_param.json"
+
+[feature_selection.sfs.hyper]
+train_out_path = "../rectal/planA_smote/GDC_rectal_tissue_450k/split80/section_3/sfs"
+dbeta_info_file = "../rectal/planA_smote/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../rectal/training_param.json"
+
+[feature_selection_2.rfe.hyper]
+train_out_path = "../rectal/planA_smote/GSE199057/split80/section_3/rfe"
+dbeta_info_file = "../rectal/planA_smote/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../rectal/training_param.json"
+
+[feature_selection_2.sfs.hyper]
+train_out_path = "../rectal/planA_smote/GSE199057/split80/section_3/sfs"
+dbeta_info_file = "../rectal/planA_smote/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../rectal/training_param.json"

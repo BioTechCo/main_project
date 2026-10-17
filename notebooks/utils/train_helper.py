@@ -223,28 +223,30 @@ class TrainHelper:
                 for gene in result_set:
                     f.write(f"{gene}\n")
 
-    def set_train_validate(self, ID: str="ID") -> None:
+    def set_train_validate(self, ID: str="ID", do_validate: bool = False) -> None:
         train_df_tt = self.train_df[
             self.train_df["Unnamed: 0"].isin(self.dbeta_info[ID])
             | (self.train_df["Unnamed: 0"] == "label")
         ]
-        validate_df_tt = self.validate_df[
-            self.validate_df["Unnamed: 0"].isin(self.dbeta_info[ID])
-            | (self.validate_df["Unnamed: 0"] == "label")
-        ]
         self.X_train = train_df_tt.iloc[:-1, 1:].T.values.tolist()
-        self.X_validate = validate_df_tt.iloc[:-1, 1:].T.values.tolist()
         self.y_train = self.train_df.iloc[-1, 1:].astype(int)
-        self.y_validate = self.validate_df.iloc[-1, 1:].astype(int)
+        
+        if do_validate:
+            validate_df_tt = self.validate_df[
+                self.validate_df["Unnamed: 0"].isin(self.dbeta_info[ID])
+                | (self.validate_df["Unnamed: 0"] == "label")
+            ]
+            self.X_validate = validate_df_tt.iloc[:-1, 1:].T.values.tolist()
+            self.y_validate = self.validate_df.iloc[-1, 1:].astype(int)
 
-        self.X_validate__ = []
-        self.y_validate__ = []
-        for seed in range(self.Bagging_num):
-            self._validate_df_tt = validate_df_tt
-            split_df = self._balance_dataframe_with_labels(validate_df_tt, seed=seed)
-            self.split_df = split_df
-            self.X_validate__.append(split_df.iloc[:-1, :].T.values.tolist())
-            self.y_validate__.append(split_df.iloc[-1, :].astype(int))
+            self.X_validate__ = []
+            self.y_validate__ = []
+            for seed in range(self.Bagging_num):
+                self._validate_df_tt = validate_df_tt
+                split_df = self._balance_dataframe_with_labels(validate_df_tt, seed=seed)
+                self.split_df = split_df
+                self.X_validate__.append(split_df.iloc[:-1, :].T.values.tolist())
+                self.y_validate__.append(split_df.iloc[-1, :].astype(int))
 
     def set_selection_models(self, selection_models: dict) -> None:
         self.selection_models = selection_models
@@ -316,11 +318,11 @@ class TrainHelper:
     def select_feature_rfe(
         self,
         train_out_path: str,
-        validate_out_path: str,
         selected_feature_path: str,
         step: int = 1,
         feature_range: Union[tuple, Literal["cluster"]] = "cluster",
-        do_validation: bool = True,
+        validate_out_path: str = None,
+        do_validation: bool = False,
     ) -> None:
         """
         Select features using Recursive Feature Elimination (RFE) with the selection models.
@@ -345,11 +347,13 @@ class TrainHelper:
                 while True:
                     rfe = RFE(estimator=selection_model, n_features_to_select=step_)
                     X_train_rfe = rfe.fit_transform(self.X_train, self.y_train)
-                    X_validate_rfe = rfe.transform(self.X_validate)
+                    
+                    if do_validation:
+                        X_validate_rfe = rfe.transform(self.X_validate)
 
-                    X_validate_rfe__ = []
-                    for X_validate__item in self.X_validate__:
-                        X_validate_rfe__.append(rfe.transform(X_validate__item))
+                        X_validate_rfe__ = []
+                        for X_validate__item in self.X_validate__:
+                            X_validate_rfe__.append(rfe.transform(X_validate__item))
 
                     self._save_selected_features(
                         rfe, selection_model_name

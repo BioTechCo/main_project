@@ -64,7 +64,8 @@ def split_dataset(
         random seed
 
     """
-
+    # set the index of the last row as "label"
+    df.index = df.index[:-1].tolist() + ['label']
     ID = list(df.iloc[:, 0])
     df_values = df.iloc[:, 1:].T
     complement_df, split_ratio_df = train_test_split(df_values, test_size=split_ratio, stratify=df_values["label"], random_state=seed)
