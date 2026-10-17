@@ -1,0 +1,2 @@
+estimator_name,gene_0,accuracy,recall,specificity,precision,f1_score,AUC,MCC,fbeta2_score
+DecisionTree,RAX,0.375,0.25,0.5,0.3333333333333333,0.2857142857142857,0.1875,-0.2581988897471611,0.2631578947368421

@@ -3,6 +3,7 @@
 /data_TNBC
 /train
 /champ_result
+**/external_result
 *.7z
 *.gz
 *.pptx
@@ -18,3 +19,6 @@
 **/champ_result/
 **/data/
 all_beta_normalized*
+*.pickle
+notebooks/credentials.json
+/notebooks/logs

@@ -1,0 +1,24 @@
+select_model,validation_model,num_features,accuracy,sensitivity,specificity,precision,f1,mcc
+XGBoost,Decision Tree,25,0.7,0.69,0.72,1,1,0.41
+XGBoost,Decision Tree,30,0.68,0.67,0.68,1,1,0.35
+XGBoost,Decision Tree,35,0.7,0.69,0.72,1,1,0.41
+XGBoost,Random Forest,25,0.72,0.75,0.7,1,1,0.45
+XGBoost,Random Forest,30,0.7,0.71,0.68,1,1,0.39
+XGBoost,Random Forest,35,0.7,0.73,0.68,1,1,0.41
+Random Forest,Decision Tree,25,0.67,0.67,0.66,1,1,0.33
+Random Forest,Decision Tree,30,0.69,0.67,0.7,1,1,0.37
+Random Forest,Decision Tree,35,0.7,0.69,0.72,1,1,0.41
+Random Forest,XGBoost,25,0.48,0.0,1.0,0,0,0.0
+Random Forest,XGBoost,30,0.48,0.0,1.0,0,0,0.0
+Random Forest,XGBoost,35,0.48,0.0,1.0,0,0,0.0
+Decision Tree,Random Forest,25,0.65,0.67,0.62,1,1,0.29
+Decision Tree,Random Forest,30,0.64,0.62,0.66,1,1,0.28
+Decision Tree,Random Forest,35,0.63,0.64,0.62,1,1,0.26
+Decision Tree,XGBoost,25,0.48,0.0,1.0,0,0,0.0
+Decision Tree,XGBoost,30,0.48,0.0,1.0,0,0,0.0
+Decision Tree,XGBoost,35,0.48,0.0,1.0,0,0,0.0
+SVM,Decision Tree,25,0.67,0.67,0.66,1,1,0.33
+SVM,Decision Tree,35,0.67,0.67,0.66,1,1,0.33
+SVM,XGBoost,25,0.48,0.0,1.0,0,0,0.0
+SVM,XGBoost,30,0.48,0.0,1.0,0,0,0.0
+SVM,XGBoost,35,0.48,0.0,1.0,0,0,0.0

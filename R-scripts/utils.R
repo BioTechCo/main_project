@@ -11,6 +11,7 @@ nan_count <- function(x, data_name) {
         sum(is.nan(x)), " | ", sum(!is.na(x) & !is.nan(x)),
         "\n"
     )
+    return(sum(is.na(x)) + sum(is.nan(x)))
 }
 
 
