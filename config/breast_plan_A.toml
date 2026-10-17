@@ -1,0 +1,75 @@
+[init.hyper]
+df_file_1 = "../breast/champ_result/TCGA_BRCA_20250119_80/all_beta_normalized.csv"
+df_file_2 = "../breast/champ_result/GSE66313_80/all_beta_normalized.csv"
+dmp_file_1 = "../breast/champ_result/TCGA_BRCA_20250119/DMP_result_TCGA_BRCA.csv"
+dmp_file_2 = "../breast/champ_result/GSE66313/DMP_result_GSE66313.csv"
+majority_out_path_1 = "../breast/planA/TCGA_BRCA_20250119/split80train"
+majority_out_path_2 = "../breast/planA/GSE66313/split80train"
+joined_out_path = "../breast/planA/joined"
+
+[GO_distance_matrix.hyper]
+input_file = "breast/planA/joined/section_2/dbeta_TSS_threshold_joined.csv"
+base_out_dir = "breast/planA/joined/GO_distance_matrix"
+
+[clustering_visual.hyper]
+result_prefix = "dbeta_TSS_threshold_joined"
+dbeta_file = "../breast/planA/joined/section_2/dbeta_TSS_threshold_joined.csv"
+bp_file = "../breast/planA/joined/GO_distance_matrix/distance_matrix_bp.csv"
+cc_file = "../breast/planA/joined/GO_distance_matrix/distance_matrix_cc.csv"
+mf_file = "../breast/planA/joined/GO_distance_matrix/distance_matrix_mf.csv"
+terms_count_file = "../breast/planA/joined/GO_distance_matrix/terms_count.csv"
+result_out_path = "../breast/planA/joined/section_5"
+
+[simple_model.hyper]
+dbeta_file = "../breast/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+selected_feature_file = "../breast/planA/TCGA_BRCA_20250119/split80train/section_3/rfe/selected_features.json"
+selected_feature_file_2 = "../breast/planA/GSE66313/split80train/section_3/rfe/selected_features.json"
+train_out_path = "../breast/planA/joined/split80train/section_6"
+validate_out_path = "../breast/planA/joined/split20test/section_6"
+df_train_file = "../breast/champ_result/TCGA_BRCA_20250119_80/all_beta_normalized.csv"
+df_test_file = "../breast/champ_result/TCGA_BRCA_20250119_20_test/all_beta_normalized.csv"
+df_train_file_2 = "../breast/champ_result/GSE66313_80/all_beta_normalized.csv"
+df_test_file_2 = "../breast/champ_result/GSE66313_20_test/all_beta_normalized.csv"
+training_param_file = "../breast/training_param.json"
+
+[preprocess.filtering]
+threshold_TCGA = 0.33
+threshold_GEO = 0.26
+
+[preprocess.dbeta]
+delta_beta_avg_feature_numTCGA = 341738
+NaN_dbeta_featureTCGA = []
+delta_beta_avg_feature_num_remove_NaNTCGA = 341738
+dmp_before_dropna_shape_featureTCGA = 283630
+dmp_after_dropna_shape_featureTCGA = 218476
+delta_beta_avg_feature_num_remove_NaN_join_dmpTCGA = 341738
+delta_beta_avg_feature_numGEO = 348278
+NaN_dbeta_featureGEO = []
+delta_beta_avg_feature_num_remove_NaNGEO = 348278
+dmp_before_dropna_shape_featureGEO = 105219
+dmp_after_dropna_shape_featureGEO = 75981
+delta_beta_avg_feature_num_remove_NaN_join_dmpGEO = 348278
+
+[preprocess.filtering.hyper]
+avg_dbeta_lower_bound = 300
+avg_dbeta_upper_bound = 500
+
+[feature_selection.rfe.hyper]
+train_out_path = "../breast/planA/TCGA_BRCA_20250119/split80train/section_3/rfe"
+dbeta_info_file = "../breast/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../breast/training_param.json"
+
+[feature_selection.sfs.hyper]
+train_out_path = "../breast/planA/TCGA_BRCA_20250119/split80train/section_3/sfs"
+dbeta_info_file = "../breast/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../breast/training_param.json"
+
+[feature_selection_2.rfe.hyper]
+train_out_path = "../breast/planA/GSE66313/split80train/section_3/rfe"
+dbeta_info_file = "../breast/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../breast/training_param.json"
+
+[feature_selection_2.sfs.hyper]
+train_out_path = "../breast/planA/GSE66313/split80train/section_3/sfs"
+dbeta_info_file = "../breast/planA/joined/section_5/dbeta_TSS_threshold_joined_consensus.csv"
+training_param_file = "../breast/training_param.json"
