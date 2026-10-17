@@ -2,28 +2,51 @@ name: r-utils-check
 
 on:
   pull_request:
-    paths:
+    paths: &paths
       - R-scripts/**
       - renv/**
       - .github/workflows/r-utils-check.yml
       - renv.lock
+  # Run on master too so the renv cache is saved in the base-branch scope,
+  # where every PR can restore it (PR-scoped caches aren't shared across PRs).
+  push:
+    branches: [master]
+    paths: *paths
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      TEST_PACKAGES: testthat abind rentrez AnnotationDbi org.Hs.eg.db GOSemSim
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with: 
+        uses: actions/checkout@v4
+        with:
           sparse-checkout: |
             .github
             R-scripts
             renv
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
-      - name: Set up renv
-        uses: r-lib/actions/setup-renv@v2
+        with:
+          # Match the R version in renv.lock so the cache key stays stable
+          r-version: renv
+          # Install prebuilt Linux binaries from Posit Package Manager instead of compiling
+          use-public-rspm: true
+      - name: Set renv cache path
+        run: echo "RENV_PATHS_ROOT=$HOME/.cache/R/renv" >> "$GITHUB_ENV"
+      - name: Cache renv packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/R/renv
+          # Package list lives in this file, so its hash covers TEST_PACKAGES changes
+          key: renv-v1-${{ runner.os }}-${{ hashFiles('renv.lock', '.github/workflows/r-utils-check.yml') }}
+          restore-keys: renv-v1-${{ runner.os }}-
+      - name: Restore test dependencies
+        run: |
+          Rscript -e 'renv::restore(packages = strsplit(Sys.getenv("TEST_PACKAGES"), " ")[[1]], prompt = FALSE)'
       - name: Run tests
         working-directory: ${{ github.workspace }}
         run: |

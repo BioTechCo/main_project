@@ -40,7 +40,7 @@ if (nan_and_na_count > 0) {
 
 # load GO data for BP, CC, and MF
 d_all <- lapply(c("BP", "CC", "MF"), function(ont) {
-    godata(annoDb = "org.Hs.eg.db", ont = ont, computeIC = TRUE)
+    godata(OrgDb  = "org.Hs.eg.db", ont = ont, computeIC = TRUE)
 })
 
 # a list of count of GO terms for each ontology

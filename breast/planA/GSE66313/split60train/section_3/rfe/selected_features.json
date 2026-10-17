@@ -1,0 +1,1 @@
+{"SVM": {"1": ["CFTR", "PTPRN"], "3": ["MIR921"], "2": ["LEP"]}, "DecisionTree": {"3": ["C7orf16", "ZNF177"], "2": ["WISP1"], "1": ["SYN2"]}, "RandomForest": {"3": ["C7orf16", "MIR921"], "1": ["SLC4A11"], "2": ["SFRP2"]}, "XGBoost": {"3": ["C7orf16", "ZNF177"], "2": ["WISP1"], "1": ["SYN2"]}}

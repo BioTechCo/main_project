@@ -1,0 +1,9 @@
+estimator_name,gene_0,gene_1,gene_2,gene_3,fpr,tpr,threshold
+DecisionTree,FGF12,IMMP2L,RAX,SLCO4C1,"[0.0, 0.0, 0.25, 1.0]","[0.0, 1.0, 1.0, 1.0]",[inf 1.  0.5 0. ]
+DecisionTree,FGF12,IMMP2L,RAX,TMEFF2,"[0.0, 0.0, 1.0]","[0.0, 1.0, 1.0]",[inf  1.  0.]
+DecisionTree,SERPINB5,IMMP2L,RAX,SLCO4C1,"[0.0, 0.25, 1.0]","[0.0, 1.0, 1.0]",[inf  1.  0.]
+DecisionTree,SERPINB5,IMMP2L,RAX,TMEFF2,"[0.0, 0.5, 1.0]","[0.0, 1.0, 1.0]",[inf  1.  0.]
+DecisionTree,SH3D19,IMMP2L,RAX,SLCO4C1,"[0.0, 0.0, 0.5, 1.0]","[0.0, 0.75, 1.0, 1.0]",[       inf 1.         0.66666667 0.        ]
+DecisionTree,SH3D19,IMMP2L,RAX,TMEFF2,"[0.0, 0.5, 1.0]","[0.0, 1.0, 1.0]",[inf  1.  0.]
+DecisionTree,SIAH3,IMMP2L,RAX,SLCO4C1,"[0.0, 0.25, 0.75, 1.0]","[0.0, 0.5, 1.0, 1.0]",[       inf 1.         0.66666667 0.        ]
+DecisionTree,SIAH3,IMMP2L,RAX,TMEFF2,"[0.0, 0.25, 0.25, 0.75, 1.0]","[0.0, 0.5, 1.0, 1.0, 1.0]",[       inf 1.         0.66666667 0.33333333 0.        ]
