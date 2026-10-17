@@ -8,20 +8,60 @@
         "split_test": 0.2,
         "random_state": 42
     },
+    "GDC_lung_tissue_80":{
+        "normal": 59,
+        "tumor": 674,
+        "file": "../lung/champ_result/GDC_lung_tissue_80/all_beta_normalized.csv",
+        "split_test": 0.25,
+        "random_state": 42,
+        "sample_count": 1
+    },
+    
+    "GDC_lung_tissue_20_test":{
+        "normal": 15,
+        "tumor": 169,
+        "file": "../lung/champ_result/GDC_lung_tissue_20_test/all_beta_normalized.csv"
+    },
+    "GDC_lung_tissue_60_train":{
+        "normal": 44,
+        "tumor": 505,
+        "file": "../lung/champ_result/GDC_lung_tissue_60_train/all_beta_normalized.csv"
+    },
+    "GDC_lung_tissue_20_validate":{
+        "normal": 15,
+        "tumor": 169,
+        "file": "../lung/champ_result/GDC_lung_tissue_20_validate/all_beta_normalized.csv"
+    },
     "GSE235414":{
         "normal": 65,
         "tumor": 65,
         "sample_count": 2,
-        "sample_type": "tissue"
+        "sample_type": "tissue",
+        "file": "../lung/champ_result/GSE235414/all_beta_normalized.csv",
+        "split_test": 0.2,
+        "random_state": 42
     },
-    "GDC_lung_tissue_80":{
-        "normal": 59,
-        "tumor": 674,
-        "file": "../lung/result/GDC_lung_tissue/split80/all_beta_normalized.csv"
+    "GSE235414_80":{
+        "normal": 52,
+        "tumor": 52,
+        "sample_count": 1,
+        "file": "../lung/champ_result/GSE235414_80/all_beta_normalized.csv",
+        "split_test": 0.25,
+        "random_state": 42
     },
-    "GDC_lung_tissue_20":{
-        "normal": 15,
-        "tumor": 169,
-        "file": "../lung/result/GDC_lung_tissue/split20/all_beta_normalized.csv"
-    }
+    "GSE235414_20_test":{
+        "normal": 13,
+        "tumor": 13,
+        "file": "../lung/champ_result/GSE235414_20_test/all_beta_normalized.csv"
+    },
+    "GSE235414_60_train":{
+        "normal": 39,
+        "tumor": 39,
+        "file": "../lung/champ_result/GSE235414_60_train/all_beta_normalized.csv"
+    },
+    "GSE235414_20_validate":{
+        "normal": 13,
+        "tumor": 13,
+        "file": "../lung/champ_result/GSE235414_20_validate/all_beta_normalized.csv"
+    }   
 }

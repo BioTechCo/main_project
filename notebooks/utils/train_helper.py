@@ -223,13 +223,13 @@ class TrainHelper:
                 for gene in result_set:
                     f.write(f"{gene}\n")
 
-    def set_train_validate(self) -> None:
+    def set_train_validate(self, ID: str="ID") -> None:
         train_df_tt = self.train_df[
-            self.train_df["Unnamed: 0"].isin(self.dbeta_info["ID"])
+            self.train_df["Unnamed: 0"].isin(self.dbeta_info[ID])
             | (self.train_df["Unnamed: 0"] == "label")
         ]
         validate_df_tt = self.validate_df[
-            self.validate_df["Unnamed: 0"].isin(self.dbeta_info["ID"])
+            self.validate_df["Unnamed: 0"].isin(self.dbeta_info[ID])
             | (self.validate_df["Unnamed: 0"] == "label")
         ]
         self.X_train = train_df_tt.iloc[:-1, 1:].T.values.tolist()
@@ -258,7 +258,7 @@ class TrainHelper:
         out_path: str,
         tol: float = 0.001,
         step: int = 1,
-        n_features_to_select: Literal["auto", "cluster"] = "auto",
+        n_features_to_select: Union[Literal["auto", "cluster"],int] = "auto",
     ) -> None:
         """
         Select features using Sequential Feature Selector (SFS) with the selection models.
@@ -266,22 +266,26 @@ class TrainHelper:
 
         Parameters:
             out_path (str): The path to save the selected features.
-            tol (float): The tolerance for the stopping criteriq.
+            tol (float): The tolerance for the stopping criteria.
             step (int): The step size for the number of features to select.
-            n_features_to_select (int): The number of features to select. If "auto", the number of features to select is the number of unique clusters.
+            n_features_to_select: the method to determine the number of features to select.
+            If "auto", the number of features to select is automatically determined.
+            If "cluster", the number of features to select is the number of unique clusters.
         """
         for selection_model_name, selection_model in self.selection_models.items():
             logger.info(f"Training {selection_model_name} with SFS")
-            num_unique_clusters = len(set(self.dbeta_info["cluster"]))
             if n_features_to_select == "auto":
                 step_ = n_features_to_select
             elif n_features_to_select == "cluster":
+                num_unique_clusters = len(set(self.dbeta_info["cluster"]))
                 step_ = num_unique_clusters
+            elif isinstance(n_features_to_select, int):
+                step_ = n_features_to_select
             else:
                 raise ValueError(
-                    "n_features_to_select should be either 'auto' or 'cluster'"
+                    "n_features_to_select should be either 'auto', 'cluster', or an integer."
                 )
-            while 1:
+            while True:
                 sfs = SequentialFeatureSelector(
                     estimator=selection_model,
                     direction="forward",
@@ -314,89 +318,160 @@ class TrainHelper:
         train_out_path: str,
         validate_out_path: str,
         selected_feature_path: str,
-        feature_range: tuple,
+        step: int = 1,
+        feature_range: Union[tuple, Literal["cluster"]] = "cluster",
+        do_validation: bool = True,
     ) -> None:
+        """
+        Select features using Recursive Feature Elimination (RFE) with the selection models.
+        The selected features are saved in the selected_feature_path file.
+        The training results are saved in the train_out_path and validate_out_path files.
+        
+        Parameters:
+            train_out_path (str): The path to save the training results.
+            validate_out_path (str): The path to save the validation results.
+            selected_feature_path (str): The path to save the selected features.
+            step (int): The step size for the number of features to select.
+            feature_range (Union[tuple, Literal["cluster"]]): The range of the number of features to select.
+            If "cluster", the number of features to select is the number of unique clusters.
+            If a tuple, the number of features to select is in the range of the tuple.
+            do_validation (bool): Whether to perform validation.
+        """
         for selection_model_name, selection_model in self.selection_models.items():
-            for feature_count in range(*feature_range):
-                rfe = RFE(estimator=selection_model, n_features_to_select=feature_count)
+            logger.info(f"Training {selection_model_name} with RFE")
+            if feature_range == "cluster":
+                num_unique_clusters = len(set(self.dbeta_info["cluster"]))
+                step_ = num_unique_clusters
+                while True:
+                    rfe = RFE(estimator=selection_model, n_features_to_select=step_)
+                    X_train_rfe = rfe.fit_transform(self.X_train, self.y_train)
+                    X_validate_rfe = rfe.transform(self.X_validate)
 
-                X_train_rfe = rfe.fit_transform(self.X_train, self.y_train)
-                X_validate_rfe = rfe.transform(self.X_validate)
+                    X_validate_rfe__ = []
+                    for X_validate__item in self.X_validate__:
+                        X_validate_rfe__.append(rfe.transform(X_validate__item))
 
-                X_validate_rfe__ = []
-                for X_validate__item in self.X_validate__:
-                    X_validate_rfe__.append(rfe.transform(X_validate__item))
-
-                self._save_selected_features(
-                    rfe, selection_model_name
-                ) >> self._append_to_file(selected_feature_path, is_first_header=False)
-
-                for estimator_name, grid_estimator in self.grid_estimators.items():
-                    grid_estimator.fit(X_train_rfe, self.y_train)
-                    self._fit_predict_append(
-                        grid_estimator.best_estimator_,
-                        X_train_rfe,
-                        self.y_train,
-                        selection_model_name,
-                        estimator_name,
-                        feature_count,
-                        "rfe.csv",
-                        "roc_curve.csv",
-                        train_out_path,
+                    self._save_selected_features(
+                        rfe, selection_model_name
+                    ) >> self._append_to_file(selected_feature_path, is_first_header=False)
+                    
+                    if self.selected_clusters == num_unique_clusters:
+                        logger.info(
+                            f"Training finished with {self.selected_clusters} clusters selected"
+                        )
+                        break
+                    step_ += step
+                    logger.info(
+                        f"Training {selection_model_name} with {self.selected_clusters} clusters selected"
                     )
 
-                    self._fit_predict_append(
-                        grid_estimator.best_estimator_,
-                        X_validate_rfe,
-                        self.y_validate,
-                        selection_model_name,
-                        estimator_name,
-                        feature_count,
-                        "rfe.csv",
-                        "roc_curve.csv",
-                        validate_out_path,
-                    )
-                    metric_avg = {}
+            elif isinstance(feature_range, tuple):
+                for feature_count in range(*feature_range):
+                    rfe = RFE(estimator=selection_model, n_features_to_select=feature_count)
 
-                    # not planing to plot roc curve for each bagging anyway
-                    for i, (X_validate_rfe__i, y_validate__i) in enumerate(
-                        zip(X_validate_rfe__, self.y_validate__)
-                    ):
-                        y_pred_on_X = grid_estimator.best_estimator_.predict(
-                            X_validate_rfe__i
+                    X_train_rfe = rfe.fit_transform(self.X_train, self.y_train)
+                    X_validate_rfe = rfe.transform(self.X_validate)
+
+                    X_validate_rfe__ = []
+                    for X_validate__item in self.X_validate__:
+                        X_validate_rfe__.append(rfe.transform(X_validate__item))
+
+                    self._save_selected_features(
+                        rfe, selection_model_name
+                    ) >> self._append_to_file(selected_feature_path, is_first_header=False)
+
+                    if do_validation:
+                        self._do_validation(
+                            selection_model_name,
+                            feature_count,
+                            train_out_path,
+                            validate_out_path,
+                            X_train_rfe,
+                            X_validate_rfe,
+                            X_validate_rfe__,
                         )
-                        y_proba_on_X = grid_estimator.best_estimator_.predict_proba(
-                            X_validate_rfe__i
-                        )[:, 1]
-                        result = self._predict(
-                            y=y_validate__i,
-                            y_pred_on_X=y_pred_on_X,
-                            y_proba_on_X=y_proba_on_X,
-                        )
-                        for key, value in result["metrics"].items():
-                            if key not in metric_avg:
-                                metric_avg[key] = value
-                            else:
-                                metric_avg[key] += value
-                    for key, value in metric_avg.items():
-                        metric_avg[key] = value / self.Bagging_num
-                    pd.DataFrame(
-                        [
-                            {
-                                "selection_model": selection_model_name,
-                                "train_model": estimator_name,
-                                "features": feature_count,
-                                "accuracy": metric_avg["accuracy"],
-                                "recall": metric_avg["recall"],
-                                "specificity": metric_avg["specificity"],
-                                "precision": metric_avg["precision"],
-                                "f1_score": metric_avg["f1_score"],
-                                "AUC": metric_avg["AUC"],
-                                "MCC": metric_avg["MCC"],
-                                "fbeta2_score": metric_avg["fbeta2_score"],
-                            }
-                        ]
-                    ) >> self._append_to_file(f"{validate_out_path}/rfe_avg.csv")
+                else:
+                    logger.info(
+                        f"Training finished with {self.selected_clusters} clusters selected"
+                    )
+        
+    def _do_validation(
+        self,
+        selection_model_name: str,
+        feature_count: int,
+        train_out_path: str,
+        validate_out_path: str,
+        X_train_rfe: pd.DataFrame,
+        X_validate_rfe: pd.DataFrame,
+        X_validate_rfe__: list[pd.DataFrame],
+    ):
+        for estimator_name, grid_estimator in self.grid_estimators.items():
+            grid_estimator.fit(X_train_rfe, self.y_train)
+            self._fit_predict_append(
+                grid_estimator.best_estimator_,
+                X_train_rfe,
+                self.y_train,
+                selection_model_name,
+                estimator_name,
+                feature_count,
+                "rfe.csv",
+                "roc_curve.csv",
+                train_out_path,
+            )
+
+            self._fit_predict_append(
+                grid_estimator.best_estimator_,
+                X_validate_rfe,
+                self.y_validate,
+                selection_model_name,
+                estimator_name,
+                feature_count,
+                "rfe.csv",
+                "roc_curve.csv",
+                validate_out_path,
+            )
+            metric_avg = {}
+
+            # not planing to plot roc curve for each bagging anyway
+            for i, (X_validate_rfe__i, y_validate__i) in enumerate(
+                zip(X_validate_rfe__, self.y_validate__)
+            ):
+                y_pred_on_X = grid_estimator.best_estimator_.predict(
+                    X_validate_rfe__i
+                )
+                y_proba_on_X = grid_estimator.best_estimator_.predict_proba(
+                    X_validate_rfe__i
+                )[:, 1]
+                result = self._predict(
+                    y=y_validate__i,
+                    y_pred_on_X=y_pred_on_X,
+                    y_proba_on_X=y_proba_on_X,
+                )
+                for key, value in result["metrics"].items():
+                    if key not in metric_avg:
+                        metric_avg[key] = value
+                    else:
+                        metric_avg[key] += value
+            for key, value in metric_avg.items():
+                metric_avg[key] = value / self.Bagging_num
+            pd.DataFrame(
+                [
+                    {
+                        "selection_model": selection_model_name,
+                        "train_model": estimator_name,
+                        "features": feature_count,
+                        "accuracy": metric_avg["accuracy"],
+                        "recall": metric_avg["recall"],
+                        "specificity": metric_avg["specificity"],
+                        "precision": metric_avg["precision"],
+                        "f1_score": metric_avg["f1_score"],
+                        "AUC": metric_avg["AUC"],
+                        "MCC": metric_avg["MCC"],
+                        "fbeta2_score": metric_avg["fbeta2_score"],
+                    }
+                ]
+            ) >> self._append_to_file(f"{validate_out_path}/rfe_avg.csv")
+
 
     @pipe_dec
     def _append_to_file(
