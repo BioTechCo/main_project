@@ -2,11 +2,17 @@ name: r-utils-check
 
 on:
   pull_request:
-    paths:
+    paths: &paths
       - R-scripts/**
       - renv/**
       - .github/workflows/r-utils-check.yml
       - renv.lock
+  # Run on master too so the renv cache is saved in the base-branch scope,
+  # where every PR can restore it (PR-scoped caches aren't shared across PRs).
+  push:
+    branches: [master]
+    paths: *paths
+  workflow_dispatch:
 
 jobs:
   test:
@@ -14,16 +20,24 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with: 
+        uses: actions/checkout@v4
+        with:
           sparse-checkout: |
             .github
             R-scripts
             renv
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
+        with:
+          # Match the R version in renv.lock so the cache key stays stable
+          r-version: renv
+          # Install prebuilt Linux binaries from Posit Package Manager instead of compiling
+          use-public-rspm: true
       - name: Set up renv
         uses: r-lib/actions/setup-renv@v2
+        with:
+          # Bump to invalidate the renv cache manually
+          cache-version: 1
       - name: Run tests
         working-directory: ${{ github.workspace }}
         run: |
